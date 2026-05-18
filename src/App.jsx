@@ -2,11 +2,11 @@ import { BrowserRouter, Routes, Route, Link } from "react-router";
 import Drivers from "./components/Drivers";
 import Teams from "./components/Teams";
 import Races from "./components/Races";
-import DriversDetails from "./components/DriversDetails";
+import DriverDetails from "./components/DriverDetails";
 import TeamDetails from "./components/TeamDetails";
 import RaceDetails from "./components/RaceDetails";
 
-export default function formula1() {
+export default function App() {
   return (
 
     <BrowserRouter>
@@ -25,7 +25,7 @@ export default function formula1() {
           <Route path="/" element={<Drivers />} />
           <Route path="/teams" element={<Teams />} />
           <Route path="/races" element={<Races />} />
-          <Route path="/driverDetails/:id" element={<DriversDetails />} />
+          <Route path="/driverDetails/:id" element={<DriverDetails />} />
           <Route path="/teamDetails/:id" element={<TeamDetails />} />
           <Route path="/raceDetails/:id" element={<RaceDetails />} />
         </Routes>
