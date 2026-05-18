@@ -17,7 +17,7 @@ export default function formula1() {
       </nav>
 
       {/* Rute */}
-      <div style={{ backgroundColor: "#ccc" }}>
+      <div>
         <Routes>
           <Route path="/" element={<Drivers />} />
           <Route path="/teams" element={<Teams />} />
