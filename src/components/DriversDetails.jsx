@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import Loader from "../../smart/src/components/Loader";
+import Loader from "../../../smart/src/components/Loader";
 
 export default function DriverDetails() {
     const [driverDetails, setDriverDetails] = useState(null);
@@ -14,7 +14,7 @@ export default function DriverDetails() {
 
     const getDriverDetails = async () => {
         console.log("params", params);
-        const url = "https://api.jolpi.ca/ergast/f1/2013/drivers/alonso/driverStandings.json";
+        const url = `https://api.jolpi.ca/ergast/f1/2013/drivers/alonso/driverStandings.json${driverId}`;
 
         const response = await axios.get(url);
         console.log("response", response);
