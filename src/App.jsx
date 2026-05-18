@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router";
-import Home from "./components/Drivers";
-import About from "./components/Teams";
-import Contact from "./components/Races";
+import Drivers from "./components/Drivers";
+import Teams from "./components/Teams";
+import Races from "./components/Races";
 
 export default function formula1() {
   return (
