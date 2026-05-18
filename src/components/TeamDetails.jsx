@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-export default function TeamsDetails({ teamId }) {
+export default function TeamDetails({ teamId }) {
     const year = 2013;
 
     const [races, setRaces] = useState([]);
