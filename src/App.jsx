@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router";
 import Drivers from "./components/Drivers";
 import Teams from "./components/Teams";
 import Races from "./components/Races";
-import DriversDetails from "./components/DriversDetails";
+import DriverDetails from "./components/DriverDetails";
 import TeamDetails from "./components/TeamDetails";
 import RaceDetails from "./components/RaceDetails";
 
