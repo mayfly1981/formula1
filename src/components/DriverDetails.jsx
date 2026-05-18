@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import Loader from "../../../smart/src/components/Loader";
+import Loader from "Loader";
 
 export default function DriverDetails() {
     const [driverDetails, setDriverDetails] = useState(null);
