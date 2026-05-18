@@ -1,7 +1,11 @@
 export default function formula1() {
   return (
-    <>
-      FORMULA 1
-    </>
+
+    <div className="container">
+
+      <div className="navigation">
+
+      </div>
+    </div>
   )
 }
