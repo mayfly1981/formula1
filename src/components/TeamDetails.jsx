@@ -86,7 +86,7 @@ export default function TeamDetails() {
                         <th>Round</th>
                         <th>Grand Prix</th>
                         <th>{races[0].Results[0].Driver.familyName}</th>
-                        <th>{races[1].Results[0].Driver.familyName}</th>
+                        <th>{races[0].Results[1].Driver.familyName}</th>
                         <th>Points</th>
                     </tr>
                 </thead>
