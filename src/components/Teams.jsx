@@ -22,9 +22,9 @@ export default function Teams() {
         console.log("getTeams")
     };
 
-    const handleClick = (id) => {
-        console.log("handleClick ", id);
-        navigate(`/TeamDetails/${id}`);
+    const handleClick = (constructorId) => {
+        console.log("handleClick ", constructorId);
+        navigate(`/TeamDetails/${constructorId}`);
     }
 
 
@@ -35,24 +35,36 @@ export default function Teams() {
     console.log(teams)
 
     return (
+
         <div>
             <h2 style={{ textAlign: "left" }}>Constructors Champhionship Standings - 2013</h2>
-            {teams.map((team) => {
-                return (
-                    <div
-                        onClick={() => handleClick(team.constructorId)}
-                    >
-                        <table style={{ width: "80%", tableLayout: "fixed" }}>
-                            <tr key={team.constructorId}>
-                                <td style={{ textAlign: "left" }}>{team.position}</td>
-                                <td style={{ textAlign: "left" }}>{team.Constructor.name}</td>
-                                <td style={{ textAlign: "left" }}><a href="">Details</a></td>
-                                <td style={{ textAlign: "left" }}>{team.points}</td>
-                            </tr>
-                        </table>
-                    </div>
-                );
-            })}
+            <div>
+                <table style={{ width: "80%", tableLayout: "fixed" }}>
+                    <thead>
+                        <tr>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {teams.map((team) => {
+                            return (
+                                <tr onClick={() => handleClick(team.Constructor.constructorId)}
+                                    key={team.Constructor.constructorId}>
+                                    <td style={{ textAlign: "left" }}>{team.position}</td>
+                                    <td style={{ textAlign: "left" }}>{team.Constructor.name}</td>
+                                    <td style={{ textAlign: "left" }}><a href="">Details</a></td>
+                                    <td style={{ textAlign: "left" }}>{team.points}</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
+            </div >
+
+
         </div >
     )
 }
+
+
+
