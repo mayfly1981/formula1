@@ -39,9 +39,11 @@ export default function Teams() {
 
     return (
         <div>
-            <h2 style={{ textAlign: "center" }}>Races calendar</h2>
-            <div
-            >
+            <h1 style={{ textAlign: "center" }}>Races calendar</h1>
+            <div>
+                <div>
+                    <p>Races calendar - 2013</p>
+                </div>
                 <table style={{ width: "80%", tableLayout: "fixed" }}>
                     <thead>
                         <tr>
