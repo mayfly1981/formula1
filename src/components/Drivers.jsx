@@ -5,7 +5,7 @@ import Loader from "./Loader";
 export default function Drivers() {
     const [drivers, setDrivers] = useState([])
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     useEffect(() => {
 
@@ -46,7 +46,6 @@ export default function Drivers() {
                         </thead>
                         <tbody>
                             <tr>
-
                                 <td>{driver.position}</td>
                                 <td
                                     onClick={() => handleClick(driver.Driver.driverId)}
