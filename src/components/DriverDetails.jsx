@@ -50,12 +50,15 @@ export default function DriverDetails() {
                 {driverDetails.map((driverDetail) => {
                     return (
                         <div key={driverDetail.position}>
-                            <img src="" alt="" />
                             <p>Ime i prezime{driverDetail.Driver.givenName} {driverDetail.Driver.familyName}</p>
                             <p>Country: {driverDetail.Driver.nationality}</p>
                             <p>Team: {driverDetail.Constructors[0].name}</p>
                             <p>Birth: {driverDetail.Driver.dateOfBirth}</p>
-                            <a href="#">Biography</a>
+                            <a href={driverDetail.Driver.url}
+                                target="_blank"
+                                rel="noreferrer">
+                                Biography
+                            </a>
                         </div>
                     );
                 })}
@@ -77,8 +80,8 @@ export default function DriverDetails() {
                     <tbody>
                         {driverRaces.map((driverRace) => {
                             return (
-                                <tr onClick={() => handleClick(driver.Driver.driverId)}
-                                    key={driverRace.position}>
+                                <tr onClick={() => handleClick(driverRace.Results[0].Driver.driverId)}
+                                    key={driverRace.round}>
 
                                     <td>{driverRace.round}</td>
                                     <td>{driverRace.raceName}</td>
@@ -96,6 +99,6 @@ export default function DriverDetails() {
                 </table>
             </div>
 
-        </div>
+        </div >
     );
 }
