@@ -40,24 +40,35 @@ export default function Teams() {
     return (
         <div>
             <h2 style={{ textAlign: "center" }}>Races calendar</h2>
-            {races.map((race) => {
-                return (
-                    <div
-                        onClick={() => handleClick(race.round)}>
-                        <table key={race.round}
-                            style={{ width: "80%", tableLayout: "fixed" }}>
-                            <tr key={race.round}>
-                                <td>{race.round}</td>
-                                <td>{race.Results[0].raceName}</td>
-                                <td>{race.Circuit.circuitName}</td>
-                                <td>{race.date}</td>
-                                <td>{race.Results[0].Driver.familyName}</td>
-                            </tr>
+            <div
+            >
+                <table style={{ width: "80%", tableLayout: "fixed" }}>
+                    <thead>
+                        <tr>
+                            <th>Round</th>
+                            <th>Grand Prix</th>
+                            <th>Team</th>
+                            <th>Grid</th>
+                            <th>Race</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {races.map((race) => {
+                            return (
+                                <tr key={race.round}
+                                    onClick={() => handleClick(race.round)}>
+                                    <td>{race.round}</td>
+                                    <td>{race.raceName}</td>
+                                    <td>{race.Circuit.circuitName}</td>
+                                    <td>{race.date}</td>
+                                    <td>{race.Results[0].Driver.familyName}</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
 
-                        </table>
-                    </div>
-                )
-            })}
+                </table>
+            </div>
         </div>
     );
 }
