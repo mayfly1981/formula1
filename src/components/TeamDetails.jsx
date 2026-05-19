@@ -5,7 +5,8 @@ import Loader from "./Loader";
 
 
 export default function TeamDetails() {
-    const { teamId } = useParams();
+    const { id } = useParams();
+    const teamId = id;
     const year = 2013;
 
     const [races, setRaces] = useState([]);
@@ -20,6 +21,8 @@ export default function TeamDetails() {
                 setIsLoading(true);
 
                 const url = `https://api.jolpi.ca/ergast/f1/${year}/constructors/${teamId}/results.json`;
+
+
 
                 const response = await axios.get(url);
 
@@ -82,8 +85,8 @@ export default function TeamDetails() {
                     <tr>
                         <th>Round</th>
                         <th>Grand Prix</th>
-                        <th>Driver 1</th>
-                        <th>Driver 2</th>
+                        <th>{races[0].Results[0].Driver.familyName}</th>
+                        <th>{races[0].Results[1].Driver.familyName}</th>
                         <th>Points</th>
                     </tr>
                 </thead>
