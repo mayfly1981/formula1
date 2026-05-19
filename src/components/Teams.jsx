@@ -52,7 +52,7 @@ export default function Teams() {
                                     key={team.Constructor.constructorId}>
                                     <td style={{ textAlign: "left" }}>{team.position}</td>
                                     <td onClick={() => handleClick(team.Constructor.constructorId)} style={{ textAlign: "left" }}>{team.Constructor.name}</td>
-                                    <td style={{ textAlign: "left" }}><a href="">Details</a></td>
+                                    <td style={{ textAlign: "left" }}><a href={team.Constructor.url} target="_blank">Details</a></td>
                                     <td style={{ textAlign: "left" }}>{team.points}</td>
                                 </tr>
                             )
