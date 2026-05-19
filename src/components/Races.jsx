@@ -39,7 +39,7 @@ export default function Teams() {
 
     return (
         <div>
-            <h1 style={{ textAlign: "center" }}>Races calendar</h1>
+            <h2 style={{ textAlign: "center" }}>Races calendar</h2>
             {races.map((race) => {
                 return (
                     <div
