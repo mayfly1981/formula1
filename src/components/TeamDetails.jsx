@@ -5,7 +5,8 @@ import Loader from "./Loader";
 
 
 export default function TeamDetails() {
-    const { teamId } = useParams();
+    const { id } = useParams();
+    const teamId = id;
     const year = 2013;
 
     const [races, setRaces] = useState([]);
