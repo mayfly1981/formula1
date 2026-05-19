@@ -21,6 +21,8 @@ export default function TeamDetails() {
 
                 const url = `https://api.jolpi.ca/ergast/f1/${year}/constructors/${teamId}/results.json`;
 
+
+
                 const response = await axios.get(url);
 
                 const raceList =
