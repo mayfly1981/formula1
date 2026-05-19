@@ -9,9 +9,11 @@ export default function TeamDetails() {
     const teamId = id;
     const year = 2013;
 
-    const [races, setRaces] = useState([]);
+
     const [team, setTeam] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [standing, setStanding] = useState(null);
+    const [races, setRaces] = useState([]);
 
     useEffect(() => {
         if (!teamId) return;
@@ -25,6 +27,12 @@ export default function TeamDetails() {
 
 
                 const response = await axios.get(url);
+
+                const standingResponse = await axios.get(
+                    `https://api.jolpi.ca/ergast/f1/${year}/constructors/${teamId}/constructorStandings.json`
+                );
+                const standingData = standingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0];
+                setStanding(standingData);
 
                 const raceList =
                     response.data.MRData.RaceTable.Races;
@@ -68,7 +76,11 @@ export default function TeamDetails() {
                 <strong>Country:</strong> {team.nationality}
             </p>
 
+            <p>Position:{standing?.position}</p>
+            <p>Points:{standing?.points}</p>
+
             <p>
+
                 <a
                     href={team.url}
                     target="_blank"
@@ -78,7 +90,7 @@ export default function TeamDetails() {
                 </a>
             </p>
 
-            <h2>Formula 1 {year} Results</h2>
+            <h2>Formula 1 2013 Results</h2>
 
             <table border="1">
                 <thead>
