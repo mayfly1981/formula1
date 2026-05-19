@@ -34,12 +34,13 @@ export default function Drivers() {
 
     return (
         <div>
-            <h2 className="title">Drivers Championship Standings - 2013</h2>
+
+            <h1 className="title">Drivers Championship</h1>
             <div>
                 <table style={{ width: "80%", tableLayout: "fixed" }}>
                     <thead>
                         <tr>
-                            <th></th>
+                            <th colSpan={4}>Drivers Championship Standings - 2013</th>
                         </tr>
                     </thead>
                     <tbody>
