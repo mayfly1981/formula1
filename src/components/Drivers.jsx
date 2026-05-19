@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "./Loader";
+import { useNavigate, } from "react-router";
+
 export default function Drivers() {
     const [drivers, setDrivers] = useState([])
     const [loading, setLoading] = useState(true);
-
+    const navigate = useNavigate();
 
     useEffect(() => {
 
@@ -25,7 +27,10 @@ export default function Drivers() {
 
 
     };
-
+    const handleClick = (driverId) => {
+        console.log("handleClick", driverId);
+        navigate(`/driverDetails/${driverId}`);
+    };
     if (loading) {
         return <Loader />
 
@@ -34,14 +39,25 @@ export default function Drivers() {
         <>
             {drivers.map((driver) => {
                 return (
-                    <div key={driver.Driver.driverId}>
+                    <table key={driver.Driver.driverId}>
+                        <thead>
+                            <tr>
+                                <th>Drivers Championship Standings - 2013</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{driver.position}</td>
+                                <td
+                                    onClick={() => handleClick(driver.Driver.driverId)}
+                                    className="driver-details" key={driver.Driver.driverId}
+                                >{driver.Driver.givenName}{driver.Driver.familyName}</td>
+                                <td>{driver.Constructors[0].name}</td>
+                                <td>{driver.points}</td>
+                            </tr>
+                        </tbody>
 
-                        <p>{driver.position}</p>
-                        <p>{driver.Driver.givenName}{driver.Driver.familyName}</p>
-                        <p>{driver.Constructors[0].name}</p>
-                        <p>{driver.points}</p>
-
-                    </div>
+                    </table>
                 )
             })}
         </>

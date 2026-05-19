@@ -18,7 +18,8 @@ export default function DriverDetails() {
 
         const response = await axios.get(url);
         console.log("response", response);
-        // setDriverDetails(response.data);
+        console.log(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
+        setDrivers(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
         setIsLoading(false);
         console.log("getDriversDetails");
     };
