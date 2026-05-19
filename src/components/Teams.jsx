@@ -24,7 +24,7 @@ export default function Teams() {
 
     const handleClick = (id) => {
         console.log("handleClick ", id);
-        navigate(`/details/${id}`);
+        navigate(`/TeamDetails/${id}`);
     }
 
 
@@ -36,13 +36,20 @@ export default function Teams() {
 
     return (
         <div>
-            <h2>Constructors Champhionship</h2>
+            <h2 style={{ textAlign: "left" }}>Constructors Champhionship Standings - 2013</h2>
             {teams.map((team) => {
                 return (
                     <div
                         onClick={() => handleClick(team.constructorId)}
-                        key={team.Constructor.constructorId}>
-                        <h3>{team.name}</h3>
+                    >
+                        <table style={{ width: "80%", tableLayout: "fixed" }}>
+                            <tr key={team.constructorId}>
+                                <td style={{ textAlign: "left" }}>{team.position}</td>
+                                <td style={{ textAlign: "left" }}>{team.Constructor.name}</td>
+                                <td style={{ textAlign: "left" }}><a href="">Details</a></td>
+                                <td style={{ textAlign: "left" }}>{team.points}</td>
+                            </tr>
+                        </table>
                     </div>
                 );
             })}
