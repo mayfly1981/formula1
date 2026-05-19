@@ -2,17 +2,30 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "./Loader";
 import { useNavigate, } from "react-router";
+import Flag from "react-flagkit";
 
 export default function Drivers() {
 
     const [drivers, setDrivers] = useState([])
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const [flag, setFlags] = useState([]);
 
     useEffect(() => {
         console.log("useEffect");
         getDrivers();
     }, []);
+    const getFlags = async () => {
+        const urlFlag = `https://raw.githubusercontent.com/Imagin-io/country-nationality-list/refs/heads/master/countries.json`;
+        const responce = await axios.get(urlFlag);
+        setLoading(false);
+        console.log("getFlags");
+
+    };
+    useEffect(() => {
+
+        getFlags();
+    }, [])
 
     const getDrivers = async () => {
         const url = "https://api.jolpi.ca/ergast/f1/2013/driverStandings.json";
@@ -51,7 +64,7 @@ export default function Drivers() {
                                     key={driver.Driver.driverId}>
                                     <td>{driver.position}</td>
                                     <td
-                                    >{driver.Driver.givenName}{driver.Driver.familyName}</td>
+                                    >{ }{driver.Driver.givenName}{driver.Driver.familyName}</td>
                                     <td>{driver.Constructors[0].name}</td>
                                     <td>{driver.points}</td>
                                 </tr>
