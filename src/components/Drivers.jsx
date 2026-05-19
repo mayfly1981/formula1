@@ -46,8 +46,12 @@ export default function Drivers() {
                         </thead>
                         <tbody>
                             <tr>
+
                                 <td>{driver.position}</td>
-                                <td>{driver.Driver.givenName}{driver.Driver.familyName}</td>
+                                <td
+                                    onClick={() => handleClick(driver.Driver.driverId)}
+                                    className="driver-details" key={driver.Driver.driverId}
+                                >{driver.Driver.givenName}{driver.Driver.familyName}</td>
                                 <td>{driver.Constructors[0].name}</td>
                                 <td>{driver.points}</td>
                             </tr>
