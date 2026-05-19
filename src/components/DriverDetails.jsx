@@ -15,7 +15,7 @@ export default function DriverDetails() {
     const getDriverDetails = async () => {
         console.log("params", params);
         const url = `https://api.jolpi.ca/ergast/f1/2013/drivers/alonso/driverStandings.json${driverId}`;
-        const url2 = ;
+        // const url2 = ;
 
         const response = await axios.get(url);
         console.log("response", response);
