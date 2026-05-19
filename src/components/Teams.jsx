@@ -37,7 +37,7 @@ export default function Teams() {
     return (
 
         <div>
-            <h2 style={{ textAlign: "left" }}>Constructors Champhionship Standings - 2013</h2>
+            <h1 style={{ textAlign: "left" }}>Constructors Champhionship Standings - 2013</h1>
             <div>
                 <table style={{ width: "80%", tableLayout: "fixed" }}>
                     <thead>
@@ -48,10 +48,10 @@ export default function Teams() {
                     <tbody>
                         {teams.map((team) => {
                             return (
-                                <tr onClick={() => handleClick(team.Constructor.constructorId)}
+                                <tr
                                     key={team.Constructor.constructorId}>
                                     <td style={{ textAlign: "left" }}>{team.position}</td>
-                                    <td style={{ textAlign: "left" }}>{team.Constructor.name}</td>
+                                    <td onClick={() => handleClick(team.Constructor.constructorId)} style={{ textAlign: "left" }}>{team.Constructor.name}</td>
                                     <td style={{ textAlign: "left" }}><a href="">Details</a></td>
                                     <td style={{ textAlign: "left" }}>{team.points}</td>
                                 </tr>
