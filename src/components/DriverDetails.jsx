@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Loader from "./Loader";
+import Flag from "react-flagkit";
 
 export default function DriverDetails() {
     const [driverDetails, setDriverDetails] = useState(null);
@@ -19,9 +20,12 @@ export default function DriverDetails() {
     }, []);
 
     const getDriverDetails = async () => {
+
         console.log("params", params);
         const urlDriverDetails = `https://api.jolpi.ca/ergast/f1/2013/drivers/${params.id}/driverStandings.json`;
         const urlDriverRaces = `https://api.jolpi.ca/ergast/f1/2013/drivers/${params.id}/results.json`;
+
+        const urlFlag = "https://raw.githubusercontent.com/Imagin-io/country-nationality-list/refs/heads/master/countries.json";
 
         const response1 = await axios.get(urlDriverDetails);
         const response2 = await axios.get(urlDriverRaces);
@@ -50,7 +54,8 @@ export default function DriverDetails() {
                 {driverDetails.map((driverDetail) => {
                     return (
                         <div key={driverDetail.position}>
-                            <p>Ime i prezime{driverDetail.Driver.givenName} {driverDetail.Driver.familyName}</p>
+                            <img src={driverDetail.nationality} alt="" />
+                            <p>{driverDetail.Driver.givenName} {driverDetail.Driver.familyName}</p>
                             <p>Country: {driverDetail.Driver.nationality}</p>
                             <p>Team: {driverDetail.Constructors[0].name}</p>
                             <p>Birth: {driverDetail.Driver.dateOfBirth}</p>
