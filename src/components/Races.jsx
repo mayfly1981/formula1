@@ -3,8 +3,10 @@ import Loader from "./Loader";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import Flag from "react-flagkit";
+import { getCountryCodeByShortName } from "../helpers/getCountryCode";
+import { getCountryCodeByNationality } from "../helpers/getCountryCode";
 
-export default function Teams() {
+export default function Races(props) {
     const [races, setRaces] = useState([])
     const [loading, setLoading] = useState(true);
     const [flag, setFlags] = useState([]);
@@ -72,10 +74,17 @@ export default function Teams() {
                                 <tr key={race.round}
                                     onClick={() => handleClick(race.round)}>
                                     <td>{race.round}</td>
-                                    <td>{race.raceName}</td>
+                                    <td>
+                                        <Flag country={getCountryCodeByShortName(props.flags, race.Circuit.Location.country)} size={20} />
+                                        {race.raceName}
+                                    </td>
                                     <td>{race.Circuit.circuitName}</td>
                                     <td>{race.date}</td>
-                                    <td>{race.Results[0].Driver.familyName}</td>
+                                    <td>
+                                        <Flag country={getCountryCodeByNationality(props.flags, race.Results[0].Driver.nationality)} size={20} />
+                                        {race.Results[0].Driver.familyName}
+
+                                    </td>
                                 </tr>
                             );
                         })}

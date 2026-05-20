@@ -3,12 +3,13 @@ import axios from "axios";
 import Loader from "./Loader";
 import { useNavigate, } from "react-router";
 import Flag from "react-flagkit";
+import { getCountryCodeByNationality } from "../helpers/getCountryCode";
 
-export default function Drivers() {
+export default function Drivers(props) {
 
     const [drivers, setDrivers] = useState([])
     const [loading, setLoading] = useState(true);
-    const [flag, setFlags] = useState([]);
+    // const [flag, setFlags] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -63,9 +64,14 @@ export default function Drivers() {
                                 <tr onClick={() => handleClick(driver.Driver.driverId)}
                                     className="driver-details"
                                     key={driver.Driver.driverId}>
+
                                     <td>{driver.position}</td>
-                                    <td
-                                    >{ }{driver.Driver.givenName}{driver.Driver.familyName}</td>
+
+                                    <td onClick={() => handleClick(driver.Driver.driverId)}>
+
+                                        <Flag country={getCountryCodeByNationality(props.flags, driver.Driver.nationality)} size={20} /> {driver.Driver.givenName}{driver.Driver.familyName}
+
+                                    </td>
                                     <td>{driver.Constructors[0].name}</td>
                                     <td>{driver.points}</td>
                                 </tr>

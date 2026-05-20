@@ -3,8 +3,10 @@ import { useParams } from "react-router";
 import Loader from "./Loader";
 import axios from "axios";
 import Flag from "react-flagkit";
+import { getCountryCodeByShortName } from "../helpers/getCountryCode";
+import { getCountryCodeByNationality } from "../helpers/getCountryCode";
 
-export default function RaceDetails() {
+export default function RaceDetails(props) {
     const [raceQualifiers, setRaceQualifiers] = useState(null);
     const [raceResults, setRaceResults] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -23,6 +25,7 @@ export default function RaceDetails() {
 
     const getRaceQualifiers = async () => {
         console.log("params", params);
+        const urlRaces = "https://api.jolpi.ca/ergast/f1/2013/results/1.json"
         const urlRaceQualifiers = `https://api.jolpi.ca/ergast/f1/2013/${params.id}/qualifying.json`;
         const urlRaceResults = `https://api.jolpi.ca/ergast/f1/2013/${params.id}/results.json`;
         const urlFlag = "https://raw.githubusercontent.com/Imagin-io/country-nationality-list/refs/heads/master/countries.json";
@@ -103,7 +106,10 @@ export default function RaceDetails() {
                             return (
                                 <tr key={qualifier.position}>
                                     <td>{qualifier.position}</td>
-                                    <td>{qualifier.Driver.familyName}</td>
+                                    <td>
+                                        <Flag country={getCountryCodeByNationality(props.flags, qualifier.Driver.nationality)} size={20} />
+                                        {qualifier.Driver.familyName}
+                                    </td>
                                     <td>{qualifier.Constructor.name}</td>
                                     <td>{getBestTime(qualifier)}</td>
                                 </tr>
@@ -131,7 +137,10 @@ export default function RaceDetails() {
                             return (
                                 <tr key={result.position}>
                                     <td>{result.position}</td>
-                                    <td>{result.Driver.familyName}</td>
+                                    <td>
+                                        <Flag country={getCountryCodeByNationality(props.flags, result.Driver.nationality)} size={20} />
+                                        {result.Driver.familyName}
+                                    </td>
                                     <td>{result.Constructor.name}</td>
                                     {/* <td>{result.Time?.time}</td> */}
                                     <td>{getRaceTime(result)}</td>
