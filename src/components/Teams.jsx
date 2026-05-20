@@ -3,7 +3,7 @@ import Loader from "./Loader"
 import axios from "axios";
 import { useNavigate } from "react-router";
 import Flag from "react-flagkit";
-import { getCountryCode } from "../helpers/getCountryCode"
+import { getCountryCodeByNationality } from "../helpers/getCountryCode"
 
 
 
@@ -62,7 +62,7 @@ export default function Teams(props) {
                                     key={team.Constructor.constructorId}>
                                     <td style={{ textAlign: "left" }}>{team.position}</td>
                                     <td onClick={() => handleClick(team.Constructor.constructorId)} style={{ textAlign: "left" }}>
-                                        <Flag country={getCountryCode(props.flags, team.Constructor.nationality)} size={20} />{team.Constructor.name}
+                                        <Flag country={getCountryCodeByNationality(props.flags, team.Constructor.nationality)} size={20} />{team.Constructor.name}
                                     </td>
                                     <td style={{ textAlign: "left" }}><a href={team.Constructor.url} target="_blank">Details</a></td>
                                     <td style={{ textAlign: "left" }}>{team.points}</td>
