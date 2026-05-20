@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Loader from "./Loader";
 import Flag from "react-flagkit";
-import { getCountryCodeByNationality } from "../helpers/getCountryCode";
+import { getCountryCodeByNationality, getCountryCodeByShortName } from "../helpers/getCountryCode";
+
 
 
 export default function TeamDetails(props) {
@@ -137,7 +138,9 @@ export default function TeamDetails(props) {
                         return (
                             <tr key={race.round}>
                                 <td>{race.round}</td>
-                                <td>{race.raceName}</td>
+                                <td>
+                                    <Flag country={getCountryCodeByShortName(props.flags, race.Circuit.Location.country)} size={20} /> {race.raceName}
+                                </td>
 
                                 {/* <td>{driver1?.position}</td>
                                 <td>{driver2?.position || "-"}</td> */}
