@@ -24,8 +24,8 @@ export default function TeamDetails() {
         6: "thistle",
         7: "pink",
         8: "paleturquoise",
-        9: "truemint",
-        10: "pink",
+        9: "mediumaquamarine",
+        10: "salmon",
     };
 
 
