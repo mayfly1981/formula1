@@ -134,8 +134,8 @@ export default function RaceDetails() {
                                     <td>{result.Driver.familyName}</td>
                                     <td>{result.Constructor.name}</td>
                                     {/* <td>{result.Time?.time}</td> */}
-                                    <td>{result.points}</td>
                                     <td>{getRaceTime(result)}</td>
+                                    <td>{result.points}</td>
                                 </tr>
                             );
                         })}
