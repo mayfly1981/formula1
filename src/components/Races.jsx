@@ -40,7 +40,7 @@ export default function Teams() {
     const handleClick = (position) => {
         //key moze biti i "round"
         console.log("handleClick", position);
-        navigate(`/race/${position}`);
+        navigate(`/raceDetails/${position}`);
     };
 
     if (loading) {

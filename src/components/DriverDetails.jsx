@@ -17,6 +17,7 @@ export default function DriverDetails() {
 
     useEffect(() => {
         getDriverDetails();
+        console.log("useEffect");
     }, []);
 
     const getDriverDetails = async () => {
@@ -50,7 +51,6 @@ export default function DriverDetails() {
     return (
         <div className="container">
             <div className="driver-details">
-
                 {driverDetails.map((driverDetail) => {
                     return (
                         <div key={driverDetail.position}>
