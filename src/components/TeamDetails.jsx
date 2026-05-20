@@ -2,9 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Loader from "./Loader";
+import Flag from "react-flagkit";
+import { getCountryCodeByNationality } from "../helpers/getCountryCode";
 
 
-export default function TeamDetails() {
+export default function TeamDetails(props) {
     const { id } = useParams();
     const teamId = id;
     const year = 2013;
@@ -82,12 +84,14 @@ export default function TeamDetails() {
     if (!team) {
         return <p>No team data found</p>;
     }
-
+    console.log(team);
     return (
         <div>
 
             <div>
                 <img src={`/img/${team.constructorId}.png`} className="team-logo" alt={team.name} />
+                <p><Flag country={getCountryCodeByNationality(props.flags, team.nationality)} size={20} />{team.name}
+                </p>
             </div>
 
             <h1>{team.name}</h1>
