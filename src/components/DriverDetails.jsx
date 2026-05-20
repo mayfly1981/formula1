@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Loader from "./Loader";
 import Flag from "react-flagkit";
+import { getCountryCodeByNationality } from "../helpers/getCountryCode";
+import { getCountryCodeByShortName } from "../helpers/getCountryCode";
 
-export default function DriverDetails() {
+export default function DriverDetails(props) {
     const [driverDetails, setDriverDetails] = useState(null);
     const [driverRaces, setDriverRaces] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -55,6 +57,9 @@ export default function DriverDetails() {
                     return (
                         <div key={driverDetail.position}>
                             <img src={driverDetail.nationality} alt="" />
+
+                            <Flag country={getCountryCodeByNationality(props.flags, driverDetail.Driver.nationality)} size={20} />
+
                             <p>{driverDetail.Driver.givenName} {driverDetail.Driver.familyName}</p>
                             <p>Country: {driverDetail.Driver.nationality}</p>
                             <p>Team: {driverDetail.Constructors[0].name}</p>
@@ -89,8 +94,14 @@ export default function DriverDetails() {
                                     key={driverRace.round}>
 
                                     <td>{driverRace.round}</td>
-                                    <td>{driverRace.raceName}</td>
+
+                                    <td>
+                                        <Flag country={getCountryCodeByShortName(props.flags, driverRace.Circuit.Location.country)} size={20} />
+                                        {driverRace.raceName}
+
+                                    </td>
                                     <td>{driverRace.Results[0].Constructor.name}</td>
+
                                     <td>{driverRace.Results[0].grid}</td>
                                     <td>{driverRace.Results[0].position}</td>
 
