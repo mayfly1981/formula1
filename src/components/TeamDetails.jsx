@@ -21,6 +21,11 @@ export default function TeamDetails() {
         3: "orange",
         4: "lightgreen",
         5: "lightblue",
+        6: "thistle",
+        7: "pink",
+        8: "paleturquoise",
+        9: "truemint",
+        10: "pink",
     };
 
 
