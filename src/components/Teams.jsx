@@ -3,11 +3,13 @@ import Loader from "./Loader"
 import axios from "axios";
 import { useNavigate } from "react-router";
 import Flag from "react-flagkit";
+import { getCountryCode } from "../helpers/getCountryCode"
 
 
-export default function Teams() {
+
+export default function Teams(props) {
+
     const [teams, setTeams] = useState([]);
-    const [flags, setFlags] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
@@ -15,9 +17,7 @@ export default function Teams() {
         getTeams();
     }, []);
 
-    useEffect(() => {
-        setFlags();
-    }, []);
+
 
     const getTeams = async () => {
         const url = "https://api.jolpi.ca/ergast/f1/2013/constructorStandings.json";
@@ -27,18 +27,6 @@ export default function Teams() {
         setIsLoading(false);
         console.log("getTeams")
     };
-
-    const getFlags = async () => {
-        const urlFlags = "https://raw.githubusercontent.com/Imagin-io/country-nationality-list/refs/heads/master/countries.json";
-        const responseFlags = await axios.get(url);
-        console.log(responseFlags);
-        setTeams(responseFlags.data.alpha_2_code);
-        setIsLoading(false);
-        console.log("getFlags")
-    };
-
-
-
 
 
 
@@ -73,7 +61,9 @@ export default function Teams() {
                                 <tr
                                     key={team.Constructor.constructorId}>
                                     <td style={{ textAlign: "left" }}>{team.position}</td>
-                                    <td onClick={() => handleClick(team.Constructor.constructorId)} style={{ textAlign: "left" }}><Flag country="GB" size={20} />{team.Constructor.name}</td>
+                                    <td onClick={() => handleClick(team.Constructor.constructorId)} style={{ textAlign: "left" }}>
+                                        <Flag country={getCountryCode(props.flags, team.Constructor.nationality)} size={20} />{team.Constructor.name}
+                                    </td>
                                     <td style={{ textAlign: "left" }}><a href={team.Constructor.url} target="_blank">Details</a></td>
                                     <td style={{ textAlign: "left" }}>{team.points}</td>
                                 </tr>
