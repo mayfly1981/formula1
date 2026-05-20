@@ -74,12 +74,17 @@ export default function Races(props) {
                                 <tr key={race.round}
                                     onClick={() => handleClick(race.round)}>
                                     <td>{race.round}</td>
-                                    <td>{race.raceName}
+                                    <td>
                                         <Flag country={getCountryCodeByShortName(props.flags, race.Circuit.Location.country)} size={20} />
+                                        {race.raceName}
                                     </td>
                                     <td>{race.Circuit.circuitName}</td>
                                     <td>{race.date}</td>
-                                    <td>{race.Results[0].Driver.familyName}</td>
+                                    <td>
+                                        <Flag country={getCountryCodeByNationality(props.flags, race.Results[0].Driver.nationality)} size={20} />
+                                        {race.Results[0].Driver.familyName}
+
+                                    </td>
                                 </tr>
                             );
                         })}
