@@ -2,39 +2,51 @@ import { useState, useEffect } from "react";
 import Loader from "./Loader";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import Flag from "react-flagkit";
 
 export default function Teams() {
     const [races, setRaces] = useState([])
     const [loading, setLoading] = useState(true);
+    const [flag, setFlags] = useState([]);
     const navigate = useNavigate();
 
-    useEffect(() => {
 
+    useEffect(() => {
+        console.log("useEffect");
+        getFlags();
+    }, []);
+
+    const getFlags = async () => {
+        const urlFlag = `https://raw.githubusercontent.com/Imagin-io/country-nationality-list/refs/heads/master/countries.json`;
+        const responce = await axios.get(urlFlag);
+        setLoading(false);
+        console.log("getFlags");
+    };
+
+    useEffect(() => {
         console.log("useEffect");
         getRaces();
-
     }, []);
 
     const getRaces = async () => {
-
         const url = "https://api.jolpi.ca/ergast/f1/2013/results/1.json";
         const response = await axios.get(url);
         console.log(response.data.MRData.RaceTable.Races);
         setRaces(response.data.MRData.RaceTable.Races);
         setLoading(false);
         console.log("getRaces");
-
-
-
     };
+
     const handleClick = (position) => {
+        //key moze biti i "round"
         console.log("handleClick", position);
         navigate(`/race/${position}`);
     };
+
     if (loading) {
         return <Loader />
+    };
 
-    }
     console.log("races", races);
 
     return (
@@ -65,7 +77,7 @@ export default function Teams() {
                                     <td>{race.date}</td>
                                     <td>{race.Results[0].Driver.familyName}</td>
                                 </tr>
-                            )
+                            );
                         })}
                     </tbody>
 

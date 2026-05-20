@@ -8,24 +8,24 @@ export default function Drivers() {
 
     const [drivers, setDrivers] = useState([])
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
     const [flag, setFlags] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        console.log("useEffect");
-        getDrivers();
+        getFlags();
     }, []);
+
     const getFlags = async () => {
         const urlFlag = `https://raw.githubusercontent.com/Imagin-io/country-nationality-list/refs/heads/master/countries.json`;
         const responce = await axios.get(urlFlag);
         setLoading(false);
         console.log("getFlags");
-
     };
-    useEffect(() => {
 
-        getFlags();
-    }, [])
+    useEffect(() => {
+        console.log("useEffect");
+        getDrivers();
+    }, []);
 
     const getDrivers = async () => {
         const url = "https://api.jolpi.ca/ergast/f1/2013/driverStandings.json";
@@ -43,11 +43,12 @@ export default function Drivers() {
 
     if (loading) {
         return <Loader />
-    }
+    };
+
+    console.log("drivers ", drivers);
 
     return (
         <div>
-
             <h1 className="title">Drivers Championship</h1>
             <div>
                 <table style={{ width: "80%", tableLayout: "fixed" }}>
@@ -68,7 +69,7 @@ export default function Drivers() {
                                     <td>{driver.Constructors[0].name}</td>
                                     <td>{driver.points}</td>
                                 </tr>
-                            )
+                            );
                         })}
                     </tbody>
                 </table>
