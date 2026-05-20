@@ -15,6 +15,16 @@ export default function TeamDetails() {
     const [standing, setStanding] = useState(null);
     const [races, setRaces] = useState([]);
 
+    const positionColors = {
+        1: "yellow",
+        2: "gray",
+        3: "orange",
+        4: "lightgreen",
+        5: "lightblue",
+    };
+
+
+
     useEffect(() => {
         if (!teamId) return;
 
@@ -70,7 +80,14 @@ export default function TeamDetails() {
 
     return (
         <div>
+
+            <div>
+                <img src={`/img/${team.constructorId}.png`} className="team-logo" alt={team.name} />
+            </div>
+
             <h1>{team.name}</h1>
+
+
 
             <p>
                 <strong>Country:</strong> {team.nationality}
@@ -112,12 +129,22 @@ export default function TeamDetails() {
                             <tr key={race.round}>
                                 <td>{race.round}</td>
                                 <td>{race.raceName}</td>
-                                <td>{driver1?.position}</td>
-                                <td>{driver2?.position || "-"}</td>
+
+                                {/* <td>{driver1?.position}</td>
+                                <td>{driver2?.position || "-"}</td> */}
+
+                                <td style={{ backgroundColor: positionColors[driver1?.position] || "darkgray" }}>
+                                    {driver1?.position || "-"}
+                                </td>
+
+                                <td style={{ backgroundColor: positionColors[driver2?.position] || "darkgray" }}>
+                                    {driver2?.position || "-"}
+                                </td>
                                 <td>
                                     {Number(driver1?.points || 0) +
                                         Number(driver2?.points || 0)}
                                 </td>
+
                             </tr>
                         );
                     })}
