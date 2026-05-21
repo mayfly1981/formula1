@@ -3,13 +3,17 @@ body {
     color: white;
 }
 
-.navigation {
+.navigations {
+
+    font-size: 22px;
+
     ul {
         list-style-type: none;
         margin: 0;
         padding: 0;
-        background-color: rgb(26, 18, 18);
+        background-color: rgb(60, 60, 60);
         width: 250px;
+        height: 350px;
     }
 
     li {
@@ -19,7 +23,15 @@ body {
         text-align: center;
     }
 
-    // a{
-    //     &:hover
-    // }
+    a {
+        text-decoration: none;
+        color: white;
+
+        &:hover {
+            background-color: rgb(240, 235, 235);
+            color: black;
+            padding: 12px 80px;
+        }
+
+    }
 }
