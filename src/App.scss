@@ -210,45 +210,48 @@ body {
     background-color: $color-bg-table;
     border-radius: 24px;
     padding: 25px;
+    box-shadow: 2px 0 4px 6px rgba(138, 126, 126, 0.55);
+}
 
-    h2 {
-        margin-bottom: 20px;
+
+h2 {
+    margin-bottom: 20px;
+    color: $color-text;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+thead {
+    background-color: $line-border;
+
+    th {
+        padding: 16px;
+        text-align: left;
         color: $color-text;
     }
+}
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        overflow: hidden;
-        border-radius: 16px;
-    }
+tbody {
 
-    thead {
-        background-color: $line-border;
+    tr {
+        border-top: 1px solid $line-border;
 
-        th {
-            padding: 16px;
-            text-align: left;
-            color: $color-text;
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.03);
         }
     }
 
-    tbody {
-
-        tr {
-            border-top: 1px solid $line-border;
-
-            &:hover {
-                background-color: rgba(255, 255, 255, 0.03);
-            }
-        }
-
-        td {
-            padding: 16px;
-            color: $color-text;
-        }
+    td {
+        padding: 16px;
+        color: $color-text;
     }
 }
+
 
 // .pos1 {
 //     background-color: $table-pos1;
