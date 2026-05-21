@@ -1,4 +1,12 @@
 export function getCountryCodeByNationality(flags, nationality) {
+    if (nationality === "British") {
+        return "GB";
+    }
+
+    if (nationality === "Dutch") {
+        return "NL";
+    }
+
     console.log("flags ", flags, nationality)
     const flag = flags.find(flag => flag.nationality === nationality);
     console.log(flag);
