@@ -39,8 +39,8 @@ export default function DriverDetails(props) {
         setDriverDetails(response1.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
         setDriverRaces(response2.data.MRData.RaceTable.Races);
         setIsLoading(false);
-        console.log("getDriversDetails");
-        console.log("getDriversRaces");
+        console.log("getDriversDetails", driverDetails);
+        console.log("getDriversRaces", driverRaces);
     };
 
     if (isLoading) {
@@ -56,6 +56,7 @@ export default function DriverDetails(props) {
                 {driverDetails.map((driverDetail) => {
                     return (
                         <div key={driverDetail.position}>
+                            <img src={`../../public/img/${driverDetail.Driver.driverId}.jpg`} alt={"Driver picture"} width={180} />
                             <img src={driverDetail.nationality} alt="" />
 
                             <Flag country={getCountryCodeByNationality(props.flags, driverDetail.Driver.nationality)} size={20} />
