@@ -32,34 +32,36 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <div className="main-container">
 
-      {/*Navigacija*/}
-      <div className="navigations">
-        <nav>
-          <ul>
-            <div className="home-page">
-              <li><Link to="/"><img src="../public/img/F1-logo.png" alt="Home picture" /></Link></li>
-            </div>
-            <div className="just-li">
-              <li><Link to="/drivers">Drivers</Link></li>
-              <li><Link to="/teams">Teams</Link></li>
-              <li><Link to="/races">Races</Link></li>
-            </div>
-          </ul>
-        </nav>
-      </div>
+        {/*Navigacija*/}
+        <div className="navigations">
+          <nav>
+            <ul>
+              <div className="home-page">
+                <li><Link to="/"><img src="../public/img/F1-logo.png" alt="Home picture" /></Link></li>
+              </div>
+              <div className="just-li">
+                <li><Link to="/drivers">Drivers</Link></li>
+                <li><Link to="/teams">Teams</Link></li>
+                <li><Link to="/races">Races</Link></li>
+              </div>
+            </ul>
+          </nav>
+        </div>
 
-      {/* Rute */}
-      <div>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/drivers" element={<Drivers flags={flags} />} />
-          <Route path="/teams" element={<Teams flags={flags} />} />
-          <Route path="/races" element={<Races flags={flags} />} />
-          <Route path="/driverDetails/:id" element={<DriverDetails flags={flags} />} />
-          <Route path="/teamDetails/:id" element={<TeamDetails flags={flags} />} />
-          <Route path="/raceDetails/:id" element={<RaceDetails flags={flags} />} />
-        </Routes>
+        {/* Rute */}
+        <div>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/drivers" element={<Drivers flags={flags} />} />
+            <Route path="/teams" element={<Teams flags={flags} />} />
+            <Route path="/races" element={<Races flags={flags} />} />
+            <Route path="/driverDetails/:id" element={<DriverDetails flags={flags} />} />
+            <Route path="/teamDetails/:id" element={<TeamDetails flags={flags} />} />
+            <Route path="/raceDetails/:id" element={<RaceDetails flags={flags} />} />
+          </Routes>
+        </div>
       </div>
     </BrowserRouter >
   );
