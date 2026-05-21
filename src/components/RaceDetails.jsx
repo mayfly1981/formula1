@@ -5,6 +5,7 @@ import axios from "axios";
 import Flag from "react-flagkit";
 import { getCountryCodeByShortName } from "../helpers/getCountryCode";
 import { getCountryCodeByNationality } from "../helpers/getCountryCode";
+import getPositionColor from "../helpers/positionColors";
 
 export default function RaceDetails(props) {
     const [raceQualifiers, setRaceQualifiers] = useState(null);
@@ -145,7 +146,7 @@ export default function RaceDetails(props) {
                                     <td>{result.Constructor.name}</td>
                                     {/* <td>{result.Time?.time}</td> */}
                                     <td>{getRaceTime(result)}</td>
-                                    <td>{result.points}</td>
+                                    <td style={{ backgroundColor: getPositionColor(result.position) }}>{result.points}</td>
                                 </tr>
                             );
                         })}
