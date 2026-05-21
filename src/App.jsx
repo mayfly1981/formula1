@@ -8,6 +8,7 @@ import TeamDetails from "./components/TeamDetails";
 import RaceDetails from "./components/RaceDetails";
 import Loader from "./components/Loader";
 import axios from "axios";
+import Home from "./components/Home";
 
 export default function App() {
   const [flags, setFlags] = useState([]);
@@ -34,7 +35,8 @@ export default function App() {
       {/*Navigacija*/}
       <nav className="top-navigation">
         <ul>
-          <li><Link to="/">Drivers</Link></li>
+          <li><Link to="/"><img src="../public/img/F1-logo.png" alt="Home picture" /></Link></li>
+          <li><Link to="/drivers">Drivers</Link></li>
           <li><Link to="/teams">Teams</Link></li>
           <li><Link to="/races">Races</Link></li>
         </ul>
@@ -43,7 +45,7 @@ export default function App() {
       {/* Rute */}
       <div>
         <Routes>
-          <Route path="/" element={<Drivers flags={flags} />} />
+          <Route path="/drivers" element={<Drivers flags={flags} />} />
           <Route path="/teams" element={<Teams flags={flags} />} />
           <Route path="/races" element={<Races flags={flags} />} />
           <Route path="/driverDetails/:id" element={<DriverDetails flags={flags} />} />
