@@ -1,80 +1,3 @@
-// @use "variable.scss";
-
-// body {
-//     background-color: $color-body;
-//     color: white;
-// }
-
-// .navigations {
-//     display: flex;
-//     justify-content: left;
-//     font-size: 22px;
-
-
-//     ul {
-//         list-style-type: none;
-//         margin: 0;
-//         padding: 0;
-//         background-color: $color-bg-table;
-//         ;
-//         width: 250px;
-//         height: 250px;
-//     }
-
-//     li {
-//         display: block;
-//         text-decoration: none;
-//         padding: 12px;
-//         text-align: center;
-//     }
-
-//     .just-li {
-//         a {
-//             text-decoration: none;
-//             color: $color-text;
-
-//             &:hover {
-//                 background-color: rgb(87, 90, 89);
-//                 color: black;
-//                 padding: 12px 80px;
-//             }
-//         }
-//     }
-// }
-
-// .container-drivers {
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: space-between;
-
-//     h1 {
-//         color: $color-text;
-//         font-size: 50px;
-//         // font-weight: ;
-//     }
-
-//     display: block;
-//     justify-content: space-between;
-//     gap: 10px;
-
-
-//     .table-drivers {
-//         table {
-//             background-color: $color-bg-table;
-//         }
-
-//     }
-// }
-
-// table {
-//     background-color: $color-bg-table;
-//     color: $color-text;
-// }
-
-// h1 {
-//     color: $color-h1;
-// }
-
 @use "./variable" as *;
 
 body {
@@ -82,16 +5,11 @@ body {
     color: $color-text;
     margin: 0;
     font-size: 20px;
-    font-family: serif;
+    font-family: 'Times New Roman', Times, serif
 }
 
 .main-container {
     display: flex;
-}
-
-.driver-page {
-    display: flex;
-    min-height: 100vh;
 }
 
 .navigations {
@@ -117,11 +35,11 @@ body {
             text-decoration: none;
             color: $color-text;
             font-size: 20px;
-            font-weight: 500;
+            font-weight: 500px;
             display: block;
-            border-radius: 12px;
+            border-radius: 15px;
             padding: 12px;
-            transition: 0.1s;
+            transition: 0.2s;
 
             &:hover {
                 background-color: $a-hover;
@@ -138,101 +56,40 @@ body {
     }
 }
 
+table {
+    width: 100%;
+    table-layout: fixed;
+    column-span: 4;
+}
+
 .container-drivers {
     flex: 1;
     padding: 30px;
+    width: "100%";
+    table-layout: "fixed";
 
     h1 {
         color: $color-h1;
         font-size: 48px;
         margin-bottom: 30px;
-    }
-}
-
-.driver-card {
-    background-color: $color-bg-table;
-    border-radius: 24px;
-    padding: 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-
-    .driver-left {
-        display: flex;
-        align-items: center;
-        gap: 30px;
+        text-align: left;
     }
 
-    .driver-image {
-        img {
-            width: 230px;
-            border-radius: 18px;
-        }
-    }
-
-    .driver-info {
-        h2 {
-            font-size: 42px;
-            margin-bottom: 10px;
-        }
-
-        p {
-            color: $color-text;
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        button {
-            margin-top: 20px;
-            padding: 12px 20px;
-            border-radius: 12px;
-            border: none;
-            background-color: $color-h1;
-            color: $color-text;
-            cursor: pointer;
-            transition: 0.2s;
-
-            &:hover {
-                transform: scale(1.05);
-            }
-        }
-    }
-
-    .team-logo {
-        img {
-            width: 220px;
-        }
+    .title {
+        text-align: left;
     }
 }
 
 .table-drivers {
     background-color: $color-bg-table;
-    border-radius: 24px;
+    border-radius: 25px;
     padding: 25px;
-    box-shadow: 2px 0 4px 6px rgba(138, 126, 126, 0.55);
-}
+    font-size: 22px;
 
-
-h2 {
-    margin-bottom: 20px;
-    color: $color-text;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    overflow: hidden;
-    border-radius: 16px;
-}
-
-thead {
-    background-color: $line-border;
-
-    th {
-        padding: 16px;
-        text-align: left;
+    h1 {
+        margin-bottom: 40px;
         color: $color-text;
+        text-align: center;
     }
 }
 
@@ -241,62 +98,34 @@ tbody {
     tr {
         border-top: 1px solid $line-border;
 
-        &:hover {
-            background-color: rgba(255, 255, 255, 0.03);
+        tr {
+
+            th {
+                padding: 16px;
+                text-align: left;
+                color: $color-text;
+                background-color: $table-bg-h-color;
+            }
         }
     }
 
-    td {
-        padding: 16px;
-        color: $color-text;
+    tbody {
+
+        tr {
+            border-top: 1px solid $line-border;
+
+            &:hover {
+                background-color: $line-border;
+            }
+
+            &:nth-child(even) {
+                background-color: $line-border;
+            }
+        }
+
+        td {
+            padding: 20px 20px;
+            color: $color-text;
+        }
     }
 }
-
-
-// .pos1 {
-//     background-color: $table-pos1;
-//     color: black;
-//     padding: 8px 14px;
-//     border-radius: 10px;
-//     font-weight: bold;
-// }
-
-// .pos2 {
-//     background-color: $table-pos2;
-//     color: black;
-//     padding: 8px 14px;
-//     border-radius: 10px;
-//     font-weight: bold;
-// }
-
-// .pos3 {
-//     background-color: $table-pos3;
-//     color: black;
-//     padding: 8px 14px;
-//     border-radius: 10px;
-//     font-weight: bold;
-// }
-
-// .pos4 {
-//     background-color: $table-pos4;
-//     color: black;
-//     padding: 8px 14px;
-//     border-radius: 10px;
-//     font-weight: bold;
-// }
-
-// .pos5 {
-//     background-color: $table-pos5;
-//     color: black;
-//     padding: 8px 14px;
-//     border-radius: 10px;
-//     font-weight: bold;
-// }
-
-// .pos6 {
-//     background-color: $table-pos6;
-//     color: black;
-//     padding: 8px 14px;
-//     border-radius: 10px;
-//     font-weight: bold;
-// }
