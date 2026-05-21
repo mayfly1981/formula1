@@ -33,14 +33,16 @@ export default function App() {
   return (
     <BrowserRouter>
       {/*Navigacija*/}
-      <nav className="top-navigation">
-        <ul>
-          <li><Link to="/"><img src="../public/img/F1-logo.png" alt="Home picture" /></Link></li>
-          <li><Link to="/drivers">Drivers</Link></li>
-          <li><Link to="/teams">Teams</Link></li>
-          <li><Link to="/races">Races</Link></li>
-        </ul>
-      </nav>
+      <div className="navigations">
+        <nav>
+          <ul>
+            <li><Link to="/"><img src="../public/img/F1-logo.png" alt="Home picture" /></Link></li>
+            <li><Link to="/drivers">Drivers</Link></li>
+            <li><Link to="/teams">Teams</Link></li>
+            <li><Link to="/races">Races</Link></li>
+          </ul>
+        </nav>
+      </div>
 
       {/* Rute */}
       <div>

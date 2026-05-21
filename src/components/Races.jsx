@@ -63,9 +63,9 @@ export default function Races(props) {
                         <tr>
                             <th>Round</th>
                             <th>Grand Prix</th>
-                            <th>Team</th>
-                            <th>Grid</th>
-                            <th>Race</th>
+                            <th>Circuit</th>
+                            <th>Date</th>
+                            <th>Winner</th>
                         </tr>
                     </thead>
                     <tbody>
