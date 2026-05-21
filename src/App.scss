@@ -81,17 +81,21 @@ table {
 }
 
 .table-drivers {
-    background-color: $color-bg-table;
+    background-color: $color-text;
     border-radius: 25px;
     padding: 25px;
     font-size: 22px;
-
-    h1 {
-        margin-bottom: 40px;
-        color: $color-text;
-        text-align: center;
-    }
+    box-shadow: 1px 3px 3px 3px rgba(138, 126, 126, 0.55);
 }
+
+
+
+h1 {
+    margin-bottom: 40px;
+    color: $color-text;
+    text-align: center;
+}
+
 
 tbody {
 
