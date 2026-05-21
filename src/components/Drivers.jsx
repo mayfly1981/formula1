@@ -49,9 +49,9 @@ export default function Drivers(props) {
     console.log("drivers ", drivers);
 
     return (
-        <div>
+        <div className="container-drivers">
             <h1 className="title">Drivers Championship</h1>
-            <div>
+            <div className="table-drivers">
                 <table style={{ width: "80%", tableLayout: "fixed" }}>
                     <thead>
                         <tr>

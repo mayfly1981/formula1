@@ -1,3 +1,5 @@
+// @import "variable.scss";
+
 body {
     background-color: black;
     color: white;
@@ -7,13 +9,15 @@ body {
 
     font-size: 22px;
 
+
     ul {
         list-style-type: none;
         margin: 0;
         padding: 0;
-        background-color: rgb(60, 60, 60);
+        background-color: rgb(87, 90, 89);
+        ;
         width: 250px;
-        height: 350px;
+        height: 250px;
     }
 
     li {
@@ -23,14 +27,30 @@ body {
         text-align: center;
     }
 
-    a {
-        text-decoration: none;
-        color: white;
+    .just-li {
+        a {
+            text-decoration: none;
+            color: white;
 
-        &:hover {
-            background-color: rgb(240, 235, 235);
-            color: black;
-            padding: 12px 80px;
+            &:hover {
+                background-color: rgb(87, 90, 89);
+                color: black;
+                padding: 12px 80px;
+            }
+        }
+    }
+}
+
+.container-drivers {
+    h1 {
+        color: white;
+        font-size: 50px;
+        // font-weight: ;
+    }
+
+    .table-drivers {
+        table {
+            background-color: rgb(87, 90, 89);
         }
 
     }
