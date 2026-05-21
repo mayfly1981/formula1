@@ -48,11 +48,12 @@ export default function RaceDetails(props) {
         console.log("getRaceResults");
     };
 
+
     const getBestTime = (qualifier) => {
         const times = [];
         times.push(qualifier.Q1, qualifier.Q2, qualifier.Q3);
         times.sort();
-
+        //zdravo
         return times[0];
     };
 
