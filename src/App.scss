@@ -60,6 +60,7 @@ table {
     width: 100%;
     table-layout: fixed;
     column-span: 4;
+    padding: 10px;
 }
 
 .container-drivers {
@@ -75,61 +76,49 @@ table {
         text-align: left;
     }
 
-    .title {
-        text-align: left;
-    }
 }
 
 .table-drivers {
-    background-color: $color-text;
+    background-color: $color-bg-table;
     border-radius: 25px;
     padding: 25px;
     font-size: 22px;
     box-shadow: 1px 3px 3px 3px rgba(138, 126, 126, 0.55);
-}
 
+    table {
+        tbody {
 
+            tr {
+                border-top: 1px solid $line-border;
 
-h1 {
-    margin-bottom: 40px;
-    color: $color-text;
-    text-align: center;
-}
+                th {
+                    padding: 16px;
+                    color: $color-text;
+                    background-color: $table-bg-h-color;
 
+                    &:hover {
+                        background-color: $line-border;
+                    }
 
-tbody {
+                    &:nth-child(even) {
+                        background-color: $line-border;
+                    }
+                }
 
-    tr {
-        border-top: 1px solid $line-border;
+            }
 
-        tr {
+        }
 
-            th {
-                padding: 16px;
-                text-align: left;
+        tbody {
+
+            tr {
+                border-top: 1px solid $line-border;
+            }
+
+            td {
+                padding: 20px 20px;
                 color: $color-text;
-                background-color: $table-bg-h-color;
             }
-        }
-    }
-
-    tbody {
-
-        tr {
-            border-top: 1px solid $line-border;
-
-            &:hover {
-                background-color: $line-border;
-            }
-
-            &:nth-child(even) {
-                background-color: $line-border;
-            }
-        }
-
-        td {
-            padding: 20px 20px;
-            color: $color-text;
         }
     }
 }
