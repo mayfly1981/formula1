@@ -4,6 +4,7 @@ import Loader from "./Loader";
 import { useNavigate, } from "react-router";
 import Flag from "react-flagkit";
 import { getCountryCodeByNationality } from "../helpers/getCountryCode";
+import Breadcrumb from "./Breadcrumb";
 
 export default function Drivers(props) {
 
@@ -46,10 +47,15 @@ export default function Drivers(props) {
         return <Loader />
     };
 
+    const breadcrumbs = [
+        { text: "Drivers", route: "" }
+    ];
+
     console.log("drivers ", drivers);
 
     return (
         <div className="container-drivers">
+            <Breadcrumb items={breadcrumbs} />
             <h1 className="title">Drivers Championship</h1>
             <div className="table-drivers">
                 <table style={{ width: "80%", tableLayout: "fixed" }}>
