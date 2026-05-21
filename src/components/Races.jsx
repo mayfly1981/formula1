@@ -52,14 +52,13 @@ export default function Races(props) {
     console.log("races", races);
 
     return (
-        <div>
-            <h1 style={{ textAlign: "center" }}>Races calendar</h1>
-            <div>
-                <div>
-                    <p>Races calendar - 2013</p>
-                </div>
-                <table style={{ width: "80%", tableLayout: "fixed" }}>
+        <div className="container-races">
+            <h1>Races calendar</h1>
+
+            <div className="table-races">
+                <table >
                     <thead>
+                        <tr><th colSpan={5}>Races calendar - 2013</th></tr>
                         <tr>
                             <th>Round</th>
                             <th>Grand Prix</th>
@@ -68,6 +67,7 @@ export default function Races(props) {
                             <th>Winner</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         {races.map((race) => {
                             return (
@@ -83,7 +83,6 @@ export default function Races(props) {
                                     <td>
                                         <Flag country={getCountryCodeByNationality(props.flags, race.Results[0].Driver.nationality)} size={20} />
                                         {race.Results[0].Driver.familyName}
-
                                     </td>
                                 </tr>
                             );
@@ -93,5 +92,6 @@ export default function Races(props) {
                 </table>
             </div>
         </div>
+
     );
 }

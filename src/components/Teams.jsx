@@ -46,10 +46,10 @@ export default function Teams(props) {
 
     return (
 
-        <div>
-            <h1 style={{ textAlign: "left" }}>Constructors Champhionship Standings - 2013</h1>
-            <div>
-                <table style={{ width: "80%", tableLayout: "fixed" }}>
+        <div className="container-teams">
+            <h1>Constructors Champhionship Standings - 2013</h1>
+            <div className="table-teams">
+                <table>
                     <thead>
                         <tr>
                             <th></th>
