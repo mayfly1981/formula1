@@ -40,9 +40,11 @@ export default function App() {
             <div className="home-page">
               <li><Link to="/"><img src="../public/img/F1-logo.png" alt="Home picture" /></Link></li>
             </div>
-            <li><Link to="/drivers">Drivers</Link></li>
-            <li><Link to="/teams">Teams</Link></li>
-            <li><Link to="/races">Races</Link></li>
+            <div className="just-li">
+              <li><Link to="/drivers">Drivers</Link></li>
+              <li><Link to="/teams">Teams</Link></li>
+              <li><Link to="/races">Races</Link></li>
+            </div>
           </ul>
         </nav>
       </div>
