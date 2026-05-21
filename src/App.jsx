@@ -9,6 +9,7 @@ import RaceDetails from "./components/RaceDetails";
 import Loader from "./components/Loader";
 import axios from "axios";
 import Home from "./components/Home";
+import Breadcrumb from "./components/Breadcrumb";
 
 export default function App() {
   const [flags, setFlags] = useState([]);
