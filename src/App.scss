@@ -84,35 +84,38 @@ table {
     padding: 25px;
     font-size: 22px;
     box-shadow: 1px 3px 3px 3px rgba(138, 126, 126, 0.55);
+}
 
-    table {
-        tbody {
+table {
+
+    tbody {
+
+        tr {
+            border-top: 1px solid $line-border;
 
             tr {
-                border-top: 1px solid $line-border;
 
                 th {
                     padding: 16px;
+                    text-align: left;
                     color: $color-text;
                     background-color: $table-bg-h-color;
-
-                    &:hover {
-                        background-color: $line-border;
-                    }
-
-                    &:nth-child(even) {
-                        background-color: $line-border;
-                    }
                 }
-
             }
-
         }
 
         tbody {
 
             tr {
                 border-top: 1px solid $line-border;
+
+                &:hover {
+                    background-color: $line-border;
+                }
+
+                &:nth-child(even) {
+                    background-color: $line-border;
+                }
             }
 
             td {
