@@ -280,5 +280,32 @@ table {
 
 
     }
+}
 
+
+// ===============> TEAMS <============
+
+.container-teams {
+    display: block;
+    background-color: $color-bg-table;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 30px;
+    font-size: 22px;
+    border: 0.1px solid grey;
+    box-shadow: 1px 3px 3px 3px rgba(138, 126, 126, 0.55);
+
+    h1 {
+        color: $color-h1;
+        font-size: 50px;
+        margin-bottom: 30px;
+        text-align: left;
+    }
+
+    .table-teams {
+        background-color: $color-bg-table;
+        border-radius: 10px;
+        padding: 25px;
+        font-size: 22px;
+    }
 }

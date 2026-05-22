@@ -55,7 +55,7 @@ export default function Teams(props) {
 
         <div className="container-teams">
             <Breadcrumb items={breadcrumbsTeams} />
-            <h1>Constructors Champhionship Standings - 2013</h1>
+            <h1>Constructors Champhionship</h1>
             <div className="table-teams">
                 <table>
                     <thead>
