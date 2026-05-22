@@ -56,20 +56,26 @@ export default function DriverDetails(props) {
                 {driverDetails.map((driverDetail) => {
                     return (
                         <div key={driverDetail.position}>
-                            <img src={`../../public/img/${driverDetail.Driver.driverId}.jpg`} alt={"Driver picture"} width={180} />
-                            <img src={driverDetail.nationality} alt="" />
+                            <div className="img-driver">
 
-                            <Flag country={getCountryCodeByNationality(props.flags, driverDetail.Driver.nationality)} size={20} />
+                                <img src={`../../public/img/${driverDetail.Driver.driverId}.jpg`} alt={"Driver picture"} width={180} className="img-drivers" />
+                            </div>
+                            <div className="information-drivers">
 
-                            <p>{driverDetail.Driver.givenName} {driverDetail.Driver.familyName}</p>
-                            <p>Country: {driverDetail.Driver.nationality}</p>
-                            <p>Team: {driverDetail.Constructors[0].name}</p>
-                            <p>Birth: {driverDetail.Driver.dateOfBirth}</p>
-                            <a href={driverDetail.Driver.url}
-                                target="_blank"
-                                rel="noreferrer">
-                                Biography
-                            </a>
+                                <img src={driverDetail.nationality} alt="" />
+
+                                <Flag country={getCountryCodeByNationality(props.flags, driverDetail.Driver.nationality)} size={20} />
+
+                                <p>{driverDetail.Driver.givenName} {driverDetail.Driver.familyName}</p>
+                                <p>Country: {driverDetail.Driver.nationality}</p>
+                                <p>Team: {driverDetail.Constructors[0].name}</p>
+                                <p>Birth: {driverDetail.Driver.dateOfBirth}</p>
+                                <a href={driverDetail.Driver.url}
+                                    target="_blank"
+                                    rel="noreferrer">
+                                    Biography
+                                </a>
+                            </div>
                         </div>
                     );
                 })}
