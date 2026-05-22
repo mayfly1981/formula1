@@ -50,9 +50,10 @@ export default function Drivers(props) {
 
     return (
         <div className="container-drivers">
-            <h1 className="title">Drivers Championship</h1>
+
             <div className="table-drivers">
-                <table style={{ width: "80%", tableLayout: "fixed" }}>
+                <h1 className="title">Drivers Championship</h1>
+                <table>
                     <thead>
                         <tr>
                             <th colSpan={4}>Drivers Championship Standings - 2013</th>
@@ -68,9 +69,7 @@ export default function Drivers(props) {
                                     <td>{driver.position}</td>
 
                                     <td onClick={() => handleClick(driver.Driver.driverId)}>
-
-                                        <Flag country={getCountryCodeByNationality(props.flags, driver.Driver.nationality)} size={20} /> {driver.Driver.givenName}{driver.Driver.familyName}
-
+                                        <Flag country={getCountryCodeByNationality(props.flags, driver.Driver.nationality)} size={20} /> {driver.Driver.givenName} {driver.Driver.familyName}
                                     </td>
                                     <td>{driver.Constructors[0].name}</td>
                                     <td>{driver.points}</td>
@@ -79,6 +78,8 @@ export default function Drivers(props) {
                         })}
                     </tbody>
                 </table>
+
+
             </div>
         </div>
     )
