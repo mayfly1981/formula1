@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import Flag from "react-flagkit";
 import { getCountryCodeByNationality } from "../helpers/getCountryCode"
+import Breadcrumb from "./Breadcrumb";
 
 
 
@@ -42,11 +43,18 @@ export default function Teams(props) {
         return <Loader />;
     }
 
+    const breadcrumbsTeams = [
+
+        { text: "Teams", route: "" }
+
+    ];
+
     console.log(teams)
 
     return (
 
         <div className="container-teams">
+            <Breadcrumb items={breadcrumbsTeams} />
             <h1>Constructors Champhionship Standings - 2013</h1>
             <div className="table-teams">
                 <table>

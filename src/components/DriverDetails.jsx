@@ -5,6 +5,7 @@ import Loader from "./Loader";
 import Flag from "react-flagkit";
 import { getCountryCodeByNationality } from "../helpers/getCountryCode";
 import { getCountryCodeByShortName } from "../helpers/getCountryCode";
+import Breadcrumb from "./Breadcrumb";
 
 export default function DriverDetails(props) {
     const [driverDetails, setDriverDetails] = useState(null);
@@ -46,13 +47,22 @@ export default function DriverDetails(props) {
     if (isLoading) {
         return <Loader />;
     };
-    console.log("driver " + driverDetails);
+    console.log("driver ", driverDetails);
     console.log("driverDetails ", driverDetails);
     console.log("driverRaces ", driverRaces);
+
+    const driver = driverDetails[0];
+    console.log("driver ", driver);
+
+    const breadcrumbsDriverDetails = [
+        { text: "Drivers", route: "/drivers" },
+        { text: `${driver.Driver.givenName} ${driver.Driver.familyName}`, route: "" }
+    ];
 
     return (
         <div className="container">
             <div className="driver-details">
+                <Breadcrumb items={breadcrumbsDriverDetails} />
                 {driverDetails.map((driverDetail) => {
                     return (
                         <div key={driverDetail.position}>

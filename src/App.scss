@@ -58,6 +58,8 @@ body {
 
 
 .container-drivers {
+
+
     flex: 1;
     padding: 30px;
     width: "100%";
@@ -233,9 +235,21 @@ table {
         }
     }
 
+
     td {
         padding: 15px;
         font-size: 20px;
         text-align: center;
     }
+}
+
+.home-image {
+    text-align: center;
+    height: 100vh;
+    width: 100vw;
+    color: $color-h1;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../public/img/2026_Explainer_FIA_Front_3_4_1920x1080.avif");
+
 }

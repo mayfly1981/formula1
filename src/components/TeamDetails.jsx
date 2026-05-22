@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import Loader from "./Loader";
 import Flag from "react-flagkit";
 import { getCountryCodeByNationality, getCountryCodeByShortName } from "../helpers/getCountryCode";
+import Breadcrumb from "./Breadcrumb";
 
 
 
@@ -86,6 +87,7 @@ export default function TeamDetails(props) {
         return <p>No team data found</p>;
     }
     console.log(team);
+
     return (
         <div>
 
