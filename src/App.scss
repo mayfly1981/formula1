@@ -5,7 +5,7 @@ body {
     color: $color-text;
     margin: 0;
     font-size: 26px;
-    font-family: Arial, Helvetica, sans-serif
+    font-family: serif
 }
 
 .main-container {
@@ -312,5 +312,57 @@ table {
     a {
         text-decoration: none;
         color: $color-text;
+    }
+}
+
+// radis RACES DETAILS
+
+// =============> RACES DETAILS <===============
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    background-color: $color-bg-table;
+    color: $color-text;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 30px;
+    font-size: 22px;
+    border: 0.1px solid grey;
+    box-shadow: 1px 3px 3px 3px rgba(138, 126, 126, 0.55);
+    overflow: hidden;
+
+    h1 {
+        color: $color-h1;
+        font-size: 30px;
+        margin-bottom: 30px;
+        text-align: left;
+    }
+
+    .tables-container {
+        display: flex;
+
+    }
+
+    // .grand-prix { }
+
+    .qualifying-results {
+        background-color: $color-bg-table;
+        border-radius: 10px;
+        padding: 25px;
+        font-size: 22px;
+
+    }
+
+    .race-results {
+        background-color: $color-bg-table;
+        border-radius: 10px;
+        padding: 25px;
+        font-size: 22px;
+
+        .points-color {
+            color: black;
+            overflow: hidden;
+        }
     }
 }

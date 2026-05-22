@@ -67,7 +67,7 @@ export default function DriverDetails(props) {
                     return (
                         <div key={driverDetail.position}>
                             <div className="img-driver">
-                                <img className="img-drivers" src={`../../public/img/${driverDetail.Driver.driverId}.jpg`} alt={"Driver picture"} width={180} />
+                                <img className="img-drivers" src={`../../public/img/${driverDetail.Driver.driverId}.png`} alt={"Driver picture"} width={180} />
                             </div>
                             <div className="information-drivers">
 

@@ -89,37 +89,138 @@ export default function TeamDetails(props) {
     console.log(team);
 
     return (
-        <div>
+        <div className="team-details-page">
 
-            <div>
-                <img src={`/img/${team.constructorId}.png`} className="team-logo" alt={team.name} />
-                <p><Flag country={getCountryCodeByNationality(props.flags, team.nationality)} size={20} />{team.name}
-                </p>
+            {/* <div className="team-card">
+                <div className="team-card-header">
+                    <img
+                        src={`/img/${team.constructorId}.png`}
+                        className="team-logo"
+                        alt={team.name}
+                    />
+
+                    <div className="team-title-box">
+                        <p className="team-name-with-flag">
+                            <Flag
+                                country={getCountryCodeByNationality(props.flags, team.nationality)}
+                                size={20}
+                            />
+                            <span>{team.name}</span>
+                        </p>
+
+
+
+
+                        <h1 className="team-title">{team.name}</h1>
+                    </div>
+                </div>
+
+                <div className="time-info">
+
+                    <p className="team-info-row">
+
+                        <strong>Country:</strong>
+
+                        <span>{team.nationality}</span>
+                    </p>
+
+                    <div className="team-stats">
+
+                        <p className="team-stat">
+
+                            <span className="team-stat-label">Position</span>
+                            <span className="team-stat-value">{standing?.position}</span>
+                        </p>
+
+                        <p className="team-stat">
+
+                            <span className="team-stat-label">Points</span>
+                            <span className="team-stat-value">{standing?.points}</span>
+                        </p>
+                    </div>
+
+
+
+                    <a className="team-wiki-link"
+                        href={team.url}
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        History
+                    </a>
+                </div>
+            </div> */}
+
+            <div className="team-card">
+                <div className="team-logo-box">
+                    <img
+                        src={`/img/${team.constructorId}.png`}
+                        className="team-logo"
+                        alt={team.name}
+                    />
+                </div>
+
+                <div className="team-card-content">
+                    <p className="team-name-with-flag">
+                        <Flag
+                            country={getCountryCodeByNationality(props.flags, team.nationality)}
+                            size={20}
+                        />
+                        <span>{team.name}</span>
+                    </p>
+
+                    <h1 className="team-title">{team.name}</h1>
+
+                    <div className="team-info">
+                        <p className="team-info-row">
+                            <strong>Country:</strong>
+                            <span>{team.nationality}</span>
+                        </p>
+
+                        <div className="team-stats">
+                            <p className="team-stat">
+                                <span className="team-stat-label">Position</span>
+                                <span className="team-stat-value">{standing?.position}</span>
+                            </p>
+
+                            <p className="team-stat">
+                                <span className="team-stat-label">Points</span>
+                                <span className="team-stat-value">{standing?.points}</span>
+                            </p>
+                        </div>
+
+                        <a
+                            className="team-wiki-link"
+                            href={team.url}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            History
+                        </a>
+                    </div>
+                </div>
             </div>
 
-            <h1>{team.name}</h1>
+
+            {/* Donja tabela */}
+
+            {/* <div className="team-result-section"></div>
+            <h2 className="team-results-title">Formula 1   2013 Results</h2>
 
 
+            <div className="results-table-wrapper"></div> */}
 
-            <p>
-                <strong>Country:</strong> {team.nationality}
-            </p>
+            <div className="team-results-section">
+                <h2 className="team-results-title">Formula 1 2013 Results</h2>
 
-            <p>Position:{standing?.position}</p>
-            <p>Points:{standing?.points}</p>
+                <div className="results-table-wrapper">
+                    <table className="results-table">
+                        ...
+                    </table>
+                </div>
+            </div>
 
-            <p>
 
-                <a
-                    href={team.url}
-                    target="_blank"
-                    rel="noreferrer"
-                >
-                    History
-                </a>
-            </p>
-
-            <h2>Formula 1 2013 Results</h2>
 
             <table className="results-table">
                 <thead>
@@ -140,9 +241,23 @@ export default function TeamDetails(props) {
                         return (
                             <tr key={race.round}>
                                 <td>{race.round}</td>
-                                <td>
+
+                                {/* <td>
                                     <Flag country={getCountryCodeByShortName(props.flags, race.Circuit.Location.country)} size={20} /> {race.raceName}
+                                </td> */}
+
+
+                                <td>
+                                    <div className="flag-text">
+                                        <Flag
+                                            country={getCountryCodeByShortName(props.flags, race.Circuit.Location.country)}
+                                            size={20}
+                                        />
+                                        <span>{race.raceName}</span>
+                                    </div>
                                 </td>
+
+
 
                                 {/* <td>{driver1?.position}</td>
                                 <td>{driver2?.position || "-"}</td> */}
@@ -163,7 +278,7 @@ export default function TeamDetails(props) {
 
                                 <td className="position-cell">
                                     <span className={`position-badge pos-${driver2?.position || "default"}`}>
-                                        {driver1?.position || "-"}
+                                        {driver2?.position || "-"}
                                     </span>
                                 </td>
                                 <td>
@@ -176,6 +291,8 @@ export default function TeamDetails(props) {
                     })}
                 </tbody>
             </table>
-        </div>
+        </div >
+
+
     );
 }
