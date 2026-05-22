@@ -119,7 +119,7 @@ export default function TeamDetails(props) {
 
             <h2>Formula 1 2013 Results</h2>
 
-            <table border="1">
+            <table>
                 <thead>
                     <tr>
                         <th>Round</th>
