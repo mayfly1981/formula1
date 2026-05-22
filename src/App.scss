@@ -56,10 +56,9 @@ body {
     }
 }
 
+// ==========> DRIVERS < ==========
 
 .container-drivers {
-
-
     flex: 1;
     padding: 30px;
     width: "100%";
@@ -67,7 +66,7 @@ body {
 
     h1 {
         color: $color-h1;
-        font-size: 48px;
+        font-size: 70px;
         margin-bottom: 30px;
         text-align: left;
     }
@@ -76,16 +75,13 @@ body {
 
 .table-drivers {
     background-color: $color-bg-table;
-    border-radius: 25px;
+    border-radius: 10px;
     padding: 25px;
     font-size: 22px;
+    border: 0.1px solid grey;
     box-shadow: 1px 3px 3px 3px rgba(138, 126, 126, 0.55);
 
-    h1 {
-        text-align: left;
-        font-size: 70px;
 
-    }
 
     .img-country {
         width: 100px;
@@ -202,6 +198,7 @@ body {
     }
 }
 
+// ===========> DIZAJN ZA SVE TABELE < =========
 table {
     width: 100%;
     border-collapse: collapse;
@@ -243,7 +240,9 @@ table {
     }
 }
 
+// ===========> HOME PAGE < ==========
 .home-image {
+
     text-align: center;
     height: 100vh;
     width: 100vw;
@@ -251,5 +250,44 @@ table {
     background-repeat: no-repeat;
     background-size: cover;
     background-image: url("../public/img/2026_Explainer_FIA_Front_3_4_1920x1080.avif");
+}
+
+// ==========> RACES <============
+
+.container-races {
+    display: block;
+    background-color: $color-bg-table;
+    border-radius: 10px;
+    padding: 25px;
+    font-size: 22px;
+    border: 0.1px solid grey;
+    box-shadow: 1px 3px 3px 3px rgba(138, 126, 126, 0.55);
+
+    h1 {
+        color: $color-h1;
+        font-size: 70px;
+        margin-bottom: 30px;
+        text-align: left;
+    }
+
+    .table-races {
+        background-color: $color-bg-table;
+        padding: 25px;
+        font-size: 22px;
+    }
+
+    a {
+        margin-top: 15px;
+        padding: 10px 20px;
+        background: $color-bg-table;
+        color: $color-text;
+        text-decoration: none;
+        transition: 0.2s;
+
+        &:hover {
+            background: $color-nav;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    }
 
 }
