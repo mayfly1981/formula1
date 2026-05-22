@@ -5,7 +5,7 @@ body {
     color: $color-text;
     margin: 0;
     font-size: 20px;
-    font-family: 'Times New Roman', Times, serif
+    font-family: Arial, Helvetica, sans-serif
 }
 
 .main-container {
@@ -63,7 +63,7 @@ body {
     flex: 1;
     padding: 30px;
     width: "100%";
-    table-layout: "fixed";
+    table-layout: fixed;
 
     h1 {
         color: $color-h1;
