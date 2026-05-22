@@ -147,12 +147,24 @@ export default function TeamDetails(props) {
                                 {/* <td>{driver1?.position}</td>
                                 <td>{driver2?.position || "-"}</td> */}
 
-                                <td style={{ backgroundColor: positionColors[driver1?.position] || "darkgray" }}>
+                                {/* <td style={{ backgroundColor: positionColors[driver1?.position] || "darkgray" }}>
                                     {driver1?.position || "-"}
+                                </td> */}
+
+                                <td className="position-cell">
+                                    <span className={`position-badge pos-${driver1?.position || "default"}`}>
+                                        {driver1?.position || "-"}
+                                    </span>
                                 </td>
 
-                                <td style={{ backgroundColor: positionColors[driver2?.position] || "darkgray" }}>
+                                {/* <td style={{ backgroundColor: positionColors[driver2?.position] || "darkgray" }}>
                                     {driver2?.position || "-"}
+                                </td> */}
+
+                                <td className="position-cell">
+                                    <span className={`position-badge pos-${driver2?.position || "default"}`}>
+                                        {driver1?.position || "-"}
+                                    </span>
                                 </td>
                                 <td>
                                     {Number(driver1?.points || 0) +
