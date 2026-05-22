@@ -62,7 +62,7 @@ export default function Drivers(props) {
                 <table>
                     <thead>
                         <tr>
-                            <th colSpan={4}>Drivers Championship Standings - 2013</th>
+                            <th colSpan={5}>Drivers Championship Standings - 2013</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,8 +75,9 @@ export default function Drivers(props) {
                                     <td>{driver.position}</td>
 
                                     <td onClick={() => handleClick(driver.Driver.driverId)}>
-                                        <Flag country={getCountryCodeByNationality(props.flags, driver.Driver.nationality)} size={20} /> {driver.Driver.givenName} {driver.Driver.familyName}
+                                        <Flag country={getCountryCodeByNationality(props.flags, driver.Driver.nationality)} size={20} />
                                     </td>
+                                    <td>{driver.Driver.givenName} {driver.Driver.familyName}</td>
                                     <td>{driver.Constructors[0].name}</td>
                                     <td>{driver.points}</td>
                                 </tr>
