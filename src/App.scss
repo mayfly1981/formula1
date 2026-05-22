@@ -56,9 +56,10 @@ body {
     }
 }
 
-// ==========> DRIVERS < ==========
 
 .container-drivers {
+
+
     flex: 1;
     padding: 30px;
     width: "100%";
@@ -66,7 +67,7 @@ body {
 
     h1 {
         color: $color-h1;
-        font-size: 50px;
+        font-size: 48px;
         margin-bottom: 30px;
         text-align: left;
     }
@@ -75,13 +76,16 @@ body {
 
 .table-drivers {
     background-color: $color-bg-table;
-    border-radius: 10px;
+    border-radius: 25px;
     padding: 25px;
     font-size: 22px;
-    border: 0.1px solid grey;
     box-shadow: 1px 3px 3px 3px rgba(138, 126, 126, 0.55);
 
+    h1 {
+        text-align: left;
+        font-size: 70px;
 
+    }
 
     .img-country {
         width: 100px;
@@ -198,7 +202,6 @@ body {
     }
 }
 
-// ===========> DIZAJN ZA SVE TABELE < =========
 table {
     width: 100%;
     border-collapse: collapse;
@@ -240,9 +243,7 @@ table {
     }
 }
 
-// ===========> HOME PAGE < ==========
 .home-image {
-
     text-align: center;
     height: 100vh;
     width: 100vw;
@@ -253,64 +254,185 @@ table {
 
 }
 
-// ==========> RACES <============
 
-.container-races {
-    display: block;
+/*  Team Details- Gornja kartica tim info */
+
+// .team-details-page {
+//     width: 100%;
+//     padding: 24px;
+//     box-sizing: border-box;
+//     display: flex;
+//     flex-direction: column;
+//     gap: 28px;
+// }
+
+// .team-card {
+//     width: 100%;
+//     max-width: 760px;
+//     background-color: $color-bg-table;
+//     border-radius: 24px;
+//     padding: 32px;
+//     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+//     border: 1px solid $line-border;
+// }
+
+.team-card {
+    width: 100%;
+    max-width: 760px;
     background-color: $color-bg-table;
-    border-radius: 10px;
-    padding: 25px;
-    margin: 30px;
-    font-size: 22px;
-    border: 0.1px solid grey;
-    box-shadow: 1px 3px 3px 3px rgba(138, 126, 126, 0.55);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+    border: 1px solid $line-border;
 
-    h1 {
-        color: $color-h1;
-        font-size: 50px;
-        margin-bottom: 30px;
-        text-align: left;
-    }
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    column-gap: 28px;
+    align-items: start;
+}
 
-    .table-races {
-        background-color: $color-bg-table;
-        border-radius: 10px;
-        padding: 25px;
-        font-size: 22px;
+// .team-card-header {
+//     display: flex;
+//     align-items: center;
+//     gap: 28px;
+//     margin-bottom: 32px;
+// }
 
+.team-card-header {
+    display: contents;
+}
 
-    }
+.team-logo {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+.team-logo {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    background-color: rgba(255, 255, 255, 0.04);
+    border-radius: 20px;
+    padding: 18px;
+}
+
+.team-title-box {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.team-name-with-flag {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    color: $color-text;
+    font-size: 18px;
+}
+
+.team-title {
+    margin: 0;
+    color: $color-h1;
+    font-size: 42px;
+    line-height: 1.1;
+}
+
+.team-info {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.team-info-row {
+    display: flex;
+    gap: 10px;
+    margin: 0;
+    font-size: 20px;
+}
+
+strong {
+    color: $color-text;
+}
+
+// Team details donja tabela sa rezultatima i bojama za pozicije
+
+.team-details-page {
+    width: 100%;
+    padding: 24px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.team-card {
+    width: 100%;
+    max-width: 420px;
+}
+
+.team-results-section {
+    width: 100%;
+    max-width: 1100px;
+}
+
+.team-results-title {
+    margin: 0 0 16px;
+    font-size: 24px;
+    color: $color-text;
+}
+
+.results-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    background-color: $color-bg-table;
+    border-radius: 20px;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.results-table th,
+.results-table td {
+    padding: 12px 14px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.results-table th {
+    background-color: #111a2f;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.results-table td {
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.results-table td:nth-child(2),
+.results-table th:nth-child(2) {
+    text-align: left;
 }
 
 
-// ===============> TEAMS <============
+.flag-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    line-height: 1;
+}
 
-.container-teams {
-    display: block;
-    background-color: $color-bg-table;
-    border-radius: 10px;
-    padding: 25px;
-    margin: 30px;
-    font-size: 22px;
-    border: 0.1px solid grey;
-    box-shadow: 1px 3px 3px 3px rgba(138, 126, 126, 0.55);
-
-    h1 {
-        color: $color-h1;
-        font-size: 50px;
-        margin-bottom: 30px;
-        text-align: left;
-    }
-
-    .table-teams {
-        background-color: $color-bg-table;
-        border-radius: 10px;
-        padding: 25px;
-        font-size: 22px;
-    }
-
-    a {
-        text-decoration: none;
-        color: $color-text;
-    }
+.flag-text-cell span {
+    display: inline-flex;
+    align-items: center;
 }
