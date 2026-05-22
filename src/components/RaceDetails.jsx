@@ -6,6 +6,7 @@ import Flag from "react-flagkit";
 import { getCountryCodeByShortName } from "../helpers/getCountryCode";
 import { getCountryCodeByNationality } from "../helpers/getCountryCode";
 import getPositionColor from "../helpers/positionColors";
+import Breadcrumb from "./Breadcrumb";
 
 export default function RaceDetails(props) {
     const [raceQualifiers, setRaceQualifiers] = useState(null);
@@ -68,12 +69,20 @@ export default function RaceDetails(props) {
         return <Loader />
     };
 
-    console.log("races " + raceQualifiers);
+    const race = raceQualifiers[0];
+
+    const breadcrumbsRaceDetails = [
+        { text: "Races", route: "/races" },
+        { text: `${race.raceName}`, route: "" }
+    ];
+
+    console.log("races ", raceQualifiers);
     console.log("raceQualifiers ", raceQualifiers);
     console.log("raceResults ", raceResults);
 
     return (
         <div className="container">
+            <Breadcrumb items={breadcrumbsRaceDetails} />
             <div className="grand-prix">
                 {raceQualifiers.map((raceQualifier) => {
                     return (

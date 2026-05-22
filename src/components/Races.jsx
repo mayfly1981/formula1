@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import Flag from "react-flagkit";
 import { getCountryCodeByShortName } from "../helpers/getCountryCode";
 import { getCountryCodeByNationality } from "../helpers/getCountryCode";
+import Breadcrumb from "./Breadcrumb";
 
 export default function Races(props) {
     const [races, setRaces] = useState([])
@@ -49,10 +50,17 @@ export default function Races(props) {
         return <Loader />
     };
 
+    const breadcrumbsRaces = [
+
+        { text: "Races", route: "" }
+
+    ];
+
     console.log("races", races);
 
     return (
         <div className="container-races">
+            <Breadcrumb items={breadcrumbsRaces} />
             <h1>Races calendar</h1>
 
             <div className="table-races">
