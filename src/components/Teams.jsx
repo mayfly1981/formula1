@@ -60,7 +60,7 @@ export default function Teams(props) {
                 <table>
                     <thead>
                         <tr>
-                            <th></th>
+                            <th colSpan={6}>Constructors Champhionship Standings - 2013</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -70,7 +70,10 @@ export default function Teams(props) {
                                     key={team.Constructor.constructorId}>
                                     <td style={{ textAlign: "left" }}>{team.position}</td>
                                     <td onClick={() => handleClick(team.Constructor.constructorId)} style={{ textAlign: "left" }}>
-                                        <Flag country={getCountryCodeByNationality(props.flags, team.Constructor.nationality)} size={20} />{team.Constructor.name}
+                                        <Flag country={getCountryCodeByNationality(props.flags, team.Constructor.nationality)} size={20} />
+                                    </td>
+                                    <td>
+                                        {team.Constructor.name}
                                     </td>
                                     <td style={{ textAlign: "left" }}><a href={team.Constructor.url} target="_blank">Details</a></td>
                                     <td style={{ textAlign: "left" }}>{team.points}</td>
