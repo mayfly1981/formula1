@@ -65,14 +65,14 @@ export default function Races(props) {
 
             <div className="table-races">
                 <table >
-                    <thead>
-                        <tr><th colSpan={5}>Races calendar - 2013</th></tr>
+                    <thead colSpan={7}>
+                        <tr><th colSpan={7}>Races calendar - 2013</th></tr>
                         <tr>
                             <th>Round</th>
-                            <th>Grand Prix</th>
+                            <th colSpan={2}>Grand Prix</th>
                             <th>Circuit</th>
-                            <th>Date</th>
-                            <th>Winner</th>
+                            <th >Date</th>
+                            <th colSpan={2}>Winner</th>
                         </tr>
                     </thead>
 
@@ -84,14 +84,16 @@ export default function Races(props) {
                                     <td>{race.round}</td>
                                     <td>
                                         <Flag country={getCountryCodeByShortName(props.flags, race.Circuit.Location.country)} size={20} />
-                                        {race.raceName}
+
                                     </td>
+                                    <td> {race.raceName}</td>
                                     <td>{race.Circuit.circuitName}</td>
                                     <td>{race.date}</td>
                                     <td>
                                         <Flag country={getCountryCodeByNationality(props.flags, race.Results[0].Driver.nationality)} size={20} />
-                                        {race.Results[0].Driver.familyName}
+
                                     </td>
+                                    <td>{race.Results[0].Driver.familyName}</td>
                                 </tr>
                             );
                         })}

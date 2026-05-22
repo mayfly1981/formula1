@@ -61,8 +61,8 @@ export default function DriverDetails(props) {
 
     return (
         <div className="container">
+            <Breadcrumb items={breadcrumbsDriverDetails} />
             <div className="driver-details">
-                <Breadcrumb items={breadcrumbsDriverDetails} />
                 {driverDetails.map((driverDetail) => {
                     return (
                         <div key={driverDetail.position}>
@@ -76,9 +76,11 @@ export default function DriverDetails(props) {
                                 <p>{driverDetail.Constructors[0].name} Racing</p>
                                 <div className="country-name">
 
-                                    <Flag country={getCountryCodeByNationality(props.flags, driverDetail.Driver.nationality)} size={20} />
+                                    <Flag className="flag" country={getCountryCodeByNationality(props.flags, driverDetail.Driver.nationality)} size={20} />
 
-                                    <p> {driverDetail.Driver.nationality}</p>
+                                    <span> {driverDetail.Driver.nationality}</span>
+
+
                                 </div>
                                 <p>Birth: {driverDetail.Driver.dateOfBirth}</p>
                                 <a href={driverDetail.Driver.url}
