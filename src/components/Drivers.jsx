@@ -11,10 +11,9 @@ export default function Drivers(props) {
     const [drivers, setDrivers] = useState([])
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
+    const [finalFilteredDrivers, setFinalFilteredDrivers] = useState([]);
 
     const navigate = useNavigate();
-
-
 
     useEffect(() => {
         console.log("useEffect");
@@ -29,8 +28,11 @@ export default function Drivers(props) {
         setLoading(false);
         console.log("getDrivers");
     };
+    useEffect(() => {
+        const filteredDrivers = drivers.filter((driver) => driver.Driver.givenName.toLowerCase().includes(search.toLowerCase()) || driver.Driver.familyName.toLowerCase().includes(search.toLowerCase()));
+        setFinalFilteredDrivers(filteredDrivers)
 
-    const filteredDrivers = drivers.filter((driver) => driver.Driver.givenName.toLowerCase().includes(search.toLowerCase()) || driver.Driver.familyName.toLowerCase().includes(search.toLowerCase()));
+    }, [drivers, search]);
 
     const handleClick = (driverId) => {
         console.log("handleClick", driverId);
@@ -60,7 +62,7 @@ export default function Drivers(props) {
                     onChange={(e) => setSearch(e.target.value)}
                 />
 
-                {filteredDrivers.length === 0 && (
+                {finalFilteredDrivers.length === 0 && (
                     <p>Driver not found</p>
                 )
                 }
@@ -72,7 +74,7 @@ export default function Drivers(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredDrivers.map((driver) => {
+                        {finalFilteredDrivers.map((driver) => {
                             return (
                                 <tr onClick={() => handleClick(driver.Driver.driverId)}
                                     className="driver-details"
