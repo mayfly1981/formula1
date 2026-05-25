@@ -9,7 +9,7 @@ import Breadcrumb from "./Breadcrumb";
 
 export default function DriverDetails(props) {
     const [driverDetails, setDriverDetails] = useState(null);
-    const [driverRaces, setDriverRaces] = useState(null);
+    const [driverRaces, setDriverRaces] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     const params = useParams();
@@ -31,17 +31,15 @@ export default function DriverDetails(props) {
 
         const urlFlag = "https://raw.githubusercontent.com/Imagin-io/country-nationality-list/refs/heads/master/countries.json";
 
-        const response1 = await axios.get(urlDriverDetails);
-        const response2 = await axios.get(urlDriverRaces);
-        console.log("response1", response1);
-        console.log("response2", response2);
-        console.log(response1.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
-        console.log(response2.data.MRData.RaceTable.Races);
-        setDriverDetails(response1.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
-        setDriverRaces(response2.data.MRData.RaceTable.Races);
+        const driverDetailsResponse = await axios.get(urlDriverDetails);
+        const driverDetailsRaces = await axios.get(urlDriverRaces);
+
+        console.log("driverDetailsRaces", driverDetailsRaces);
+
+        setDriverDetails(driverDetailsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
+        setDriverRaces(driverDetailsRaces.data.MRData.RaceTable.Races);
         setIsLoading(false);
-        console.log("getDriversDetails", driverDetails);
-        console.log("getDriversRaces", driverRaces);
+
     };
 
     if (isLoading) {
