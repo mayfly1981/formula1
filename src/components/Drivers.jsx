@@ -10,6 +10,7 @@ export default function Drivers(props) {
 
     const [drivers, setDrivers] = useState([])
     const [loading, setLoading] = useState(true);
+    const [search, setSearch] = useState("");
 
     const navigate = useNavigate();
 
@@ -28,6 +29,8 @@ export default function Drivers(props) {
         setLoading(false);
         console.log("getDrivers");
     };
+
+    const filteredDrivers = drivers.filter((driver) => driver.Driver.givenName.toLowerCase().includes(search.toLowerCase()) || driver.Driver.familyName.toLowerCase().includes(search.toLowerCase()));
 
     const handleClick = (driverId) => {
         console.log("handleClick", driverId);
@@ -50,6 +53,18 @@ export default function Drivers(props) {
             <div className="table-drivers">
                 <Breadcrumb items={breadcrumbsDrivers} />
                 <h1 className="title">Drivers Championship</h1>
+
+                <input type="text"
+                    placeholder="Search drivers..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                />
+
+                {filteredDrivers.length === 0 && (
+                    <p>Driver not found</p>
+                )
+                }
+
                 <table>
                     <thead>
                         <tr>
@@ -57,7 +72,7 @@ export default function Drivers(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {drivers.map((driver) => {
+                        {filteredDrivers.map((driver) => {
                             return (
                                 <tr onClick={() => handleClick(driver.Driver.driverId)}
                                     className="driver-details"

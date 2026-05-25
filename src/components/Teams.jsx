@@ -54,8 +54,6 @@ export default function Teams(props) {
 
         <div className="container-teams">
             <Breadcrumb items={breadcrumbsTeams} />
-
-
             <h1>Constructors Champhionship</h1>
 
             <input type="text"
