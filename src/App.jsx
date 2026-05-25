@@ -9,8 +9,6 @@ import RaceDetails from "./components/RaceDetails";
 import Loader from "./components/Loader";
 import axios from "axios";
 import Home from "./components/Home";
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 
 export default function App() {
   const [flags, setFlags] = useState([]);
