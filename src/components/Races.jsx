@@ -10,21 +10,8 @@ import Breadcrumb from "./Breadcrumb";
 export default function Races(props) {
     const [races, setRaces] = useState([])
     const [loading, setLoading] = useState(true);
-    const [flag, setFlags] = useState([]);
     const navigate = useNavigate();
 
-
-    useEffect(() => {
-        console.log("useEffect");
-        getFlags();
-    }, []);
-
-    const getFlags = async () => {
-        const urlFlag = `https://raw.githubusercontent.com/Imagin-io/country-nationality-list/refs/heads/master/countries.json`;
-        const responce = await axios.get(urlFlag);
-        setLoading(false);
-        console.log("getFlags");
-    };
 
     useEffect(() => {
         console.log("useEffect");
@@ -65,7 +52,7 @@ export default function Races(props) {
 
             <div className="table-races">
                 <table >
-                    <thead colSpan={7}>
+                    <thead>
                         <tr><th colSpan={7}>Races calendar - 2013</th></tr>
                         <tr>
                             <th>Round</th>
@@ -79,9 +66,8 @@ export default function Races(props) {
                     <tbody>
                         {races.map((race) => {
                             return (
-                                <tr key={race.round}
-                                    onClick={() => handleClick(race.round)}>
-                                    <td>{race.round}</td>
+                                <tr key={race.round}>
+                                    <td onClick={() => handleClick(race.round)}> {race.round}</td>
                                     <td>
                                         <Flag country={getCountryCodeByShortName(props.flags, race.Circuit.Location.country)} size={20} />
 
