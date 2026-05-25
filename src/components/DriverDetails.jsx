@@ -35,7 +35,7 @@ export default function DriverDetails(props) {
 
         console.log("driverDetailsRaces", driverDetailsRaces);
 
-        setDriverDetails(driverDetailsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
+        setDriverDetails(driverDetailsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
         setDriverRaces(driverDetailsRaces.data.MRData.RaceTable.Races);
         setIsLoading(false);
 
@@ -48,8 +48,7 @@ export default function DriverDetails(props) {
     console.log("driverDetails ", driverDetails);
     console.log("driverRaces ", driverRaces);
 
-    const driver = driverDetails[0];
-    console.log("driver ", driver);
+    const driver = driverDetails;
 
     const breadcrumbsDriverDetails = [
         { text: "Drivers", route: "/drivers" },
@@ -60,42 +59,69 @@ export default function DriverDetails(props) {
         <div className="container">
             <Breadcrumb items={breadcrumbsDriverDetails} />
             <div className="driver-details">
-                {driverDetails.map((driverDetail) => {
-                    return (
-                        <div key={driverDetail.position}>
-                            <div className="img-driver">
-                                <img className="img-drivers" src={`../../public/img/${driverDetail.Driver.driverId}.png`} alt={"Driver picture"} width={180} />
-                            </div>
-                            <div className="information-drivers">
+                <div>
 
-                                <h3>{driverDetail.Driver.givenName} {driverDetail.Driver.familyName}</h3>
-                                <img src={driverDetail.nationality} alt="" />
-                                <p>{driverDetail.Constructors[0].name} Racing</p>
-                                <div className="country-name">
+                    <div className="img-driver">
+                        <img
+                            className="img-drivers"
+                            src={`../../public/img/${driver.Driver.driverId}.png`}
+                            alt="Driver picture"
+                            width={180}
+                        />
+                    </div>
 
-                                    <Flag className="flag" country={getCountryCodeByNationality(props.flags, driverDetail.Driver.nationality)} size={20} />
+                    <div className="information-drivers">
 
-                                    <span> {driverDetail.Driver.nationality}</span>
+                        <h3>
+                            {driver.Driver.givenName}{" "}
+                            {driver.Driver.familyName}
+                        </h3>
 
+                        <p>
+                            {driver.Constructors[0].name} Racing
+                        </p>
 
-                                </div>
-                                <p>Birth: {driverDetail.Driver.dateOfBirth}</p>
-                                <a href={driverDetail.Driver.url}
-                                    target="_blank"
-                                    rel="noreferrer">
-                                    Biography
-                                </a>
-                            </div>
+                        <div className="country-name">
+
+                            <Flag
+                                className="flag"
+                                country={getCountryCodeByNationality(
+                                    props.flags,
+                                    driver.Driver.nationality
+                                )}
+                                size={20}
+                            />
+
+                            <span>
+                                {driver.Driver.nationality}
+                            </span>
+
                         </div>
-                    );
-                })}
+
+                        <p>
+                            Birth: {driver.Driver.dateOfBirth}
+                        </p>
+
+                        <a
+                            href={driver.Driver.url}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            Biography
+                        </a>
+
+                    </div>
+                </div>
             </div>
 
             <div className="right-details">
+
                 <h3>Formula 1 2013 Results</h3>
+
                 <div className="card-table">
 
                     <table>
+
                         <thead>
                             <tr>
                                 <th>Round</th>
@@ -106,37 +132,65 @@ export default function DriverDetails(props) {
                                 <th>Race</th>
                             </tr>
                         </thead>
+
                         <tbody>
+
                             {driverRaces.map((driverRace) => {
                                 return (
-                                    <tr onClick={() => handleClick(driverRace.Results[0].Driver.driverId)}
-                                        key={driverRace.round} >
+                                    <tr
+                                        onClick={() =>
+                                            handleClick(
+                                                driverRace.Results[0].Driver.driverId
+                                            )
+                                        }
+                                        key={driverRace.round}
+                                    >
+
                                         <td>{driverRace.round}</td>
+
                                         <td>
                                             <div className="img-country">
-                                                <Flag country={getCountryCodeByShortName(props.flags, driverRace.Circuit.Location.country)} size={20} />
+                                                <Flag
+                                                    country={getCountryCodeByShortName(
+                                                        props.flags,
+                                                        driverRace.Circuit.Location.country
+                                                    )}
+                                                    size={20}
+                                                />
                                             </div>
                                         </td>
-                                        <td>
 
+                                        <td>
                                             {driverRace.raceName}
                                         </td>
-                                        <td>{driverRace.Results[0].Constructor.name}</td>
 
-                                        <td>{driverRace.Results[0].grid}</td>
-                                        <td>{driverRace.Results[0].position}</td>
+                                        <td>
+                                            {driverRace.Results[0].Constructor.name}
+                                        </td>
+
+                                        <td>
+                                            {driverRace.Results[0].grid}
+                                        </td>
+
+                                        <td>
+                                            {driverRace.Results[0].position}
+                                        </td>
 
                                     </tr>
                                 );
                             })}
-                            <tr>
 
-                            </tr>
                         </tbody>
+
                     </table>
+
                 </div>
             </div>
 
-        </div >
+        </div>
     );
 }
+
+
+
+
