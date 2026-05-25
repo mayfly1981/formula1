@@ -9,8 +9,8 @@ import getPositionColor from "../helpers/positionColors";
 import Breadcrumb from "./Breadcrumb";
 
 export default function RaceDetails(props) {
-    const [raceQualifiers, setRaceQualifiers] = useState(null);
-    const [raceResults, setRaceResults] = useState(null);
+    const [raceQualifiers, setRaceQualifiers] = useState([]);
+    const [raceResults, setRaceResults] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
 
@@ -27,22 +27,20 @@ export default function RaceDetails(props) {
 
     const getRaceQualifiers = async () => {
         console.log("params", params);
-        const urlRaces = "https://api.jolpi.ca/ergast/f1/2013/results/1.json"
         const urlRaceQualifiers = `https://api.jolpi.ca/ergast/f1/2013/${params.id}/qualifying.json`;
         const urlRaceResults = `https://api.jolpi.ca/ergast/f1/2013/${params.id}/results.json`;
-        const urlFlag = "https://raw.githubusercontent.com/Imagin-io/country-nationality-list/refs/heads/master/countries.json";
 
-        const response1 = await axios.get(urlRaceQualifiers);
-        const response2 = await axios.get(urlRaceResults);
+        const raceQualifiers = await axios.get(urlRaceQualifiers);
+        const raceResults = await axios.get(urlRaceResults);
 
-        console.log("responseRaces1", response1);
-        console.log("responseRaces2", response2);
+        console.log("raceQualifiers", raceQualifiers);
+        console.log("raceResults", raceResults);
 
-        console.log(response1.data.MRData.RaceTable.Races);
-        console.log(response2.data.MRData.RaceTable.Races);
+        console.log(raceQualifiers.data.MRData.RaceTable.Races);
+        console.log(raceResults.data.MRData.RaceTable.Races);
 
-        setRaceQualifiers(response1.data.MRData.RaceTable.Races);
-        setRaceResults(response2.data.MRData.RaceTable.Races)
+        setRaceQualifiers(raceQualifiers.data.MRData.RaceTable.Races);
+        setRaceResults(raceResults.data.MRData.RaceTable.Races)
 
         setIsLoading(false);
 
@@ -55,14 +53,14 @@ export default function RaceDetails(props) {
         const times = [];
         times.push(qualifier.Q1, qualifier.Q2, qualifier.Q3);
         times.sort();
-        //zdravo
+
         return times[0];
     };
 
 
     const getRaceTime = (result) => {
         if (result.Time?.time) return result.Time.time;
-        return "DNQ"; // ili "-"
+        return "DNQ";
     };
 
     if (isLoading) {
@@ -87,7 +85,7 @@ export default function RaceDetails(props) {
                 {raceQualifiers.map((raceQualifier) => {
                     return (
                         <div key={raceQualifier.round}>
-                            {/* <img src="" alt="" /> */}
+                            <Flag country={getCountryCodeByShortName(props.flags, raceQualifier.Circuit.Location.country)} size={100} />
                             <p>{raceQualifier.QualifyingResults.raceName}</p>
                             <p>Country: {raceQualifier.Circuit.Location.country}</p>
                             <p>Location: {raceQualifier.Circuit.Location.locality}</p>
@@ -107,7 +105,7 @@ export default function RaceDetails(props) {
                     <thead>
                         <tr>
                             <th>Pos</th>
-                            <th>Driver</th>
+                            <th colSpan={2}>Driver</th>
                             <th>Team</th>
                             <th>Best Time</th>
                         </tr>
@@ -119,8 +117,9 @@ export default function RaceDetails(props) {
                                     <td>{qualifier.position}</td>
                                     <td>
                                         <Flag country={getCountryCodeByNationality(props.flags, qualifier.Driver.nationality)} size={20} />
-                                        {qualifier.Driver.familyName}
+
                                     </td>
+                                    <td> {qualifier.Driver.familyName}</td>
                                     <td>{qualifier.Constructor.name}</td>
                                     <td>{getBestTime(qualifier)}</td>
                                 </tr>
@@ -136,7 +135,7 @@ export default function RaceDetails(props) {
                     <thead>
                         <tr>
                             <th>Pos</th>
-                            <th>Driver</th>
+                            <th colSpan={2}>Driver</th>
                             <th>Team</th>
                             <th>Result</th>
                             <th>Points</th>
@@ -150,10 +149,10 @@ export default function RaceDetails(props) {
                                     <td>{result.position}</td>
                                     <td>
                                         <Flag country={getCountryCodeByNationality(props.flags, result.Driver.nationality)} size={20} />
-                                        {result.Driver.familyName}
+
                                     </td>
+                                    <td>  {result.Driver.familyName}</td>
                                     <td>{result.Constructor.name}</td>
-                                    {/* <td>{result.Time?.time}</td> */}
                                     <td>{getRaceTime(result)}</td>
                                     <td style={{ backgroundColor: getPositionColor(result.position) }}>{result.points}</td>
                                 </tr>
