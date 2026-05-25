@@ -13,12 +13,11 @@ export default function Teams(props) {
     const [teams, setTeams] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         getTeams();
     }, []);
-
-
 
     const getTeams = async () => {
         const url = "https://api.jolpi.ca/ergast/f1/2013/constructorStandings.json";
@@ -29,7 +28,7 @@ export default function Teams(props) {
         console.log("getTeams")
     };
 
-
+    const filteredTeams = teams.filter((team) => team.Constructor.name.toLowerCase().includes(search.toLowerCase()));
 
 
 
@@ -55,7 +54,21 @@ export default function Teams(props) {
 
         <div className="container-teams">
             <Breadcrumb items={breadcrumbsTeams} />
+
+
             <h1>Constructors Champhionship</h1>
+
+            <input type="text"
+                placeholder="Search teams..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+            />
+
+            {filteredTeams.length === 0 && (
+                <p>Team not found</p>
+            )
+            }
+
             <div className="table-teams">
                 <table>
                     <thead>
@@ -64,15 +77,15 @@ export default function Teams(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {teams.map((team) => {
+                        {filteredTeams.map((team) => {
                             return (
                                 <tr
                                     key={team.Constructor.constructorId}>
                                     <td style={{ textAlign: "left" }}>{team.position}</td>
-                                    <td onClick={() => handleClick(team.Constructor.constructorId)} style={{ textAlign: "left" }}>
+                                    <td>
                                         <Flag country={getCountryCodeByNationality(props.flags, team.Constructor.nationality)} size={20} />
                                     </td>
-                                    <td>
+                                    <td onClick={() => handleClick(team.Constructor.constructorId)} style={{ textAlign: "left" }}>
                                         {team.Constructor.name}
                                     </td>
                                     <td style={{ textAlign: "left" }}><a href={team.Constructor.url} target="_blank">Details</a></td>
