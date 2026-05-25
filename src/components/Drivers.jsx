@@ -10,19 +10,10 @@ export default function Drivers(props) {
 
     const [drivers, setDrivers] = useState([])
     const [loading, setLoading] = useState(true);
-    // const [flag, setFlags] = useState([]);
+
     const navigate = useNavigate();
 
-    useEffect(() => {
-        getFlags();
-    }, []);
 
-    const getFlags = async () => {
-        const urlFlag = `https://raw.githubusercontent.com/Imagin-io/country-nationality-list/refs/heads/master/countries.json`;
-        const responce = await axios.get(urlFlag);
-        setLoading(false);
-        console.log("getFlags");
-    };
 
     useEffect(() => {
         console.log("useEffect");
