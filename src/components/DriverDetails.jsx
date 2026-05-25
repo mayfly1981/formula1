@@ -29,7 +29,6 @@ export default function DriverDetails(props) {
         const urlDriverDetails = `https://api.jolpi.ca/ergast/f1/2013/drivers/${params.id}/driverStandings.json`;
         const urlDriverRaces = `https://api.jolpi.ca/ergast/f1/2013/drivers/${params.id}/results.json`;
 
-        const urlFlag = "https://raw.githubusercontent.com/Imagin-io/country-nationality-list/refs/heads/master/countries.json";
 
         const driverDetailsResponse = await axios.get(urlDriverDetails);
         const driverDetailsRaces = await axios.get(urlDriverRaces);
