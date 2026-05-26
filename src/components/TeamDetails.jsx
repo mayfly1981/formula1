@@ -89,9 +89,17 @@ export default function TeamDetails(props) {
     }
     console.log(team);
 
+
+    const breadcrumbsTeamDetails = [
+        { text: "Teams", route: "/teams" },
+        { text: `${team.name}`, route: "" }
+    ];
+
+
     return (
 
         <div className="team-details-page">
+            <Breadcrumb items={breadcrumbsTeamDetails} />
 
             <div className="team-card">
                 <div className="team-card-header">
