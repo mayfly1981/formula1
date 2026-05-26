@@ -8,7 +8,6 @@ import { getCountryCodeByShortName } from "../helpers/getCountryCode";
 import Breadcrumb from "./Breadcrumb";
 import HomeIcon from '@mui/icons-material/Home';
 import Home from "./Home";
-import getPositionColor from "../helpers/positionColors";
 
 export default function DriverDetails(props) {
     const [driverDetails, setDriverDetails] = useState(null);
@@ -25,14 +24,12 @@ export default function DriverDetails(props) {
         getDriverDetails();
         console.log("useEffect");
     }, [props.year]);
-    console.log(driverDetails);
-
 
     const getDriverDetails = async () => {
 
         console.log("params", params);
         const urlDriverDetails = `https://api.jolpi.ca/ergast/f1/${props.year}/drivers/${params.id}/driverStandings.json`;
-        const urlDriverRaces = `https://api.jolpi.ca/ergast/f1//${props.year}/drivers/${params.id}/results.json`;
+        const urlDriverRaces = `https://api.jolpi.ca/ergast/f1/${props.year}/drivers/${params.id}/results.json`;
 
 
         const driverDetailsResponse = await axios.get(urlDriverDetails);
@@ -45,8 +42,6 @@ export default function DriverDetails(props) {
         setIsLoading(false);
 
     };
-
-
 
     if (isLoading) {
         return <Loader />;
@@ -129,7 +124,7 @@ export default function DriverDetails(props) {
 
             <div className="right-details">
 
-                <h3>Formula 1 {props.year} Results</h3>
+                <h3>Formula 1 - {props.year} Results</h3>
 
                 <div className="card-table">
 
@@ -185,17 +180,8 @@ export default function DriverDetails(props) {
                                             {driverRace.Results[0].grid}
                                         </td>
 
-                                        <td className="position-cell">
-                                            <span className="position-badge" style={{ backgroundColor: getPositionColor(driverRace.Results[0].position, 5) }}>
-                                                {driverRace.Results[0].position}
-                                            </span>
-
-                                            {/* <td className="position-cell">
-                                                <span className="position-badge" style={{ backgroundColor: getPositionColor(driver1?.position, 10) }}>
-                                                    {driver1?.position}
-                                                </span>
-                                            </td> */}
-
+                                        <td>
+                                            {driverRace.Results[0].position}
                                         </td>
 
                                     </tr>
