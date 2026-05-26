@@ -10,6 +10,7 @@ import Breadcrumb from "./Breadcrumb";
 export default function Races(props) {
     const [races, setRaces] = useState([])
     const [loading, setLoading] = useState(true);
+    const [search, setSearch] = useState("");
     const navigate = useNavigate();
 
 
@@ -26,6 +27,8 @@ export default function Races(props) {
         setLoading(false);
         console.log("getRaces");
     };
+
+    const filteredRaces = races.filter((race) => race.raceName.toLowerCase().includes(search.toLowerCase().trim().replace(/\s+/g, " ")));
 
     const handleClick = (position) => {
         //key moze biti i "round"
@@ -50,6 +53,17 @@ export default function Races(props) {
             <Breadcrumb items={breadcrumbsRaces} />
             <h1>Races calendar</h1>
 
+            <input type="text"
+                placeholder="Search races..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+            />
+
+            {filteredRaces.length === 0 && (
+                <p>Race not found</p>
+            )
+            }
+
             <div className="table-races">
                 <table >
                     <thead>
@@ -64,15 +78,15 @@ export default function Races(props) {
                     </thead>
 
                     <tbody>
-                        {races.map((race) => {
+                        {filteredRaces.map((race) => {
                             return (
                                 <tr key={race.round}>
-                                    <td onClick={() => handleClick(race.round)}> {race.round}</td>
+                                    <td> {race.round}</td>
                                     <td>
                                         <Flag country={getCountryCodeByShortName(props.flags, race.Circuit.Location.country)} size={20} />
 
                                     </td>
-                                    <td> {race.raceName}</td>
+                                    <td onClick={() => handleClick(race.round)}>{race.raceName}</td>
                                     <td>{race.Circuit.circuitName}</td>
                                     <td>{race.date}</td>
                                     <td>
