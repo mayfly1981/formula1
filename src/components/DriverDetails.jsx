@@ -128,7 +128,7 @@ export default function DriverDetails(props) {
 
             <div className="right-details">
 
-                <h3>Formula 1 2013 Results</h3>
+                <h3>Formula 1 {props.year} Results</h3>
 
                 <div className="card-table">
 
