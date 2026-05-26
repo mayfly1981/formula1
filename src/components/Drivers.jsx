@@ -16,12 +16,12 @@ export default function Drivers(props) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log("useEffect");
         getDrivers();
-    }, []);
+        console.log("useEffect");
+    }, [props.year]);
 
     const getDrivers = async () => {
-        const url = "https://api.jolpi.ca/ergast/f1/2013/driverStandings.json";
+        const url = `https://api.jolpi.ca/ergast/f1/${props.year}/driverStandings.json`;
         const response = await axios.get(url);
         console.log(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
         setDrivers(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
@@ -34,6 +34,7 @@ export default function Drivers(props) {
 
     const handleClick = (driverId) => {
         navigate(`/driverDetails/${driverId}`);
+        console.log("handleClick", driverId);
     };
 
     const handleClickTeam = (driverId) => {
@@ -71,7 +72,7 @@ export default function Drivers(props) {
                 <table>
                     <thead>
                         <tr>
-                            <th colSpan={5}>Drivers Championship Standings - 2013</th>
+                            <th colSpan={5}>Drivers Championship Standings - {props.year}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,10 +81,8 @@ export default function Drivers(props) {
                                 <tr
                                     className="driver-details"
                                     key={driver.Driver.driverId}>
-
                                     <td>{driver.position}</td>
-
-                                    <td >
+                                    <td onClick={() => handleClick(driver.Driver.driverId)}>
                                         <Flag country={getCountryCodeByNationality(props.flags, driver.Driver.nationality)} size={20} />
                                     </td>
                                     <td onClick={() => handleClick(driver.Driver.driverId)}>{driver.Driver.givenName} {driver.Driver.familyName}</td>
