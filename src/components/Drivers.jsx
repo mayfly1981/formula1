@@ -6,6 +6,7 @@ import Flag from "react-flagkit";
 import { getCountryCodeByNationality } from "../helpers/getCountryCode";
 import Breadcrumb from "./Breadcrumb";
 import HomeIcon from '@mui/icons-material/Home';
+import SportsMotorsportsIcon from '@mui/icons-material/SportsMotorsports';
 
 export default function Drivers(props) {
 
@@ -44,7 +45,7 @@ export default function Drivers(props) {
     };
 
     const breadcrumbsDrivers = [
-        { text: "Drivers", route: "" }
+        { text: "", route: "", icon: "SportsMotorsportsIcon" }
     ];
 
     console.log("drivers ", drivers);
@@ -53,7 +54,7 @@ export default function Drivers(props) {
         <div className="container-drivers">
 
             <div className="table-drivers">
-                <HomeIcon />
+
                 <Breadcrumb items={breadcrumbsDrivers} />
                 <h1 className="title">Drivers Championship</h1>
                 <input type="text"
