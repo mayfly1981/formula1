@@ -19,17 +19,19 @@ export default function TeamDetails(props) {
     const [standing, setStanding] = useState(null);
     const [races, setRaces] = useState([]);
 
-    const positionColors = {
-        1: "yellow",
-        2: "gray",
-        3: "orange",
-        4: "lightgreen",
-        5: "lightblue",
-        6: "thistle",
-        7: "pink",
-        8: "paleturquoise",
-        9: "mediumaquamarine",
-        10: "salmon",
+
+    const getPositionClass = (position) => {
+        const pos = Number(position);
+
+        if (!position || Number.isNaN(pos)) {
+            return "pos-default";
+        }
+
+        if (pos > 10) {
+            return "pos-other";
+        }
+
+        return `pos-${pos}`;
     };
 
 
@@ -42,7 +44,6 @@ export default function TeamDetails(props) {
                 setIsLoading(true);
 
                 const url = `https://api.jolpi.ca/ergast/f1/${year}/constructors/${teamId}/results.json`;
-
 
 
                 const response = await axios.get(url);
@@ -89,9 +90,10 @@ export default function TeamDetails(props) {
     console.log(team);
 
     return (
+
         <div className="team-details-page">
 
-            {/* <div className="team-card">
+            <div className="team-card">
                 <div className="team-card-header">
                     <img
                         src={`/img/${team.constructorId}.png`}
@@ -100,199 +102,122 @@ export default function TeamDetails(props) {
                     />
 
                     <div className="team-title-box">
-                        <p className="team-name-with-flag">
-                            <Flag
-                                country={getCountryCodeByNationality(props.flags, team.nationality)}
-                                size={20}
-                            />
-                            <span>{team.name}</span>
-                        </p>
-
-
-
-
                         <h1 className="team-title">{team.name}</h1>
+
+
+
                     </div>
                 </div>
 
-                <div className="time-info">
+                <div className="team-info">
 
-                    <p className="team-info-row">
-
+                    <p className="team-country-pill">
                         <strong>Country:</strong>
+                        <span className="team-country-name">
+                            {team.nationality}
+                        </span>
 
-                        <span>{team.nationality}</span>
+                        <Flag
+                            country={getCountryCodeByNationality
+                                (props.flags, team.nationality)}
+                            size={20}
+                        />
                     </p>
 
                     <div className="team-stats">
-
                         <p className="team-stat">
-
                             <span className="team-stat-label">Position</span>
                             <span className="team-stat-value">{standing?.position}</span>
                         </p>
 
                         <p className="team-stat">
-
                             <span className="team-stat-label">Points</span>
                             <span className="team-stat-value">{standing?.points}</span>
                         </p>
                     </div>
 
-
-
-                    <a className="team-wiki-link"
+                    <a
                         href={team.url}
                         target="_blank"
                         rel="noreferrer"
+                        className="team-history-link"
                     >
                         History
                     </a>
                 </div>
-            </div> */}
-
-            <div className="team-card">
-                <div className="team-logo-box">
-                    <img
-                        src={`/img/${team.constructorId}.png`}
-                        className="team-logo"
-                        alt={team.name}
-                    />
-                </div>
-
-                <div className="team-card-content">
-                    <p className="team-name-with-flag">
-                        <Flag
-                            country={getCountryCodeByNationality(props.flags, team.nationality)}
-                            size={20}
-                        />
-                        <span>{team.name}</span>
-                    </p>
-
-                    <h1 className="team-title">{team.name}</h1>
-
-                    <div className="team-info">
-                        <p className="team-info-row">
-                            <strong>Country:</strong>
-                            <span>{team.nationality}</span>
-                        </p>
-
-                        <div className="team-stats">
-                            <p className="team-stat">
-                                <span className="team-stat-label">Position</span>
-                                <span className="team-stat-value">{standing?.position}</span>
-                            </p>
-
-                            <p className="team-stat">
-                                <span className="team-stat-label">Points</span>
-                                <span className="team-stat-value">{standing?.points}</span>
-                            </p>
-                        </div>
-
-                        <a
-                            className="team-wiki-link"
-                            href={team.url}
-                            target="_blank"
-                            rel="noreferrer"
-                        >
-                            History
-                        </a>
-                    </div>
-                </div>
             </div>
-
-
-            {/* Donja tabela */}
-
-            {/* <div className="team-result-section"></div>
-            <h2 className="team-results-title">Formula 1   2013 Results</h2>
-
-
-            <div className="results-table-wrapper"></div> */}
 
             <div className="team-results-section">
                 <h2 className="team-results-title">Formula 1 2013 Results</h2>
 
                 <div className="results-table-wrapper">
                     <table className="results-table">
-                        ...
+                        <colgroup>
+                            <col className="col-round" />
+                            <col className="col-grand-prix" />
+                            <col className="col-driver" />
+                            <col className="col-driver" />
+                            <col className="col-points" />
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Round</th>
+                                <th>Grand Prix</th>
+                                <th>{races[0]?.Results?.[0]?.Driver?.familyName}</th>
+                                <th>{races[0]?.Results?.[1]?.Driver?.familyName}</th>
+                                <th>Points</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {races.map((race) => {
+                                const driver1 = race.Results?.[0];
+                                const driver2 = race.Results?.[1];
+
+                                return (
+                                    <tr key={race.round}>
+                                        <td>{race.round}</td>
+
+                                        <td>
+                                            <div className="flag-text">
+                                                <Flag
+                                                    country={getCountryCodeByShortName(
+                                                        props.flags,
+                                                        race.Circuit.Location.country
+                                                    )}
+                                                    size={20}
+                                                />
+                                                <span>{race.raceName}</span>
+                                            </div>
+                                        </td>
+
+                                        <td className="position-cell">
+                                            <span className={`position-badge ${getPositionClass(driver1?.position)}`}>
+                                                {driver1?.position || "-"}
+                                            </span>
+                                        </td>
+
+                                        {/* ovo ispod primeniti kada podesis da vuce iz posiotionColors.js */}
+
+                                        {/* style={{ backgroundColor: getPositionColor(driver1?.position) }} */}
+
+                                        <td className="position-cell">
+                                            <span className={`position-badge ${getPositionClass(driver2?.position)}`}>
+                                                {driver2?.position || "-"}
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            {Number(driver1?.points || 0) + Number(driver2?.points || 0)}
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
                     </table>
                 </div>
             </div>
 
-
-
-            <table className="results-table">
-                <thead>
-                    <tr>
-                        <th>Round</th>
-                        <th>Grand Prix</th>
-                        <th>{races[0].Results[0].Driver.familyName}</th>
-                        <th>{races[0].Results[1].Driver.familyName}</th>
-                        <th>Points</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {races.map((race) => {
-                        const driver1 = race.Results?.[0];
-                        const driver2 = race.Results?.[1];
-
-                        return (
-                            <tr key={race.round}>
-                                <td>{race.round}</td>
-
-                                {/* <td>
-                                    <Flag country={getCountryCodeByShortName(props.flags, race.Circuit.Location.country)} size={20} /> {race.raceName}
-                                </td> */}
-
-
-                                <td>
-                                    <div className="flag-text">
-                                        <Flag
-                                            country={getCountryCodeByShortName(props.flags, race.Circuit.Location.country)}
-                                            size={20}
-                                        />
-                                        <span>{race.raceName}</span>
-                                    </div>
-                                </td>
-
-
-
-                                {/* <td>{driver1?.position}</td>
-                                <td>{driver2?.position || "-"}</td> */}
-
-                                {/* <td style={{ backgroundColor: positionColors[driver1?.position] || "darkgray" }}>
-                                    {driver1?.position || "-"}
-                                </td> */}
-
-                                <td className="position-cell">
-                                    <span className={`position-badge pos-${driver1?.position || "default"}`}>
-                                        {driver1?.position || "-"}
-                                    </span>
-                                </td>
-
-                                {/* <td style={{ backgroundColor: positionColors[driver2?.position] || "darkgray" }}>
-                                    {driver2?.position || "-"}
-                                </td> */}
-
-                                <td className="position-cell">
-                                    <span className={`position-badge pos-${driver2?.position || "default"}`}>
-                                        {driver2?.position || "-"}
-                                    </span>
-                                </td>
-                                <td>
-                                    {Number(driver1?.points || 0) +
-                                        Number(driver2?.points || 0)}
-                                </td>
-
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
         </div >
-
-
     );
 }
