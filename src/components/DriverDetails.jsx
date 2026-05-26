@@ -6,6 +6,8 @@ import Flag from "react-flagkit";
 import { getCountryCodeByNationality } from "../helpers/getCountryCode";
 import { getCountryCodeByShortName } from "../helpers/getCountryCode";
 import Breadcrumb from "./Breadcrumb";
+import HomeIcon from '@mui/icons-material/Home';
+import Home from "./Home";
 
 export default function DriverDetails(props) {
     const [driverDetails, setDriverDetails] = useState(null);
@@ -57,11 +59,16 @@ export default function DriverDetails(props) {
 
     return (
         <div className="container">
+
             <Breadcrumb items={breadcrumbsDriverDetails} />
+
             <div className="driver-details">
+
+
                 <div>
 
                     <div className="img-driver">
+
                         <img
                             className="img-drivers"
                             src={`../../public/img/${driver.Driver.driverId}.png`}
@@ -69,6 +76,7 @@ export default function DriverDetails(props) {
                             width={180}
                         />
                     </div>
+
 
                     <div className="information-drivers">
 
