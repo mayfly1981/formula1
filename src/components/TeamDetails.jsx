@@ -5,34 +5,19 @@ import Loader from "./Loader";
 import Flag from "react-flagkit";
 import { getCountryCodeByNationality, getCountryCodeByShortName } from "../helpers/getCountryCode";
 import Breadcrumb from "./Breadcrumb";
+import getPositionColor from "../helpers/positionColors";
 
 
 
 export default function TeamDetails(props) {
-    const { id } = useParams();
-    const teamId = id;
-    const year = 2013;
-
-
     const [team, setTeam] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [standing, setStanding] = useState(null);
     const [races, setRaces] = useState([]);
 
-
-    const getPositionClass = (position) => {
-        const pos = Number(position);
-
-        if (!position || Number.isNaN(pos)) {
-            return "pos-default";
-        }
-
-        if (pos > 10) {
-            return "pos-other";
-        }
-
-        return `pos-${pos}`;
-    };
+    const { id } = useParams();
+    const teamId = id;
+    const year = 2013;
 
 
 
@@ -72,9 +57,9 @@ export default function TeamDetails(props) {
                 setIsLoading(false);
             }
         };
-
         getTeamDetails();
     }, [teamId]);
+
 
     if (!teamId) {
         return <p>No team selected</p>;
@@ -200,20 +185,19 @@ export default function TeamDetails(props) {
                                         </td>
 
                                         <td className="position-cell">
-                                            <span className={`position-badge ${getPositionClass(driver1?.position)}`}>
-                                                {driver1?.position || "-"}
+                                            <span className="position-badge" style={{ backgroundColor: getPositionColor(driver1?.position, 10) }}>
+                                                {driver1?.position}
                                             </span>
                                         </td>
 
-                                        {/* ovo ispod primeniti kada podesis da vuce iz posiotionColors.js */}
-
-                                        {/* style={{ backgroundColor: getPositionColor(driver1?.position) }} */}
 
                                         <td className="position-cell">
-                                            <span className={`position-badge ${getPositionClass(driver2?.position)}`}>
-                                                {driver2?.position || "-"}
+                                            <span className="position-badge"
+                                                style={{ backgroundColor: getPositionColor(driver2?.position, 10) }}>
+                                                {driver2?.position}
                                             </span>
                                         </td>
+
 
                                         <td>
                                             {Number(driver1?.points || 0) + Number(driver2?.points || 0)}
