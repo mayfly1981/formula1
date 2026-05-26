@@ -5,6 +5,7 @@ import { useNavigate, } from "react-router";
 import Flag from "react-flagkit";
 import { getCountryCodeByNationality } from "../helpers/getCountryCode";
 import Breadcrumb from "./Breadcrumb";
+import HomeIcon from '@mui/icons-material/Home';
 
 export default function Drivers(props) {
 
@@ -52,9 +53,9 @@ export default function Drivers(props) {
         <div className="container-drivers">
 
             <div className="table-drivers">
+                <HomeIcon />
                 <Breadcrumb items={breadcrumbsDrivers} />
                 <h1 className="title">Drivers Championship</h1>
-
                 <input type="text"
                     placeholder="Search drivers..."
                     value={search}
