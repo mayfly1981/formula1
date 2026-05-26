@@ -8,6 +8,7 @@ import { getCountryCodeByShortName } from "../helpers/getCountryCode";
 import Breadcrumb from "./Breadcrumb";
 import HomeIcon from '@mui/icons-material/Home';
 import Home from "./Home";
+import getPositionColor from "../helpers/positionColors";
 
 export default function DriverDetails(props) {
     const [driverDetails, setDriverDetails] = useState(null);
@@ -184,8 +185,17 @@ export default function DriverDetails(props) {
                                             {driverRace.Results[0].grid}
                                         </td>
 
-                                        <td>
-                                            {driverRace.Results[0].position}
+                                        <td className="position-cell">
+                                            <span className="position-badge" style={{ backgroundColor: getPositionColor(driverRace.Results[0].position, 5) }}>
+                                                {driverRace.Results[0].position}
+                                            </span>
+
+                                            {/* <td className="position-cell">
+                                                <span className="position-badge" style={{ backgroundColor: getPositionColor(driver1?.position, 10) }}>
+                                                    {driver1?.position}
+                                                </span>
+                                            </td> */}
+
                                         </td>
 
                                     </tr>
