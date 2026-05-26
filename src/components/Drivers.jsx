@@ -16,12 +16,12 @@ export default function Drivers(props) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log("useEffect");
         getDrivers();
-    }, []);
+        console.log("useEffect");
+    }, [props.year]);
 
     const getDrivers = async () => {
-        const url = "https://api.jolpi.ca/ergast/f1/2013/driverStandings.json";
+        const url = `https://api.jolpi.ca/ergast/f1/${props.year}/driverStandings.json`;
         const response = await axios.get(url);
         console.log(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
         setDrivers(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
@@ -31,13 +31,9 @@ export default function Drivers(props) {
 
     const filteredDrivers = drivers.filter((driver) => `${driver.Driver.givenName} ${driver.Driver.familyName}`.toLowerCase().includes(search.toLowerCase().trim().replace(/\s+/g, " ")))
 
-
-
-
-
     const handleClick = (driverId) => {
-        console.log("handleClick", driverId);
         navigate(`/driverDetails/${driverId}`);
+        console.log("handleClick", driverId);
     };
 
     if (loading) {
@@ -71,7 +67,7 @@ export default function Drivers(props) {
                 <table>
                     <thead>
                         <tr>
-                            <th colSpan={5}>Drivers Championship Standings - 2013</th>
+                            <th colSpan={5}>Drivers Championship Standings - {props.year}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,9 +76,7 @@ export default function Drivers(props) {
                                 <tr onClick={() => handleClick(driver.Driver.driverId)}
                                     className="driver-details"
                                     key={driver.Driver.driverId}>
-
                                     <td>{driver.position}</td>
-
                                     <td onClick={() => handleClick(driver.Driver.driverId)}>
                                         <Flag country={getCountryCodeByNationality(props.flags, driver.Driver.nationality)} size={20} />
                                     </td>
