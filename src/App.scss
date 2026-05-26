@@ -101,6 +101,8 @@ body {
     color: $color-text;
     padding: 20px;
     margin: 20px;
+    cursor: pointer;
+    // text-decoration: underline;
 
 
 
@@ -109,6 +111,7 @@ body {
 
     .driver-details {
         display: flex;
+
 
         .img-driver {
             width: 250px;

@@ -23,13 +23,15 @@ export default function DriverDetails(props) {
     useEffect(() => {
         getDriverDetails();
         console.log("useEffect");
-    }, []);
+    }, [props.year]);
+    console.log(driverDetails);
+
 
     const getDriverDetails = async () => {
 
         console.log("params", params);
-        const urlDriverDetails = `https://api.jolpi.ca/ergast/f1/2013/drivers/${params.id}/driverStandings.json`;
-        const urlDriverRaces = `https://api.jolpi.ca/ergast/f1/2013/drivers/${params.id}/results.json`;
+        const urlDriverDetails = `https://api.jolpi.ca/ergast/f1/${props.year}/drivers/${params.id}/driverStandings.json`;
+        const urlDriverRaces = `https://api.jolpi.ca/ergast/f1//${props.year}/drivers/${params.id}/results.json`;
 
 
         const driverDetailsResponse = await axios.get(urlDriverDetails);
@@ -42,6 +44,8 @@ export default function DriverDetails(props) {
         setIsLoading(false);
 
     };
+
+
 
     if (isLoading) {
         return <Loader />;
