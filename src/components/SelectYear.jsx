@@ -7,7 +7,7 @@ export default function SelectYear(props) {
     //     years.push(year);
     // };
 
-    for (let i = 2026; i >= 2006; i--) {
+    for (let i = 2026; i >= 2010; i--) {
         years.push(i);
     }
 
