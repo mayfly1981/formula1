@@ -5,14 +5,14 @@ import { useNavigate, } from "react-router";
 import Flag from "react-flagkit";
 import { getCountryCodeByNationality } from "../helpers/getCountryCode";
 import Breadcrumb from "./Breadcrumb";
+import HomeIcon from '@mui/icons-material/Home';
+import SportsMotorsportsIcon from '@mui/icons-material/SportsMotorsports';
 
 export default function Drivers(props) {
 
     const [drivers, setDrivers] = useState([])
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
-    const [finalFilteredDrivers, setFinalFilteredDrivers] = useState([]);
-
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -28,11 +28,12 @@ export default function Drivers(props) {
         setLoading(false);
         console.log("getDrivers");
     };
-    useEffect(() => {
-        const filteredDrivers = drivers.filter((driver) => driver.Driver.givenName.toLowerCase().includes(search.toLowerCase()) || driver.Driver.familyName.toLowerCase().includes(search.toLowerCase()));
-        setFinalFilteredDrivers(filteredDrivers)
 
-    }, [drivers, search]);
+    const filteredDrivers = drivers.filter((driver) => `${driver.Driver.givenName} ${driver.Driver.familyName}`.toLowerCase().includes(search.toLowerCase().trim().replace(/\s+/g, " ")))
+
+
+
+
 
     const handleClick = (driverId) => {
         console.log("handleClick", driverId);
@@ -44,7 +45,7 @@ export default function Drivers(props) {
     };
 
     const breadcrumbsDrivers = [
-        { text: "Drivers", route: "" }
+        { text: "", route: "", icon: "SportsMotorsportsIcon" }
     ];
 
     console.log("drivers ", drivers);
@@ -53,16 +54,16 @@ export default function Drivers(props) {
         <div className="container-drivers">
 
             <div className="table-drivers">
+
                 <Breadcrumb items={breadcrumbsDrivers} />
                 <h1 className="title">Drivers Championship</h1>
-
                 <input type="text"
                     placeholder="Search drivers..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
 
-                {finalFilteredDrivers.length === 0 && (
+                {filteredDrivers.length === 0 && (
                     <p>Driver not found</p>
                 )
                 }
@@ -74,7 +75,7 @@ export default function Drivers(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {finalFilteredDrivers.map((driver) => {
+                        {filteredDrivers.map((driver) => {
                             return (
                                 <tr onClick={() => handleClick(driver.Driver.driverId)}
                                     className="driver-details"

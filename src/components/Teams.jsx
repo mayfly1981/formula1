@@ -12,8 +12,8 @@ export default function Teams(props) {
 
     const [teams, setTeams] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const navigate = useNavigate();
     const [search, setSearch] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
         getTeams();
@@ -28,7 +28,7 @@ export default function Teams(props) {
         console.log("getTeams")
     };
 
-    const filteredTeams = teams.filter((team) => team.Constructor.name.toLowerCase().includes(search.toLowerCase()));
+    const filteredTeams = teams.filter((team) => team.Constructor.name.toLowerCase().includes(search.toLowerCase().trim().replace(/\s+/g, " ")));
 
 
 
