@@ -23,12 +23,12 @@ export default function RaceDetails(props) {
     useEffect(() => {
         getRaceQualifiers();
         console.log("useEffect");
-    }, []);
+    }, [props.year]);
 
     const getRaceQualifiers = async () => {
         console.log("params", params);
-        const urlRaceQualifiers = `https://api.jolpi.ca/ergast/f1/2013/${params.id}/qualifying.json`;
-        const urlRaceResults = `https://api.jolpi.ca/ergast/f1/2013/${params.id}/results.json`;
+        const urlRaceQualifiers = `https://api.jolpi.ca/ergast/f1/${props.year}/${params.id}/qualifying.json`;
+        const urlRaceResults = `https://api.jolpi.ca/ergast/f1/${props.year}/${params.id}/results.json`;
 
         const raceQualifiers = await axios.get(urlRaceQualifiers);
         const raceResults = await axios.get(urlRaceResults);
@@ -98,7 +98,7 @@ export default function RaceDetails(props) {
                 })}
             </div>
             <div className="qualifying-results">
-                <h3>Qualifying Results</h3>
+                <h3>Qualifying Results {props.year}</h3>
                 <table>
                     <thead>
                         <tr>
