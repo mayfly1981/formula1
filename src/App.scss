@@ -391,15 +391,9 @@ table {
     }
 }
 
+
 // Odavde fanuchi
-// TEAM DETAILS TABELA DONJA fanuchi
-
-
-
-.results-table tbody td {
-    padding: 12px 16px;
-    color: $color-text;
-}
+// TEAM DETAILS TABELA fanuchi
 
 .results-table {
     width: 100%;
@@ -407,10 +401,40 @@ table {
     border-collapse: collapse;
 }
 
+.results-table thead {
+    background-color: #131d33;
+}
+
+.results-table th {
+    padding: 14px 16px;
+    color: $color-text;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.results-table tbody td {
+    padding: 12px 16px;
+    color: $color-text;
+    font-size: 18px;
+}
+
 .results-table th:nth-child(2),
 .results-table td:nth-child(2) {
     text-align: left;
     padding-left: 32px;
+}
+
+.results-table tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.035);
+}
+
+.results-table tbody tr:nth-child(odd) {
+    background-color: transparent;
+}
+
+.results-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.07);
 }
 
 .col-round {
@@ -449,77 +473,54 @@ table {
     font-weight: 700;
 }
 
-// .pos-1 {
-//     background-color: $pos-driver1;
-//     color: #1b1b1b;
-// }
-
-// .pos-2 {
-//     background-color: $pos-driver3;
-//     color: #1b1b1b;
-// }
-
-// .pos-3 {
-//     background-color: $pos-driver4;
-//     color: #1b1b1b;
-// }
-
-// .pos-4,
-// .pos-5,
-// .pos-6,
-// .pos-7,
-// .pos-8,
-// .pos-9,
-// .pos-10 {
-//     background-color: $pos-driver2;
-//     color: #1b1b1b;
-// }
-
-// .pos-other {
-//     background-color: $pos-driver-other;
-//     color: #1b1b1b;
-// }
-
-// .pos-default {
-//     background-color: $pos-driver-other;
-//     color: #1b1b1b;
-// }
-
-// TEAM DETAILS KARTICA GORNJA fanuchi
+// TEAM DETAILS STRANA fanuchi
 
 .team-details-page {
-    display: flex;
-    gap: 28px;
     flex: 1;
-    flex-direction: row;
-    width: auto;
+    width: 100%;
     min-width: 0;
     min-height: 100vh;
-    padding: 24px 24px 24px 20px;
-    align-items: stretch;
+    padding: 24px;
     box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
 }
+
+.team-details-content {
+    display: flex;
+    align-items: stretch;
+    gap: 24px;
+    width: 100%;
+}
+
+// TEAM DETAILS KARTICA fanuchi
 
 .team-card {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+
+    width: 360px;
+    min-width: 360px;
+
     border: 1px solid $line-border;
-    padding: 28px;
-    padding-left: 12px;
-    width: 320px;
-    min-width: 320px;
-    min-height: calc(100vh - 48px);
     border-radius: 24px;
     background-color: $color-bg-table;
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+
+    padding: 28px;
+    box-sizing: border-box;
+    margin: 0;
 }
 
 .team-card-header {
     display: flex;
     align-items: center;
-    gap: 28px;
-    margin-bottom: 32px;
+    gap: 24px;
+    margin-bottom: 28px;
 }
 
 .team-logo {
@@ -529,12 +530,20 @@ table {
     background-color: rgba(255, 255, 255, 0.04);
     border-radius: 20px;
     padding: 18px;
+    box-sizing: border-box;
 }
 
 .team-title-box {
     display: flex;
     flex-direction: column;
     gap: 8px;
+}
+
+.team-title {
+    margin: 0;
+    color: $color-h1;
+    font-size: 26px;
+    line-height: 1.1;
 }
 
 .team-name-with-flag {
@@ -558,20 +567,13 @@ table {
     white-space: nowrap;
 }
 
-
-.team-title {
-    margin: 0;
-    color: $color-h1;
-    font-size: 26px;
-    line-height: 1.1;
-}
-
 .team-info {
     display: flex;
     flex-direction: column;
-    gap: 22px;
+    gap: 18px;
     width: 100%;
 }
+
 
 .team-info-row {
     display: flex;
@@ -591,7 +593,10 @@ table {
 .team-stats {
     display: flex;
     gap: 18px;
+    width: 100%;
+    box-sizing: border-box;
 }
+
 
 .team-stat {
     flex: 1;
@@ -600,6 +605,7 @@ table {
     border-radius: 18px;
     background-color: rgba(255, 255, 255, 0.04);
     border: 1px solid $line-border;
+
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -624,9 +630,10 @@ table {
     justify-content: center;
     gap: 10px;
 
-    width: 90%;
-    margin: 0 auto;
-    padding: 12px 24px;
+    width: 100%;
+    margin: 0;
+    padding: 12px 20px;
+    box-sizing: border-box;
 
     border-radius: 999px;
     color: white;
@@ -649,7 +656,7 @@ table {
 }
 
 .team-history-link {
-    margin-top: 28px;
+
     background-color: $color-h1;
 
     &:hover {
@@ -658,18 +665,30 @@ table {
     }
 }
 
+// TABELA S REZULTATIMA fanuchi
+
 .team-results-section {
     flex: 1;
+    width: auto;
+    max-width: none;
     min-width: 0;
-    padding-top: 8px;
+    margin: 0;
+    padding-top: 0;
+    background-color: $color-bg-table;
+    border: 1px solid $line-border;
+    border-radius: 24px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
     overflow: hidden;
 }
 
 .team-results-title {
     color: $color-text;
-    font-size: 34px;
+    font-size: 32px;
     text-align: center;
-    margin: 0 0 24px 0;
+    margin: 0;
+    padding: 18px 20px;
+    background-color: $color-bg-table;
+    border-bottom: 1px solid $line-border;
 }
 
 .results-table-wrapper {
@@ -677,51 +696,58 @@ table {
     overflow-x: auto;
 }
 
-.results-table {
-    width: 100%;
-    table-layout: fixed;
-}
-
-
-// Breadcrumbs za sve fanuchi
+// BREADCRUMBS za sve fanuchi
 
 .breadcrumbs-wrapper {
     width: 100%;
-    margin-bottom: 20px;
+    max-width: none;
 }
 
 .breadcrumbs {
+    width: 100%;
+    box-sizing: border-box;
+
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 18px;
     list-style: none;
     margin: 0;
     padding: 12px 18px;
+
     background-color: $color-bg-table;
     border: 1px solid $line-border;
     border-radius: 18px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
-.breadcrumb-item {
+.breadcrumb-item,
+.breadcrumbs-item {
     display: flex;
     align-items: center;
 
     a,
     span {
-        min-height: 34px;
-        padding: 7px 14px;
+        width: 130px;
+        height: 44px;
+        padding: 0;
+        box-sizing: border-box;
+
         border-radius: 12px;
         background-color: $color-nav;
         color: $color-text;
         text-decoration: none;
+
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 6px;
+
         transition: all 0.3s ease;
         font-size: 16px;
         line-height: 1;
+        font-family: Arial, Helvetica, sans-serif;
+        white-space: nowrap;
+        text-align: center;
     }
 
     a:hover {
@@ -731,7 +757,374 @@ table {
     }
 }
 
-.breadcrumbs .breadcrumb-item:last-child>span {
+.breadcrumbs .breadcrumb-item:last-child>span,
+.breadcrumbs .breadcrumbs-item:last-child>span {
     background-color: $color-h1;
     color: white;
 }
+
+
+
+
+
+
+
+
+
+
+// .results-table tbody td {
+//     padding: 12px 16px;
+//     color: $color-text;
+// }
+
+// .results-table {
+//     width: 100%;
+//     table-layout: fixed;
+//     border-collapse: collapse;
+// }
+
+// .results-table th:nth-child(2),
+// .results-table td:nth-child(2) {
+//     text-align: left;
+//     padding-left: 32px;
+// }
+
+// .col-round {
+//     width: 8%;
+// }
+
+// .col-grand-prix {
+//     width: 34%;
+// }
+
+// .col-driver {
+//     width: 18%;
+// }
+
+// .col-points {
+//     width: 10%;
+// }
+
+// .grand-prix-cell {
+//     display: flex;
+//     align-items: center;
+//     gap: 10px;
+// }
+
+// .position-cell {
+//     text-align: center;
+// }
+
+// .position-badge {
+//     display: inline-block;
+//     min-width: 80px;
+//     padding: 8px 0;
+//     border-radius: 7px;
+//     text-align: center;
+//     color: #071016;
+//     font-weight: 700;
+// }
+
+// // .pos-1 {
+// //     background-color: $pos-driver1;
+// //     color: #1b1b1b;
+// // }
+
+// // .pos-2 {
+// //     background-color: $pos-driver3;
+// //     color: #1b1b1b;
+// // }
+
+// // .pos-3 {
+// //     background-color: $pos-driver4;
+// //     color: #1b1b1b;
+// // }
+
+// // .pos-4,
+// // .pos-5,
+// // .pos-6,
+// // .pos-7,
+// // .pos-8,
+// // .pos-9,
+// // .pos-10 {
+// //     background-color: $pos-driver2;
+// //     color: #1b1b1b;
+// // }
+
+// // .pos-other {
+// //     background-color: $pos-driver-other;
+// //     color: #1b1b1b;
+// // }
+
+// // .pos-default {
+// //     background-color: $pos-driver-other;
+// //     color: #1b1b1b;
+// // }
+
+// // TEAM DETAILS KARTICA GORNJA fanuchi
+
+// .team-details-page {
+//     width: 100%;
+//     min-width: 0;
+//     min-height: 100vh;
+//     padding: 24px;
+//     box-sizing: border-box;
+
+//     display: flex;
+//     flex-direction: column;
+//     align-items: flex-start;
+//     gap: 6px;
+// }
+
+// .team-details-content {
+//     display: flex;
+//     align-items: flex-start;
+//     gap: 24px;
+//     width: 100%;
+// }
+
+// .team-card {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: flex-start;
+//     border: 1px solid $line-border;
+//     padding: 28px;
+//     padding-left: 12px;
+//     width: 320px;
+//     min-width: 320px;
+//     min-height: auto;
+//     border-radius: 24px;
+//     background-color: $color-bg-table;
+//     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+//     margin: 0;
+//     align-self: flex-start;
+//     position: static;
+// }
+
+// .team-card-header {
+//     display: flex;
+//     align-items: center;
+//     gap: 28px;
+//     margin-bottom: 32px;
+// }
+
+// .team-logo {
+//     width: 150px;
+//     height: 150px;
+//     object-fit: contain;
+//     background-color: rgba(255, 255, 255, 0.04);
+//     border-radius: 20px;
+//     padding: 18px;
+// }
+
+// .team-title-box {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 8px;
+// }
+
+// .team-name-with-flag {
+//     display: flex;
+//     align-items: center;
+//     gap: 10px;
+//     margin: 0;
+//     color: $color-text;
+//     font-size: 18px;
+// }
+
+// .flag-text {
+//     display: flex;
+//     align-items: center;
+//     justify-content: flex-start;
+//     gap: 10px;
+//     white-space: nowrap;
+// }
+
+// .flag-text span {
+//     white-space: nowrap;
+// }
+
+
+// .team-title {
+//     margin: 0;
+//     color: $color-h1;
+//     font-size: 26px;
+//     line-height: 1.1;
+// }
+
+// .team-info {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 22px;
+//     width: 100%;
+// }
+
+// .team-info-row {
+//     display: flex;
+//     gap: 10px;
+//     margin: 0;
+//     font-size: 20px;
+
+//     strong {
+//         color: $color-text;
+//     }
+
+//     span {
+//         color: white;
+//     }
+// }
+
+// .team-stats {
+//     display: flex;
+//     gap: 18px;
+// }
+
+// .team-stat {
+//     flex: 1;
+//     margin: 0;
+//     padding: 20px;
+//     border-radius: 18px;
+//     background-color: rgba(255, 255, 255, 0.04);
+//     border: 1px solid $line-border;
+//     display: flex;
+//     flex-direction: column;
+//     gap: 8px;
+//     box-sizing: border-box;
+// }
+
+// .team-stat-label {
+//     font-size: 16px;
+//     color: $color-text;
+// }
+
+// .team-stat-value {
+//     font-size: 34px;
+//     font-weight: 700;
+//     color: white;
+// }
+
+// .team-history-link,
+// .team-country-pill {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     gap: 10px;
+
+//     width: 90%;
+//     margin: 0 auto;
+//     padding: 12px 24px;
+
+//     border-radius: 999px;
+//     color: white;
+//     text-decoration: none;
+//     font-size: 16px;
+//     border: 1px solid $line-border;
+//     transition: 0.3s;
+// }
+
+// .team-country-pill {
+//     background-color: rgba(255, 255, 255, 0.08);
+
+//     strong {
+//         color: white;
+//     }
+// }
+
+// .team-country-name {
+//     color: $color-text;
+// }
+
+// .team-history-link {
+//     margin-top: 28px;
+//     background-color: $color-h1;
+
+//     &:hover {
+//         background-color: $a-hover;
+//         transform: translateY(-2px);
+//     }
+// }
+
+// // Tabela s rezultatima fanuchi
+
+// .team-results-section {
+//     width: 100%;
+//     max-width: 1000px;
+//     margin: 0;
+
+//     min-width: 0;
+//     padding-top: 8px;
+//     overflow: visible;
+// }
+
+// .team-results-title {
+//     color: $color-text;
+//     font-size: 34px;
+//     text-align: center;
+//     margin: 0 0 24px 0;
+// }
+
+// .results-table-wrapper {
+//     width: 100%;
+//     overflow-x: auto;
+// }
+
+// .results-table {
+//     width: 100%;
+//     table-layout: fixed;
+//     border-collapse: collapse;
+// }
+
+
+// // Breadcrumbs za sve fanuchi
+
+// .breadcrumbs-wrapper {
+//     width: 100%;
+//     max-width: 100%;
+//     // margin-bottom: 20px;
+// }
+
+// .breadcrumbs {
+//     display: flex;
+//     align-items: center;
+//     gap: 10px;
+//     list-style: none;
+//     margin: 0;
+//     padding: 12px 18px;
+//     background-color: $color-bg-table;
+//     border: 1px solid $line-border;
+//     border-radius: 18px;
+//     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+// }
+
+// .breadcrumb-item {
+//     display: flex;
+//     align-items: center;
+
+//     a,
+//     span {
+//         min-height: 34px;
+//         padding: 7px 14px;
+//         border-radius: 12px;
+//         background-color: $color-nav;
+//         color: $color-text;
+//         text-decoration: none;
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         gap: 6px;
+//         transition: all 0.3s ease;
+//         font-size: 16px;
+//         line-height: 1;
+//     }
+
+//     a:hover {
+//         background-color: #111a22;
+//         color: white;
+//         transform: translateY(-2px);
+//     }
+// }
+
+// .breadcrumbs .breadcrumb-item:last-child>span {
+//     background-color: $color-h1;
+//     color: white;
+// }
