@@ -11,6 +11,7 @@ export default function Races(props) {
     const [races, setRaces] = useState([])
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
+    const [filteredRaces, setFilteredRaces] = useState([]);
     const navigate = useNavigate();
 
 
@@ -28,7 +29,13 @@ export default function Races(props) {
         console.log("getRaces");
     };
 
-    const filteredRaces = races.filter((race) => race.raceName.toLowerCase().includes(search.toLowerCase().trim().replace(/\s+/g, " ")));
+
+    useEffect(() => {
+        const searchedRaces = races.filter((race) =>
+            race.raceName.toLowerCase().includes(search.toLowerCase().trim().replace(/\s+/g, " ")));
+        setFilteredRaces(searchedRaces);
+    }, [races, search]);
+
 
     const handleClick = (position) => {
         //key moze biti i "round"
