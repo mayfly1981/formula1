@@ -6,13 +6,15 @@ import Flag from "react-flagkit";
 import { getCountryCodeByNationality } from "../helpers/getCountryCode";
 import Breadcrumb from "./Breadcrumb";
 import HomeIcon from '@mui/icons-material/Home';
-
+import Error from "./Error";
 
 export default function Drivers(props) {
 
     const [drivers, setDrivers] = useState([])
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
+    const [error, setError] = useState(false);
+    const [filteredDrivers, setFilteredDrivers] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -20,16 +22,63 @@ export default function Drivers(props) {
         console.log("useEffect");
     }, [props.year]);
 
+    // const getDrivers = async () => {
+    //     try {
+
+    //         const url = `https://api.jolpi.ca/ergast/f1/${props.year}/driverStandings.json`;
+    //         const response = await axios.get(url);
+    //         console.log(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
+    //         // setDrivers(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
+    //         const standings =
+    //             response.data.MRData.StandingsTable.StandingsLists[0]
+    //                 ?.DriverStandings || [];
+
+    //         setDrivers(standings);
+    //         console.log("getDrivers");
+    //     } catch (e) {
+    //         setError(true);
+    //     }
+    //     finally {
+    //         setLoading(false);
+    //     }
+    //};
+
+
     const getDrivers = async () => {
-        const url = `https://api.jolpi.ca/ergast/f1/${props.year}/driverStandings.json`;
-        const response = await axios.get(url);
-        console.log(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
-        setDrivers(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
-        setLoading(false);
-        console.log("getDrivers");
+        try {
+
+            setLoading(true);
+            setError(false);
+
+            const url = `https://api.jolpi.ca/ergast/f1/${props.year}/driverStandings.json`;
+
+            const response = await axios.get(url);
+
+            const standings =
+                response.data.MRData.StandingsTable.StandingsLists[0]
+                    ?.DriverStandings || [];
+
+            if (standings.length === 0) {
+                setError(true);
+            } else {
+                setDrivers(standings);
+            }
+
+        } catch (e) {
+            setError(true);
+        } finally {
+            setLoading(false);
+        }
     };
 
-    const filteredDrivers = drivers.filter((driver) => `${driver.Driver.givenName} ${driver.Driver.familyName}`.toLowerCase().includes(search.toLowerCase().trim().replace(/\s+/g, " ")))
+    useEffect(() => {
+        const searchedDrivers = drivers.filter((driver) =>
+            `${driver.Driver.givenName}`.toLowerCase().includes(search.toLowerCase().trim().replace(/\s+/g, " ")) ||
+            `${driver.Driver.familyName}`.toLowerCase().includes(search.toLowerCase().trim().replace(/\s+/g, " ")))
+        setFilteredDrivers(searchedDrivers);
+    }, [drivers, search]);
+
+    // const filteredDrivers = drivers.filter((driver) => `${driver.Driver.givenName} ${driver.Driver.familyName}`.toLowerCase().includes(search.toLowerCase().trim().replace(/\s+/g, " ")))
 
     const handleClick = (driverId) => {
         navigate(`/driverDetails/${driverId}`);
@@ -43,6 +92,9 @@ export default function Drivers(props) {
         return <Loader />
     };
 
+    if (error) {
+        return <Error />
+    }
     const breadcrumbsDrivers = [
         { text: "Drivers", route: "" }
     ];
