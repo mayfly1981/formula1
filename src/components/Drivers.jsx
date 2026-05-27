@@ -25,30 +25,24 @@ export default function Drivers(props) {
 
     const getDrivers = async () => {
         try {
-
-            setLoading(true);
             setError(false);
-
             const url = `https://api.jolpi.ca/ergast/f1/${props.year}/driverStandings.json`;
-
             const response = await axios.get(url);
-
             const standings =
                 response.data.MRData.StandingsTable.StandingsLists[0]
                     ?.DriverStandings || [];
-
             if (standings.length === 0) {
                 setError(true);
             } else {
                 setDrivers(standings);
             }
-
         } catch (e) {
             setError(true);
         } finally {
             setLoading(false);
         }
     };
+
 
     useEffect(() => {
         const searchedDrivers = drivers.filter((driver) =>
