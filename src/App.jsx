@@ -15,7 +15,7 @@ import SelectYear from "./components/SelectYear";
 export default function App() {
   const [flags, setFlags] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [year, setYear] = useState("2026");
+  const [year, setYear] = useState("2025");
 
   const getFlags = async () => {
     const urlFlags = "https://raw.githubusercontent.com/Imagin-io/country-nationality-list/refs/heads/master/countries.json";
