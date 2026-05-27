@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import Flag from "react-flagkit";
 import { getCountryCodeByNationality } from "../helpers/getCountryCode"
 import Breadcrumb from "./Breadcrumb";
-
+import Error from "./Error";
 
 
 export default function Teams(props) {
@@ -13,6 +13,7 @@ export default function Teams(props) {
     const [teams, setTeams] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [search, setSearch] = useState("");
+    const [error, setError] = useState(false);
     const [filteredTeams, setFilteredTeams] = useState([]);
     const navigate = useNavigate();
 
@@ -22,12 +23,23 @@ export default function Teams(props) {
     }, [props.year]);
 
     const getTeams = async () => {
-        const url = `https://api.jolpi.ca/ergast/f1/${props.year}/constructorStandings.json`;
-        const response = await axios.get(url);
-        console.log(response);
-        setTeams(response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
-        setIsLoading(false);
-        console.log("getTeams")
+        try {
+            setError(false);
+            const url = `https://api.jolpi.ca/ergast/f1/${props.year}/constructorStandings.json`;
+            const response = await axios.get(url);
+            const standings =
+                response.data.MRData.StandingsTable.StandingsLists[0]
+                    ?.ConstructorStandings || [];
+            if (standings.length === 0) {
+                setError(true);
+            } else {
+                setTeams(standings);
+            }
+        } catch (e) {
+            setError(true);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
 
