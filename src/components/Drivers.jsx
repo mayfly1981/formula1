@@ -33,7 +33,10 @@ export default function Drivers(props) {
 
     const handleClick = (driverId) => {
         navigate(`/driverDetails/${driverId}`);
-        console.log("handleClick", driverId);
+    };
+
+    const handleClickTeam = (driverId) => {
+        navigate(`/teamDetails/${driverId}`);
     };
 
     if (loading) {
@@ -73,15 +76,16 @@ export default function Drivers(props) {
                     <tbody>
                         {filteredDrivers.map((driver) => {
                             return (
-                                <tr onClick={() => handleClick(driver.Driver.driverId)}
+                                <tr
                                     className="driver-details"
                                     key={driver.Driver.driverId}>
                                     <td>{driver.position}</td>
-                                    <td onClick={() => handleClick(driver.Driver.driverId)}>
+                                    <td >
                                         <Flag country={getCountryCodeByNationality(props.flags, driver.Driver.nationality)} size={20} />
                                     </td>
-                                    <td>{driver.Driver.givenName} {driver.Driver.familyName}</td>
-                                    <td>{driver.Constructors[0].name}</td>
+                                    <td onClick={() => handleClick(driver.Driver.driverId)}>{driver.Driver.givenName} {driver.Driver.familyName}</td>
+
+                                    <td onClick={() => handleClickTeam(driver.Constructors[0].constructorId)}>{driver.Constructors[0].name}</td>
                                     <td>{driver.points}</td>
                                 </tr>
                             );
