@@ -22,27 +22,6 @@ export default function Drivers(props) {
         console.log("useEffect");
     }, [props.year]);
 
-    // const getDrivers = async () => {
-    //     try {
-
-    //         const url = `https://api.jolpi.ca/ergast/f1/${props.year}/driverStandings.json`;
-    //         const response = await axios.get(url);
-    //         console.log(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
-    //         // setDrivers(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
-    //         const standings =
-    //             response.data.MRData.StandingsTable.StandingsLists[0]
-    //                 ?.DriverStandings || [];
-
-    //         setDrivers(standings);
-    //         console.log("getDrivers");
-    //     } catch (e) {
-    //         setError(true);
-    //     }
-    //     finally {
-    //         setLoading(false);
-    //     }
-    //};
-
 
     const getDrivers = async () => {
         try {
@@ -78,7 +57,6 @@ export default function Drivers(props) {
         setFilteredDrivers(searchedDrivers);
     }, [drivers, search]);
 
-    // const filteredDrivers = drivers.filter((driver) => `${driver.Driver.givenName} ${driver.Driver.familyName}`.toLowerCase().includes(search.toLowerCase().trim().replace(/\s+/g, " ")))
 
     const handleClick = (driverId) => {
         navigate(`/driverDetails/${driverId}`);
