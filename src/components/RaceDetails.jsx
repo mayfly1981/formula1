@@ -29,7 +29,7 @@ export default function RaceDetails(props) {
         const raceQualifiers = await axios.get(urlRaceQualifiers);
         const raceResults = await axios.get(urlRaceResults);
 
-        setRaceQualifiers(raceQualifiers.data.MRData.RaceTable.Races);
+        setRaceQualifiers(raceQualifiers.data.MRData.RaceTable.Races[0]);
         setRaceResults(raceResults.data.MRData.RaceTable.Races[0].Results)
 
         setIsLoading(false);
@@ -57,36 +57,35 @@ export default function RaceDetails(props) {
         navigate(`/teamDetails/${constructorId}`);
     }
 
-    if (isLoading) {
+    if (isLoading || !raceQualifiers) {
         return <Loader />
     };
 
     const breadcrumbsRaceDetails = [
         { text: "Races", route: "/races" },
-        { text: `${raceQualifiers[0].raceName}`, route: "" }
+        { text: `${raceQualifiers.raceName}`, route: "" }
     ];
 
     return (
         <div className="container">
             <Breadcrumb items={breadcrumbsRaceDetails} />
             <div className="grand-prix">
-                {raceQualifiers.map((raceQualifier) => {
-                    return (
-                        <div key={raceQualifier.round}>
-                            <Flag country={getCountryCodeByShortName(props.flags, raceQualifier.Circuit.Location.country)} size={100} />
-                            <p>{raceQualifier.QualifyingResults.raceName}</p>
-                            <p>Country:  {raceQualifier.Circuit.Location.country}</p>
-                            <p>Location: {raceQualifier.Circuit.Location.locality}</p>
-                            <p>Date: {raceQualifier.date}</p>
-                            <a href={raceQualifier.QualifyingResults[0].Constructor.url}
-                                target="_blank"
-                                rel="noreferrer">
-                                Full Report:
-                            </a>
-                        </div>
-                    );
-                })}
+
+                <Flag country={getCountryCodeByShortName(
+                    props.flags,
+                    raceQualifiers.Circuit.Location.country)}
+                    size={100} />
+                <p>{raceQualifiers.raceName}</p>
+                <p>Country:  {raceQualifiers.Circuit.Location.country}</p>
+                <p>Location: {raceQualifiers.Circuit.Location.locality}</p>
+                <p>Date: {raceQualifiers.date}</p>
+                <a href={raceQualifiers.url}
+                    target="_blank"
+                    rel="noreferrer">
+                    Full Report:
+                </a>
             </div>
+
             <div className="qualifying-results">
                 <h3>Qualifying Results {props.year}</h3>
                 <table>
@@ -99,12 +98,15 @@ export default function RaceDetails(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {raceQualifiers[0].QualifyingResults.map((qualifier) => {
+                        {raceQualifiers.QualifyingResults.map((qualifier) => {
                             return (
                                 <tr key={qualifier.position}>
                                     <td>{qualifier.position}</td>
                                     <td>
-                                        <Flag country={getCountryCodeByNationality(props.flags, qualifier.Driver.nationality)} size={20} />
+                                        <Flag country={getCountryCodeByNationality(
+                                            props.flags,
+                                            qualifier.Driver.nationality)}
+                                            size={20} />
 
                                     </td>
                                     <td onClick={() => handleClickDriver(qualifier.Driver.driverId)}> {qualifier.Driver.familyName}</td>
@@ -137,11 +139,14 @@ export default function RaceDetails(props) {
                                 <tr key={result.position}>
                                     <td>{result.position}</td>
                                     <td>
-                                        <Flag country={getCountryCodeByNationality(props.flags, result.Driver.nationality)} size={20} />
+                                        <Flag country={getCountryCodeByNationality(
+                                            props.flags,
+                                            result.Driver.nationality)}
+                                            size={20} />
 
                                     </td>
                                     <td onClick={() => handleClickDriver(result.Driver.driverId)}>{result.Driver.familyName}</td>
-                                    <td onClick={() => handleClickTeam(result.Constructors[0].constructorId)}>{result.Constructor.name}</td>
+                                    <td onClick={() => handleClickTeam(result.Constructor.constructorId)}>{result.Constructor.name}</td>
                                     <td>{getRaceTime(result)}</td>
                                     <td style={{ backgroundColor: getPositionColor(result.position) }}>{result.points}</td>
                                 </tr>
@@ -151,6 +156,6 @@ export default function RaceDetails(props) {
 
                 </table>
             </div>
-        </div>
+        </div >
     );
 }

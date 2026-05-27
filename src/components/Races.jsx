@@ -11,6 +11,7 @@ export default function Races(props) {
     const [races, setRaces] = useState([])
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
+    const [error, setError] = useState(false);
     const [filteredRaces, setFilteredRaces] = useState([]);
     const navigate = useNavigate();
 
@@ -20,15 +21,55 @@ export default function Races(props) {
         getRaces();
     }, [props.year]);
 
+
     const getRaces = async () => {
-        const url = `https://api.jolpi.ca/ergast/f1/${props.year}/results/1.json`;
-        const response = await axios.get(url);
-        console.log(response.data.MRData.RaceTable.Races);
-        setRaces(response.data.MRData.RaceTable.Races);
-        setLoading(false);
-        console.log("getRaces");
+        try {
+            setError(false);
+            const url = `https://api.jolpi.ca/ergast/f1/${props.year}/results/1.json`;
+            const response = await axios.get(url);
+            const standings = response.data.MRData.RaceTable.Races || [];
+            if (standings.length === 0) {
+                setError(true);
+            } else {
+                setRaces(standings);
+            }
+        } catch (e) {
+            setError(true);
+        } finally {
+            setLoading(false);
+        }
     };
 
+    // const getRaces = async () => {
+    //     const url = `https://api.jolpi.ca/ergast/f1/${props.year}/results/1.json`;
+    //     const response = await axios.get(url);
+    //     console.log(response.data.MRData.RaceTable.Races);
+    //     setRaces(response.data.MRData.RaceTable.Races);
+    //     setLoading(false);
+    //     console.log("getRaces");
+    // };
+
+
+
+    const getDrivers = async () => {
+        try {
+            setError(false);
+            const url = `https://api.jolpi.ca/ergast/f1/${props.year}/driverStandings.json`;
+            const response = await axios.get(url);
+            const standings =
+                response.data.MRData.StandingsTable.StandingsLists[0]
+                    ?.DriverStandings || [];
+            if (standings.length === 0) {
+                setError(true);
+            } else {
+                setDrivers(standings);
+            }
+        } catch (e) {
+            setError(true);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
         const searchedRaces = races.filter((race) =>
@@ -50,6 +91,9 @@ export default function Races(props) {
     if (loading) {
         return <Loader />
     };
+    if (error) {
+        return <Error />
+    }
 
     const breadcrumbsRaces = [
 
