@@ -36,6 +36,10 @@ export default function Races(props) {
         navigate(`/raceDetails/${position}`);
     };
 
+    const handleClickDriver = (driverId) => {
+        navigate(`/driverDetails/${driverId}`);
+    };
+
     if (loading) {
         return <Loader />
     };
@@ -79,6 +83,7 @@ export default function Races(props) {
 
                     <tbody>
                         {filteredRaces.map((race) => {
+                            const driver = race.Results[0].Driver;
                             return (
                                 <tr key={race.round}>
                                     <td> {race.round}</td>
@@ -93,7 +98,8 @@ export default function Races(props) {
                                         <Flag country={getCountryCodeByNationality(props.flags, race.Results[0].Driver.nationality)} size={20} />
 
                                     </td>
-                                    <td>{race.Results[0].Driver.familyName}</td>
+                                    <td onClick={() => handleClickDriver(driver.driverId)}>
+                                        {driver.familyName}</td>
                                 </tr>
                             );
                         })}

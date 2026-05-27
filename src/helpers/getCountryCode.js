@@ -7,7 +7,7 @@ export function getCountryCodeByNationality(flags, nationality) {
         return "NL";
     }
 
-    if (nationality === "Azerbaijan") {
+    if (nationality === "Azerbaijani") {
         return "AZ";
     }
 
