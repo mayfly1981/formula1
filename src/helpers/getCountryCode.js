@@ -7,6 +7,10 @@ export function getCountryCodeByNationality(flags, nationality) {
         return "NL";
     }
 
+    if (nationality === "Azerbaijan") {
+        return "AZ";
+    }
+
     // console.log("flags ", flags, nationality)
     const flag = flags.find(flag => flag.nationality === nationality);
     // console.log(flag);
