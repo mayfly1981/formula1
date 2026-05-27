@@ -40,7 +40,7 @@ export default function RaceDetails(props) {
         console.log(raceResults.data.MRData.RaceTable.Races);
 
         setRaceQualifiers(raceQualifiers.data.MRData.RaceTable.Races);
-        setRaceResults(raceResults.data.MRData.RaceTable.Races)
+        setRaceResults(raceResults.data.MRData.RaceTable.Races[0].Results)
 
         setIsLoading(false);
 
@@ -67,11 +67,9 @@ export default function RaceDetails(props) {
         return <Loader />
     };
 
-    const race = raceQualifiers[0];
-
     const breadcrumbsRaceDetails = [
         { text: "Races", route: "/races" },
-        { text: `${race.raceName}`, route: "" }
+        { text: `${raceQualifiers[0].raceName}`, route: "" }
     ];
 
     console.log("races ", raceQualifiers);
@@ -87,7 +85,7 @@ export default function RaceDetails(props) {
                         <div key={raceQualifier.round}>
                             <Flag country={getCountryCodeByShortName(props.flags, raceQualifier.Circuit.Location.country)} size={100} />
                             <p>{raceQualifier.QualifyingResults.raceName}</p>
-                            <p>Country: {raceQualifier.Circuit.Location.country}</p>
+                            <p>Country:  {raceQualifier.Circuit.Location.country}</p>
                             <p>Location: {raceQualifier.Circuit.Location.locality}</p>
                             <p>Date: {raceQualifier.date}</p>
                             <a href={raceQualifier.QualifyingResults[0].Constructor.url}
@@ -143,7 +141,7 @@ export default function RaceDetails(props) {
                     </thead>
 
                     <tbody>
-                        {raceResults[0].Results.map((result) => {
+                        {raceResults.map((result) => {
                             return (
                                 <tr key={result.position}>
                                     <td>{result.position}</td>
@@ -151,7 +149,7 @@ export default function RaceDetails(props) {
                                         <Flag country={getCountryCodeByNationality(props.flags, result.Driver.nationality)} size={20} />
 
                                     </td>
-                                    <td>  {result.Driver.familyName}</td>
+                                    <td>{result.Driver.familyName}</td>
                                     <td>{result.Constructor.name}</td>
                                     <td>{getRaceTime(result)}</td>
                                     <td style={{ backgroundColor: getPositionColor(result.position) }}>{result.points}</td>
