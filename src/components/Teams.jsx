@@ -13,6 +13,7 @@ export default function Teams(props) {
     const [teams, setTeams] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [search, setSearch] = useState("");
+    const [filteredTeams, setFilteredTeams] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -29,13 +30,20 @@ export default function Teams(props) {
         console.log("getTeams")
     };
 
-    const filteredTeams = teams.filter((team) => team.Constructor.name.toLowerCase().includes(search.toLowerCase().trim().replace(/\s+/g, " ")));
+
+    useEffect(() => {
+        const searchedTeams = teams.filter((team) =>
+            team.Constructor.name.toLowerCase().includes(search.toLowerCase().trim().replace(/\s+/g, " ")));
+        setFilteredTeams(searchedTeams);
+    }, [teams, search]);
+
+
 
 
 
     const handleClick = (constructorId) => {
         console.log("handleClick ", constructorId);
-        navigate(`/TeamDetails/${constructorId}`);
+        navigate(`/teamDetails/${constructorId}`);
     }
 
 
