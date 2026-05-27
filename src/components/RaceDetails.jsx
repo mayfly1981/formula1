@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import Loader from "./Loader";
 import axios from "axios";
 import Flag from "react-flagkit";
@@ -13,12 +13,8 @@ export default function RaceDetails(props) {
     const [raceResults, setRaceResults] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-
     const params = useParams();
-
-    const handleClick = () => {
-        console.log("click");
-    }
+    const navigate = useNavigate();
 
     useEffect(() => {
         getRaceQualifiers();
@@ -33,21 +29,12 @@ export default function RaceDetails(props) {
         const raceQualifiers = await axios.get(urlRaceQualifiers);
         const raceResults = await axios.get(urlRaceResults);
 
-        console.log("raceQualifiers", raceQualifiers);
-        console.log("raceResults", raceResults);
-
-        console.log(raceQualifiers.data.MRData.RaceTable.Races);
-        console.log(raceResults.data.MRData.RaceTable.Races);
-
         setRaceQualifiers(raceQualifiers.data.MRData.RaceTable.Races);
         setRaceResults(raceResults.data.MRData.RaceTable.Races[0].Results)
 
         setIsLoading(false);
 
-        console.log("getRaceQualifiers");
-        console.log("getRaceResults");
     };
-
 
     const getBestTime = (qualifier) => {
         const times = [];
@@ -57,11 +44,18 @@ export default function RaceDetails(props) {
         return times[0];
     };
 
-
     const getRaceTime = (result) => {
         if (result.Time?.time) return result.Time.time;
         return "DNQ";
     };
+
+    const handleClickDriver = (driverId) => {
+        navigate(`/driverDetails/${driverId}`);
+    };
+
+    const handleClickTeam = (constructorId) => {
+        navigate(`/teamDetails/${constructorId}`);
+    }
 
     if (isLoading) {
         return <Loader />
@@ -71,10 +65,6 @@ export default function RaceDetails(props) {
         { text: "Races", route: "/races" },
         { text: `${raceQualifiers[0].raceName}`, route: "" }
     ];
-
-    console.log("races ", raceQualifiers);
-    console.log("raceQualifiers ", raceQualifiers);
-    console.log("raceResults ", raceResults);
 
     return (
         <div className="container">
@@ -117,8 +107,9 @@ export default function RaceDetails(props) {
                                         <Flag country={getCountryCodeByNationality(props.flags, qualifier.Driver.nationality)} size={20} />
 
                                     </td>
-                                    <td> {qualifier.Driver.familyName}</td>
-                                    <td>{qualifier.Constructor.name}</td>
+                                    <td onClick={() => handleClickDriver(qualifier.Driver.driverId)}> {qualifier.Driver.familyName}</td>
+
+                                    <td onClick={() => handleClickTeam(qualifier.Constructor.constructorId)}>{qualifier.Constructor.name}</td>
                                     <td>{getBestTime(qualifier)}</td>
                                 </tr>
                             );
@@ -149,8 +140,8 @@ export default function RaceDetails(props) {
                                         <Flag country={getCountryCodeByNationality(props.flags, result.Driver.nationality)} size={20} />
 
                                     </td>
-                                    <td>{result.Driver.familyName}</td>
-                                    <td>{result.Constructor.name}</td>
+                                    <td onClick={() => handleClickDriver(result.Driver.driverId)}>{result.Driver.familyName}</td>
+                                    <td onClick={() => handleClickTeam(result.Constructors[0].constructorId)}>{result.Constructor.name}</td>
                                     <td>{getRaceTime(result)}</td>
                                     <td style={{ backgroundColor: getPositionColor(result.position) }}>{result.points}</td>
                                 </tr>
