@@ -91,6 +91,9 @@ export default function Races(props) {
     if (loading) {
         return <Loader />
     };
+    if (error) {
+        return <Error />
+    }
 
     const breadcrumbsRaces = [
 
