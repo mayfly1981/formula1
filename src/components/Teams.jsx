@@ -17,10 +17,11 @@ export default function Teams(props) {
 
     useEffect(() => {
         getTeams();
-    }, []);
+        console.log("useEffect");
+    }, [props.year]);
 
     const getTeams = async () => {
-        const url = "https://api.jolpi.ca/ergast/f1/2013/constructorStandings.json";
+        const url = `https://api.jolpi.ca/ergast/f1/${props.year}/constructorStandings.json`;
         const response = await axios.get(url);
         console.log(response);
         setTeams(response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
@@ -71,7 +72,7 @@ export default function Teams(props) {
                 <table>
                     <thead>
                         <tr>
-                            <th colSpan={6}>Constructors Champhionship Standings - 2013</th>
+                            <th colSpan={6}>Constructors Champhionship Standings - {props.year}</th>
                         </tr>
                     </thead>
                     <tbody>

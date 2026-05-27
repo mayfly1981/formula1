@@ -19,8 +19,6 @@ export default function TeamDetails(props) {
     const teamId = id;
     const year = 2013;
 
-
-
     useEffect(() => {
         if (!teamId) return;
 
@@ -28,13 +26,13 @@ export default function TeamDetails(props) {
             try {
                 setIsLoading(true);
 
-                const url = `https://api.jolpi.ca/ergast/f1/${year}/constructors/${teamId}/results.json`;
+                const url = `https://api.jolpi.ca/ergast/f1/${props.year}/constructors/${teamId}/results.json`;
 
 
                 const response = await axios.get(url);
 
                 const standingResponse = await axios.get(
-                    `https://api.jolpi.ca/ergast/f1/${year}/constructors/${teamId}/constructorStandings.json`
+                    `https://api.jolpi.ca/ergast/f1/${props.year}/constructors/${teamId}/constructorStandings.json`
                 );
                 const standingData = standingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0];
                 setStanding(standingData);
@@ -58,7 +56,7 @@ export default function TeamDetails(props) {
             }
         };
         getTeamDetails();
-    }, [teamId]);
+    }, [teamId, props.year]);
 
 
     if (!teamId) {
@@ -141,7 +139,7 @@ export default function TeamDetails(props) {
             </div>
 
             <div className="team-results-section">
-                <h2 className="team-results-title">Formula 1 2013 Results</h2>
+                <h2 className="team-results-title">Formula 1 {props.year} Results</h2>
 
                 <div className="results-table-wrapper">
                     <table className="results-table">

@@ -24,14 +24,12 @@ export default function DriverDetails(props) {
         getDriverDetails();
         console.log("useEffect");
     }, [props.year]);
-    console.log(driverDetails);
-
 
     const getDriverDetails = async () => {
 
         console.log("params", params);
         const urlDriverDetails = `https://api.jolpi.ca/ergast/f1/${props.year}/drivers/${params.id}/driverStandings.json`;
-        const urlDriverRaces = `https://api.jolpi.ca/ergast/f1//${props.year}/drivers/${params.id}/results.json`;
+        const urlDriverRaces = `https://api.jolpi.ca/ergast/f1/${props.year}/drivers/${params.id}/results.json`;
 
 
         const driverDetailsResponse = await axios.get(urlDriverDetails);
@@ -44,8 +42,6 @@ export default function DriverDetails(props) {
         setIsLoading(false);
 
     };
-
-
 
     if (isLoading) {
         return <Loader />;
@@ -128,7 +124,7 @@ export default function DriverDetails(props) {
 
             <div className="right-details">
 
-                <h3>Formula 1 2013 Results</h3>
+                <h3>Formula 1 - {props.year} Results</h3>
 
                 <div className="card-table">
 

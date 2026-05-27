@@ -3,27 +3,36 @@ import HomeIcon from '@mui/icons-material/Home';
 
 export default function Breadcrumb(props) {
     return (
-        <div>
+
+        <nav className="breadcrumbs-wrapper">
 
             <ul className="breadcrumbs">
 
-                <li><Link to="/"><HomeIcon />Home</Link>
+                <li className="breadcrumbs-item">
+                    <Link to="/">
+                        <HomeIcon fontSize="small" />
+                        <span>Home</span>
+                    </Link>
                 </li>
 
 
                 {props.items.map((item, i) => {
                     const isLast = i === props.items.length - 1;
+
                     return (
-                        <li>
-                            {!isLast ?
+                        <li className="breadcrumb-item" key={item.text}>
+                            {!isLast ? (
                                 <Link to={item.route}>
                                     {item.text}</Link>
-                                : <span key={i}>{item.text}</span>
-                            }
+                            ) : (
+                                <span key={i}>{item.text}
+                                </span>
+                            )}
                         </li>
                     );
                 })}
             </ul>
-        </div >
+        </nav>
+
     );
 }

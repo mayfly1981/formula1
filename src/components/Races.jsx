@@ -17,10 +17,10 @@ export default function Races(props) {
     useEffect(() => {
         console.log("useEffect");
         getRaces();
-    }, []);
+    }, [props.year]);
 
     const getRaces = async () => {
-        const url = "https://api.jolpi.ca/ergast/f1/2013/results/1.json";
+        const url = `https://api.jolpi.ca/ergast/f1/${props.year}/results/1.json`;
         const response = await axios.get(url);
         console.log(response.data.MRData.RaceTable.Races);
         setRaces(response.data.MRData.RaceTable.Races);
@@ -67,7 +67,7 @@ export default function Races(props) {
             <div className="table-races">
                 <table >
                     <thead>
-                        <tr><th colSpan={7}>Races calendar - 2013</th></tr>
+                        <tr><th colSpan={7}>Races calendar - {props.year}</th></tr>
                         <tr>
                             <th>Round</th>
                             <th colSpan={2}>Grand Prix</th>
