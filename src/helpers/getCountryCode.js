@@ -7,8 +7,8 @@ export function getCountryCodeByNationality(flags, nationality) {
         return "NL";
     }
 
-    if (nationality === "Azerbaijani") {
-        return "AZ";
+    if (name === "Azerbaijan") {
+        return "LY";
     }
 
     const flag = flags.find(flag => flag.nationality === nationality);
