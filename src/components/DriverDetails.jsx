@@ -60,46 +60,60 @@ export default function DriverDetails(props) {
     return (
         <>
 
-            <Breadcrumb items={breadcrumbsDriverDetails} />
-            <div className="driver-details-page">
+            {/* <div className="driver-details-page"> */}
+            <div className="team-details-page">
+                <Breadcrumb items={breadcrumbsDriverDetails} />
 
+                {/* <div className="driver-card"> */}
+                <div className="team-card">
 
-                <div className="driver-card">
-                    <div className="driver-card-header">
+                    {/* <div className="driver-card-header"> */}
+                    <div className="team-card-header">
+
                         <div className="img-driver">
-                            <img className="img-drivers"
+                            <img className="team-logo"
                                 src={`../../public/img/${driver.Driver.driverId}.png`}
                                 alt="Driver picture" />
-                        </div>
-                        <div className="driver-info">
-                            <div className="driver-title-box">
+                            {/*img-drivers */}
 
-                                <h3 className="driver-title">
+
+                            {/* <div className="driver-title-box"> */}\
+                            <div className="team-title-box">
+                                <h3 className="team-title">
+                                    {/* driver-title"*/}
                                     {driver.Driver.givenName}{" "}
                                     {driver.Driver.familyName}
                                 </h3>
                             </div>
-                            <p>
-                                {driver.Constructors[0].name} Racing
-                            </p>
-                            <div className="country-name">
-                                <Flag
-                                    className="flag"
-                                    country={getCountryCodeByNationality(
-                                        props.flags,
-                                        driver.Driver.nationality
-                                    )}
-                                    size={20} />
-                                <span>
-                                    {driver.Driver.nationality}
-                                </span>
-                            </div>
-                            <p>Birth: {driver.Driver.dateOfBirth}</p>
+                            {/* <div className="driver-info"> */}
+                            <div className="team-info">
 
-                            <a href={driver.Driver.url}
-                                target="_blank"
-                                rel="noreferrer" >Biography
-                            </a>
+                                {/* <div className="team-stats"> */}
+                                <p className="team-country-pill">
+                                    <Flag
+                                        className="flag"
+                                        country={getCountryCodeByNationality(
+                                            props.flags,
+                                            driver.Driver.nationality
+                                        )}
+                                        size={30} />
+                                    {/* <span> */}
+                                    {driver.Driver.nationality}
+                                    {/* </span> */}
+                                </p>
+                                <p className="team-country-pill">
+                                    <span>{driver.Constructors[0].name}</span>
+                                </p>
+
+                                <p className="team-country-pill">Birth: {driver.Driver.dateOfBirth}</p>
+
+                                <a href={driver.Driver.url}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="team-history-link">Biography
+                                </a>
+                                {/* </div> */}
+                            </div>
                         </div>
                     </div>
                 </div>
