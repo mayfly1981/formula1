@@ -65,7 +65,7 @@ export default function Teams(props) {
     console.log("teams ", teams);
 
     return (
-        <div className="teams-page">
+        <div className="container-teams">
             <Breadcrumb items={breadcrumbsTeams} />
             <h1>Constructors Championship</h1>
             <input
@@ -84,7 +84,7 @@ export default function Teams(props) {
                 <table>
                     <thead>
                         <tr>
-                            <th colSpan={5}>Constructors Championship Standings - {props.year}
+                            <th colSpan={6}>Constructors Championship Standings - {props.year}
                             </th>
                         </tr>
                     </thead>

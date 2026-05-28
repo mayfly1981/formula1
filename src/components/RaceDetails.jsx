@@ -12,11 +12,8 @@ import getPositionColor from "../helpers/positionColors";
 export default function RaceDetails(props) {
     const [raceQualifiers, setRaceQualifiers] = useState(null);
     const [raceResults, setRaceResults] = useState([]);
-    const [filteredQualifiers, setFilteredQualifiers] = useState([]);
-    const [filteredResults, setFilteredResults] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(false);
-    const [search, setSearch] = useState("");
     const params = useParams();
     const navigate = useNavigate();
 
@@ -24,6 +21,7 @@ export default function RaceDetails(props) {
         getRaceQualifiers();
         console.log("useEffect");
     }, [props.year]);
+
 
     const getBestTime = (qualifier) => {
         const times = [];
@@ -34,8 +32,6 @@ export default function RaceDetails(props) {
 
     const getRaceQualifiers = async () => {
         try {
-            setError(false);
-
             const urlRaceQualifiers = `https://api.jolpi.ca/ergast/f1/${props.year}/${params.id}/qualifying.json`;
             const urlRaceResults = `https://api.jolpi.ca/ergast/f1/${props.year}/${params.id}/results.json`;
 
@@ -43,18 +39,13 @@ export default function RaceDetails(props) {
             const raceResultsResponse = await axios.get(urlRaceResults);
 
             const qualifiers =
-                raceQualifiersResponse.data.MRData.RaceTable.Races[0] || null;
+                raceQualifiersResponse.data?.MRData?.RaceTable?.Races?.[0] || null;
             const results =
                 raceResultsResponse.data.MRData.RaceTable.Races[0]?.Results || [];
 
-            if (!qualifiers) {
-                setError(true);
-            } else {
-                setRaceQualifiers(qualifiers);
-                setFilteredQualifiers(qualifiers.QualifyingResults);
-                setRaceResults(results);
-                setFilteredResults(results);
-            }
+            setRaceQualifiers(qualifiers);
+            setRaceResults(results);
+
         } catch (e) {
             setError(true);
         } finally {
@@ -73,37 +64,7 @@ export default function RaceDetails(props) {
 
     const handleClickTeam = (constructorId) => {
         navigate(`/teamDetails/${constructorId}`);
-    };
-
-    useEffect(() => {
-        const normalizedSearch = search
-            .toLowerCase()
-            .trim()
-            .replace(/\s+/g, " ");
-        const searchedResults = raceResults.filter((result) => {
-            const driverName =
-                result.Driver.familyName.toLowerCase();
-            const teamName =
-                result.Constructor.name.toLowerCase();
-            return (
-                driverName.includes(normalizedSearch) ||
-                teamName.includes(normalizedSearch)
-            );
-        });
-        const searchedQualifiers =
-            raceQualifiers?.QualifyingResults?.filter((qualifier) => {
-                const driverName =
-                    qualifier.Driver.familyName.toLowerCase();
-                const teamName =
-                    qualifier.Constructor.name.toLowerCase();
-                return (
-                    driverName.includes(normalizedSearch) ||
-                    teamName.includes(normalizedSearch)
-                );
-            }) || [];
-        setFilteredResults(searchedResults);
-        setFilteredQualifiers(searchedQualifiers);
-    }, [raceResults, raceQualifiers, search]);
+    }
 
     if (isLoading || !raceQualifiers) {
         return <Loader />
@@ -111,7 +72,7 @@ export default function RaceDetails(props) {
 
     if (error) {
         return <Error />
-    };
+    }
 
     const breadcrumbsRaceDetails = [
         { text: "Races", route: "/races" },
@@ -121,21 +82,6 @@ export default function RaceDetails(props) {
     return (
         <div className="team-details-page">
             <Breadcrumb items={breadcrumbsRaceDetails} />
-
-            <input type="text"
-                placeholder="Search teams or drivers..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-            />
-
-            {filteredResults.length === 0 && (
-                <p>No results found</p>
-            )}
-
-            {search && (
-                <button onClick={() => setSearch("")}>Clear
-                </button>)}
-
             <div className="team-details-content">
                 <div className="team-card">
                     <div className="team-card-header">
@@ -167,9 +113,13 @@ export default function RaceDetails(props) {
                     </div>
                 </div>
             </div>
+
             <div className="team-results-section">
+
                 <h2 className="team-results-title">Qualifying Results {props.year}</h2>
+
                 <div className="results-table-wrapper">
+
                     <table className="results-table">
                         <colgroup>
                             <col className="col-round" />
@@ -178,6 +128,7 @@ export default function RaceDetails(props) {
                             <col className="col-driver" />
                             <col className="col-points" />
                         </colgroup>
+
                         <thead>
                             <tr>
                                 <th>Pos</th>
@@ -186,13 +137,16 @@ export default function RaceDetails(props) {
                                 <th>Best Time</th>
                             </tr>
                         </thead>
+
                         <tbody>
-                            {filteredQualifiers.map((qualifier) => {
+                            {raceQualifiers?.QualifyingResults?.map((qualifier) => {
+
                                 return (
                                     <tr key={qualifier.position}>
                                         <td>{qualifier.position}</td>
                                         <td>
                                             <div className="flag-text">
+
                                                 <Flag
                                                     country={getCountryCodeByNationality(
                                                         props.flags,
@@ -219,6 +173,7 @@ export default function RaceDetails(props) {
                         </tbody>
                     </table>
                 </div>
+
                 <div className="results-table-wrapper">
                     <div className="race-results">
                         <h3>Races Results</h3>
@@ -230,6 +185,7 @@ export default function RaceDetails(props) {
                                 <col className="col-driver" />
                                 <col className="col-points" />
                             </colgroup>
+
                             <thead>
                                 <tr>
                                     <th>Pos</th>
@@ -239,11 +195,15 @@ export default function RaceDetails(props) {
                                     <th>Points</th>
                                 </tr>
                             </thead>
+
                             <tbody>
-                                {filteredResults.map((result) => {
+                                {raceResults.map((result) => {
                                     return (
+
                                         <tr key={result.position}>
+
                                             <td>{result.position}</td>
+
                                             <td>
                                                 <div className="flag-text">
                                                     <Flag country={getCountryCodeByNationality(
@@ -252,16 +212,20 @@ export default function RaceDetails(props) {
                                                         size={20} />
                                                 </div>
                                             </td>
+
                                             <td
                                                 onClick={() => handleClickDriver(result.Driver.driverId)} >
                                                 <span>
                                                     {result.Driver.familyName}
                                                 </span>
                                             </td>
+
                                             <td onClick={() => handleClickTeam(result.Constructor.constructorId)}>
                                                 {result.Constructor.name}
                                             </td>
+
                                             <td>{getRaceTime(result)}</td>
+
                                             <td className="position-cell">
                                                 <span className="position-badge"
                                                     style={{

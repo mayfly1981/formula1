@@ -3,4 +3,4 @@ export default function Home() {
         <h1>Welcome to Formula 1</h1>
 
     </div>)
-};
+}
