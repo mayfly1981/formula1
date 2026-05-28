@@ -39,8 +39,7 @@ export default function Drivers(props) {
 
     useEffect(() => {
         const searchedDrivers = drivers.filter((driver) =>
-            `${driver.Driver.givenName}`.toLowerCase().includes(search.toLowerCase().trim().replace(/\s+/g, " ")) ||
-            `${driver.Driver.familyName}`.toLowerCase().includes(search.toLowerCase().trim().replace(/\s+/g, " ")))
+            `${driver.Driver.givenName} ${driver.Driver.familyName}`.toLowerCase().includes(search.toLowerCase().trim().replace(/\s+/g, " ")));
         setFilteredDrivers(searchedDrivers);
     }, [drivers, search]);
 
@@ -75,7 +74,13 @@ export default function Drivers(props) {
                     value={search}
                     onChange={(e) => setSearch(e.target.value)} />
 
-                {filteredDrivers.length === 0 && (<p>Driver not found</p>)}
+                {filteredDrivers.length === 0 && (
+                    <p>No results found</p>
+                )}
+
+                {search && (
+                    <button onClick={() => setSearch("")}>Clear
+                    </button>)}
 
                 <table>
                     <thead>
