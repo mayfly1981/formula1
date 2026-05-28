@@ -891,3 +891,117 @@ table {
         opacity: 1;
     }
 }
+
+//GLAVNA NAVIGACIJA MENU fanuchi
+
+/* GLAVNA NAVIGACIJA IZ APP.jsx */
+
+.app-sidebar-nav {
+    width: 240px;
+    min-height: 100vh;
+    background-color: #0b111a;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 20px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.app-sidebar-nav-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+
+/* LOGO */
+
+.app-sidebar-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-sidebar-logo img {
+    max-width: 160px;
+    height: auto;
+    display: block;
+}
+
+
+/* LINKOVI: DRIVERS, TEAMS, RACES */
+
+.app-sidebar-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+
+/* JEDAN NAV LINK */
+
+.app-nav-link {
+    width: 145px;
+    min-height: 95px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+    padding: 8px;
+
+    text-decoration: none;
+    color: white;
+
+    opacity: 0.75;
+    border-radius: 14px;
+    border: 1px solid transparent;
+
+    background-color: rgba(255, 255, 255, 0.04);
+
+    transition: 0.25s ease;
+}
+
+.app-nav-link img {
+    width: 75px;
+    height: 55px;
+    object-fit: contain;
+    display: block;
+}
+
+.app-nav-link span {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+}
+
+
+/* HOVER */
+
+.app-nav-link:hover {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.35);
+    transform: translateY(-2px);
+}
+
+
+
+/* AKTIVAN LINK */
+
+.app-nav-link.active {
+    opacity: 1;
+    background-color: rgba(220, 0, 0, 0.28);
+    border: 1px solid rgba(255, 0, 0, 0.9);
+    box-shadow: 0 0 18px rgba(255, 0, 0, 0.45);
+    transform: scale(1.04);
+}
+
+.app-nav-link.active span {
+    color: white;
+    font-weight: 800;
+}
