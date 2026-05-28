@@ -34,27 +34,41 @@ export default function App() {
     return <Loader />;
   }
 
-  const activeStyle = ({ isActive }) => ({
-  });
+  const activeClass = ({ isActive }) =>
+    isActive ? "app-nav-link active" : "app-nav-link";
 
   return (
     <BrowserRouter>
       <div className="main-container">
 
         {/*Navigacija*/}
-        <div className="navigations">
-          <nav>
+        <div className="app-sidebar-nav">
+          <nav className="app-sidebar-nav-inner">
 
             <SelectYear value={year} change={(e) => setYear(e.target.value)} />
 
-            <div className="home-page">
+            <div className="app-sidebar-logo">
               <Link to="/"><img src="/img/F1-logo.png" alt="Home picture" /></Link>
             </div>
 
-            <div className="just-li">
-              <NavLink to="/drivers" style={activeStyle} ><img src="/img/drivers-helmet.gif" alt="" width={180} /> <span>Drivers</span></NavLink>
-              <NavLink to="/teams" style={activeStyle} ><img src="/img/teams-1.gif" alt="" width={180} /> <span>Teams</span></NavLink>
-              <NavLink to="/races" style={activeStyle} ><img src="/img/flag-nascar.gif" alt="" width={180} /><span>Races</span></NavLink>
+            <div className="app-sidebar-links">
+              <NavLink to="/drivers" className={activeClass}>
+                <img src="/img/drivers-helmet.gif" alt="" />
+                <span>Drivers</span>
+              </NavLink>
+
+
+              <NavLink to="/teams" className={activeClass} >
+                <img src="/img/teams-1.gif"
+                  alt="" />
+                <span>Teams</span>
+              </NavLink>
+
+              <NavLink to="/races" className={activeClass} >
+                <img src="/img/flag-nascar.gif"
+                  alt="" />
+                <span>Races</span>
+              </NavLink>
             </div>
 
           </nav>
