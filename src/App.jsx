@@ -13,6 +13,7 @@ import Flag from 'react-flagkit';
 import SelectYear from "./components/SelectYear";
 import Error from "./components/Error";
 
+
 export default function App() {
   const [flags, setFlags] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
