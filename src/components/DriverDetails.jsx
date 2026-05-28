@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import Loader from "./Loader";
 import Flag from "react-flagkit";
 import { getCountryCodeByNationality } from "../helpers/getCountryCode";
@@ -17,15 +17,11 @@ export default function DriverDetails(props) {
     const [search, setSearch] = useState("");
 
     const params = useParams();
-
-    const handleClick = () => {
-        console.log("click");
-    }
+    const navigate = useNavigate();
 
     useEffect(() => {
         getDriverDetails();
     }, [props.year]);
-
 
     useEffect(() => {
 
@@ -43,35 +39,22 @@ export default function DriverDetails(props) {
 
     }, [driverRaces, search]);
 
-
     const getDriverDetails = async () => {
 
-        console.log("params", params);
         const urlDriverDetails = `https://api.jolpi.ca/ergast/f1/${props.year}/drivers/${params.id}/driverStandings.json`;
         const urlDriverRaces = `https://api.jolpi.ca/ergast/f1/${props.year}/drivers/${params.id}/results.json`;
-
 
         const driverDetailsResponse = await axios.get(urlDriverDetails);
         const driverDetailsRaces = await axios.get(urlDriverRaces);
 
-        console.log("driverDetailsRaces", driverDetailsRaces);
-
         setDriverDetails(driverDetailsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
         setDriverRaces(driverDetailsRaces.data.MRData.RaceTable.Races);
         setIsLoading(false);
-
     };
 
     if (isLoading) {
         return <Loader />;
     };
-
-
-
-
-    console.log("driver ", driverDetails);
-    console.log("driverDetails ", driverDetails);
-    console.log("driverRaces ", driverRaces);
 
     const driver = driverDetails;
 
@@ -84,11 +67,17 @@ export default function DriverDetails(props) {
         { text: `${driver.Driver.givenName} ${driver.Driver.familyName}`, route: "" }
     ];
 
+    const handleClickRaceDetails = (position) => {
+        navigate(`/raceDetails/${position}`);
+    };
+
+    const handleClickTeam = (constructorId) => {
+        navigate(`/teamDetails/${constructorId}`);
+    }
 
     return (
-        <>
+        <div>
 
-            {/* <div className="driver-details-page"> */}
             <div className="team-details-page">
                 <Breadcrumb items={breadcrumbsDriverDetails} />
 
@@ -106,31 +95,22 @@ export default function DriverDetails(props) {
                     <button onClick={() => setSearch("")}>Clear
                     </button>)}
 
-                {/* <div className="driver-card"> */}
                 <div className="team-card">
 
-                    {/* <div className="driver-card-header"> */}
                     <div className="team-card-header">
 
                         <div className="img-driver">
                             <img className="team-logo"
-                                src={`../../public/img/${driver.Driver.driverId}.png`}
+                                src={`/img/${driver.Driver.driverId}.png`}
                                 alt="Driver picture" />
-                            {/*img-drivers */}
 
-
-                            {/* <div className="driver-title-box"> */}\
                             <div className="team-title-box">
                                 <h3 className="team-title">
-                                    {/* driver-title"*/}
                                     {driver.Driver.givenName}{" "}
                                     {driver.Driver.familyName}
                                 </h3>
                             </div>
-                            {/* <div className="driver-info"> */}
                             <div className="team-info">
-
-                                {/* <div className="team-stats"> */}
                                 <p className="team-country-pill">
                                     <Flag
                                         className="flag"
@@ -139,9 +119,7 @@ export default function DriverDetails(props) {
                                             driver.Driver.nationality
                                         )}
                                         size={30} />
-                                    {/* <span> */}
                                     {driver.Driver.nationality}
-                                    {/* </span> */}
                                 </p>
                                 <p className="team-country-pill">
                                     <span>{driver.Constructors[0].name}</span>
@@ -154,7 +132,6 @@ export default function DriverDetails(props) {
                                     rel="noreferrer"
                                     className="team-history-link">Biography
                                 </a>
-                                {/* </div> */}
                             </div>
                         </div>
                     </div>
@@ -182,11 +159,11 @@ export default function DriverDetails(props) {
                                 {filteredRaces.map((driverRace) => {
                                     return (
                                         <tr
-                                            onClick={() =>
-                                                handleClick(
-                                                    driverRace.Results[0].Driver.driverId
-                                                )
-                                            }
+                                            // onClick={() =>
+                                            //     handleClick(
+                                            //         driverRace.Results[0].Driver.driverId
+                                            //     )
+                                            // }
                                             key={driverRace.round}
                                         >
 
@@ -204,11 +181,15 @@ export default function DriverDetails(props) {
                                                 </div>
                                             </td>
 
-                                            <td>
+                                            <td onClick={() =>
+                                                handleClickRaceDetails(
+                                                    driverRace.round
+                                                )
+                                            }>
                                                 {driverRace.raceName}
                                             </td>
 
-                                            <td>
+                                            <td onClick={() => handleClickTeam(result.Constructor.constructorId)}>
                                                 {driverRace.Results[0].Constructor.name}
                                             </td>
 
@@ -232,7 +213,7 @@ export default function DriverDetails(props) {
                 </div>
 
             </div>
-        </>
+        </div>
     );
 }
 
