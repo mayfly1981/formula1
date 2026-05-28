@@ -32,8 +32,6 @@ export default function RaceDetails(props) {
 
     const getRaceQualifiers = async () => {
         try {
-            setError(false);
-
             const urlRaceQualifiers = `https://api.jolpi.ca/ergast/f1/${props.year}/${params.id}/qualifying.json`;
             const urlRaceResults = `https://api.jolpi.ca/ergast/f1/${props.year}/${params.id}/results.json`;
 
@@ -41,16 +39,13 @@ export default function RaceDetails(props) {
             const raceResultsResponse = await axios.get(urlRaceResults);
 
             const qualifiers =
-                raceQualifiersResponse.data.MRData.RaceTable.Races[0] || null;
+                raceQualifiersResponse.data?.MRData?.RaceTable?.Races?.[0] || null;
             const results =
                 raceResultsResponse.data.MRData.RaceTable.Races[0]?.Results || [];
 
-            if (!qualifiers) {
-                setError(true);
-            } else {
-                setRaceQualifiers(qualifiers);
-                setRaceResults(results);
-            }
+            setRaceQualifiers(qualifiers);
+            setRaceResults(results);
+
         } catch (e) {
             setError(true);
         } finally {
