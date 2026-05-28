@@ -10,7 +10,6 @@ import getPositionColor from "../helpers/positionColors";
 
 
 export default function TeamDetails(props) {
-    // const [team, setTeam] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [standing, setStanding] = useState(null);
     const [races, setRaces] = useState([]);
@@ -19,7 +18,6 @@ export default function TeamDetails(props) {
 
     const { id } = useParams();
     const teamId = id;
-    // const year = 2013;
     const year = props.year || 2013;
 
     const team = races[0]?.Results?.[0]?.Constructor || null;
@@ -46,20 +44,13 @@ export default function TeamDetails(props) {
             try {
                 setIsLoading(true);
 
-                // const url = `https://api.jolpi.ca/ergast/f1/${props.year}/constructors/${teamId}/results.json`;
                 const url = `https://api.jolpi.ca/ergast/f1/${year}/constructors/${teamId}/results.json`;
 
-
                 const response = await axios.get(url);
-
-                // const standingResponse = await axios.get(
-                //     `https://api.jolpi.ca/ergast/f1/${props.year}/constructors/${teamId}/constructorStandings.json`
 
                 const standingResponse = await axios.get(
                     `https://api.jolpi.ca/ergast/f1/${year}/constructors/${teamId}/constructorStandings.json`
                 );
-                // const standingData = standingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0];
-                // setStanding(standingData);
 
                 const standingData =
                     standingResponse.data.MRData.StandingsTable.StandingsLists?.[0]
@@ -72,22 +63,11 @@ export default function TeamDetails(props) {
 
                 setRaces(raceList);
 
-                // if (raceList.length > 0) {
-                //     setTeam(raceList[0].Results[0].Constructor);
-                // } else {
-                //     setTeam(null);
-                // }
-
             } catch (error) {
-                console.log("Error fetching team data:", error);
 
                 setRaces([]);
                 setStanding(null);
 
-                // setTeam(null);
-                // } finally {
-                //     setIsLoading(false);
-                // ovo dodaj da se loader ugasi i ako dođe do greške
             } finally {
                 setTimeout(() => {
                     setIsLoading(false);
@@ -111,8 +91,6 @@ export default function TeamDetails(props) {
     if (!team) {
         return <p>No team data found</p>;
     }
-    console.log(team);
-
 
     const breadcrumbsTeamDetails = [
         { text: "Teams", route: "/teams" },
@@ -139,8 +117,6 @@ export default function TeamDetails(props) {
                 <button onClick={() => setSearch("")}>Clear
                 </button>)}
 
-
-
             <div className="team-details-content">
 
                 <div className="team-card">
@@ -154,11 +130,8 @@ export default function TeamDetails(props) {
                         <div className="team-title-box">
                             <h1 className="team-title">{team.name}</h1>
 
-
-
                         </div>
                     </div>
-
 
                     <div className="team-info">
 
