@@ -1,6 +1,4 @@
-
-
-export default function F1HamiltonLoader({ text = 'Deco volite li brzu voznju' }) {
+export default function Loader({ text = 'Deco volite li brzu voznju' }) {
     return (
         <div className="f1-gif-wrap">
             <img

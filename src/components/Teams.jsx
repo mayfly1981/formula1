@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react"
+import { getCountryCodeByNationality } from "../helpers/getCountryCode"
+import { useNavigate } from "react-router";
+import Breadcrumb from "./Breadcrumb";
 import Loader from "./Loader"
 import axios from "axios";
-import { useNavigate } from "react-router";
 import Flag from "react-flagkit";
-import { getCountryCodeByNationality } from "../helpers/getCountryCode"
-import Breadcrumb from "./Breadcrumb";
 import Error from "./Error";
-
 
 export default function Teams(props) {
 
@@ -19,7 +18,6 @@ export default function Teams(props) {
 
     useEffect(() => {
         getTeams();
-        console.log("useEffect");
     }, [props.year]);
 
     const getTeams = async () => {
@@ -42,81 +40,76 @@ export default function Teams(props) {
         }
     };
 
-
     useEffect(() => {
         const searchedTeams = teams.filter((team) =>
             team.Constructor.name.toLowerCase().includes(search.toLowerCase().trim().replace(/\s+/g, " ")));
         setFilteredTeams(searchedTeams);
     }, [teams, search]);
 
-
-
-
-
     const handleClick = (constructorId) => {
         console.log("handleClick ", constructorId);
         navigate(`/teamDetails/${constructorId}`);
     }
 
-
     if (isLoading) {
         return <Loader />;
     }
 
+    if (error) {
+        return <Error />;
+    }
+
     const breadcrumbsTeams = [
-
         { text: "Teams", route: "" }
-
     ];
 
-    console.log(teams)
+    console.log("teams ", teams);
 
     return (
-
         <div className="container-teams">
             <Breadcrumb items={breadcrumbsTeams} />
-            <h1>Constructors Champhionship</h1>
-
-            <input type="text"
+            <h1>Constructors Championship</h1>
+            <input
+                type="text"
                 placeholder="Search teams..."
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
-            />
+                onChange={(e) => setSearch(e.target.value)} />
 
-            {filteredTeams.length === 0 && (
-                <p>Team not found</p>
-            )
-            }
+            {filteredTeams.length === 0 && (<p>Team not found</p>)}
 
             <div className="table-teams">
                 <table>
                     <thead>
                         <tr>
-                            <th colSpan={6}>Constructors Champhionship Standings - {props.year}</th>
+                            <th colSpan={6}>Constructors Championship Standings - {props.year}
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         {filteredTeams.map((team) => {
                             return (
-                                <tr
-                                    key={team.Constructor.constructorId}>
-                                    <td style={{ textAlign: "left" }}>{team.position}</td>
+                                <tr key={team.Constructor.constructorId}>
+                                    <td >{team.position}</td>
                                     <td>
-                                        <Flag country={getCountryCodeByNationality(props.flags, team.Constructor.nationality)} size={20} />
+                                        <Flag
+                                            country={getCountryCodeByNationality(props.flags, team.Constructor.nationality)}
+                                            size={20} />
                                     </td>
-                                    <td onClick={() => handleClick(team.Constructor.constructorId)} style={{ textAlign: "left" }}>
+                                    <td onClick={() => handleClick(team.Constructor.constructorId)}>
                                         {team.Constructor.name}
                                     </td>
-                                    <td style={{ textAlign: "left" }}><a href={team.Constructor.url} target="_blank">Details</a></td>
-                                    <td style={{ textAlign: "left" }}>{team.points}</td>
+                                    <td>
+                                        <a href={team.Constructor.url} target="_blank">
+                                            Details
+                                        </a>
+                                    </td>
+                                    <td>{team.points}</td>
                                 </tr>
-                            )
+                            );
                         })}
                     </tbody>
                 </table>
             </div >
-
-
         </div >
     )
 }

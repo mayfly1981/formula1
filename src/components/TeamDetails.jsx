@@ -10,14 +10,17 @@ import getPositionColor from "../helpers/positionColors";
 
 
 export default function TeamDetails(props) {
-    const [team, setTeam] = useState(null);
+    // const [team, setTeam] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [standing, setStanding] = useState(null);
     const [races, setRaces] = useState([]);
 
     const { id } = useParams();
     const teamId = id;
-    const year = 2013;
+    // const year = 2013;
+    const year = props.year || 2013;
+
+    const team = races[0]?.Results?.[0]?.Constructor || null;
 
     useEffect(() => {
         if (!teamId) return;
@@ -26,31 +29,45 @@ export default function TeamDetails(props) {
             try {
                 setIsLoading(true);
 
-                const url = `https://api.jolpi.ca/ergast/f1/${props.year}/constructors/${teamId}/results.json`;
+                // const url = `https://api.jolpi.ca/ergast/f1/${props.year}/constructors/${teamId}/results.json`;
+                const url = `https://api.jolpi.ca/ergast/f1/${year}/constructors/${teamId}/results.json`;
 
 
                 const response = await axios.get(url);
 
+                // const standingResponse = await axios.get(
+                //     `https://api.jolpi.ca/ergast/f1/${props.year}/constructors/${teamId}/constructorStandings.json`
+
                 const standingResponse = await axios.get(
-                    `https://api.jolpi.ca/ergast/f1/${props.year}/constructors/${teamId}/constructorStandings.json`
+                    `https://api.jolpi.ca/ergast/f1/${year}/constructors/${teamId}/constructorStandings.json`
                 );
-                const standingData = standingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0];
+                // const standingData = standingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0];
+                // setStanding(standingData);
+
+                const standingData =
+                    standingResponse.data.MRData.StandingsTable.StandingsLists?.[0]
+                        ?.ConstructorStandings?.[0] || null;
                 setStanding(standingData);
 
+
                 const raceList =
-                    response.data.MRData.RaceTable.Races;
+                    response.data.MRData.RaceTable.Races || [];
 
                 setRaces(raceList);
 
-                if (raceList.length > 0) {
-                    setTeam(raceList[0].Results[0].Constructor);
-                } else {
-                    setTeam(null);
-                }
+                // if (raceList.length > 0) {
+                //     setTeam(raceList[0].Results[0].Constructor);
+                // } else {
+                //     setTeam(null);
+                // }
 
             } catch (error) {
                 console.log("Error fetching team data:", error);
-                setTeam(null);
+
+                setRaces([]);
+                setStanding(null);
+
+                // setTeam(null);
                 // } finally {
                 //     setIsLoading(false);
                 // ovo dodaj da se loader ugasi i ako dođe do greške
@@ -62,7 +79,8 @@ export default function TeamDetails(props) {
             }
         };
         getTeamDetails();
-    }, [teamId, props.year]);
+
+    }, [teamId, year]);
 
 
     if (!teamId) {
@@ -147,7 +165,7 @@ export default function TeamDetails(props) {
                 </div>
 
                 <div className="team-results-section">
-                    <h2 className="team-results-title">Formula 1 {props.year} Results</h2>
+                    <h2 className="team-results-title">Formula 1 {year} Results</h2>
 
                     <div className="results-table-wrapper">
                         <table className="results-table">
