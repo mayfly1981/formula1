@@ -12,7 +12,9 @@ import Home from "./Home";
 export default function DriverDetails(props) {
     const [driverDetails, setDriverDetails] = useState(null);
     const [driverRaces, setDriverRaces] = useState([]);
+    const [filteredRaces, setFilteredRaces] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [search, setSearch] = useState("");
 
     const params = useParams();
 
@@ -22,8 +24,25 @@ export default function DriverDetails(props) {
 
     useEffect(() => {
         getDriverDetails();
-        console.log("useEffect");
     }, [props.year]);
+
+
+    useEffect(() => {
+
+        const searchedRaces = driverRaces.filter((driverRace) =>
+            driverRace.raceName
+                .toLowerCase()
+                .includes(
+                    search.toLowerCase()
+                        .trim()
+                        .replace(/\s+/g, " ")
+                )
+        );
+
+        setFilteredRaces(searchedRaces);
+
+    }, [driverRaces, search]);
+
 
     const getDriverDetails = async () => {
 
@@ -46,16 +65,25 @@ export default function DriverDetails(props) {
     if (isLoading) {
         return <Loader />;
     };
+
+
+
+
     console.log("driver ", driverDetails);
     console.log("driverDetails ", driverDetails);
     console.log("driverRaces ", driverRaces);
 
     const driver = driverDetails;
 
+    const clearSearch = () => {
+        setSearch("");
+    };
+
     const breadcrumbsDriverDetails = [
         { text: "Drivers", route: "/drivers" },
         { text: `${driver.Driver.givenName} ${driver.Driver.familyName}`, route: "" }
     ];
+
 
     return (
         <>
@@ -63,6 +91,20 @@ export default function DriverDetails(props) {
             {/* <div className="driver-details-page"> */}
             <div className="team-details-page">
                 <Breadcrumb items={breadcrumbsDriverDetails} />
+
+                <input type="text"
+                    placeholder="Search races..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                />
+
+                {filteredRaces.length === 0 && (
+                    <p>Race not found</p>
+                )}
+
+                {search && (
+                    <button onClick={() => setSearch("")}>Clear
+                    </button>)}
 
                 {/* <div className="driver-card"> */}
                 <div className="team-card">
@@ -137,7 +179,7 @@ export default function DriverDetails(props) {
 
                             <tbody>
 
-                                {driverRaces.map((driverRace) => {
+                                {filteredRaces.map((driverRace) => {
                                     return (
                                         <tr
                                             onClick={() =>
