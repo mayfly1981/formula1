@@ -11,6 +11,8 @@ import axios from "axios";
 import Home from "./components/Home";
 import Flag from 'react-flagkit';
 import SelectYear from "./components/SelectYear";
+// importuj error i loader
+import Error from "./components/Error";
 
 export default function App() {
   const [flags, setFlags] = useState([]);
@@ -68,6 +70,9 @@ export default function App() {
             <Route path="/driverDetails/:id" element={<DriverDetails flags={flags} year={year} />} />
             <Route path="/teamDetails/:id" element={<TeamDetails flags={flags} year={year} />} />
             <Route path="/raceDetails/:id" element={<RaceDetails flags={flags} year={year} />} />
+
+            {/* dodaj error */}
+            <Route path="*" element={<Error />} />
           </Routes>
         </div>
       </div >

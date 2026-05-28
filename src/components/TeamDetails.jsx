@@ -51,8 +51,14 @@ export default function TeamDetails(props) {
             } catch (error) {
                 console.log("Error fetching team data:", error);
                 setTeam(null);
+                // } finally {
+                //     setIsLoading(false);
+                // ovo dodaj da se loader ugasi i ako dođe do greške
             } finally {
-                setIsLoading(false);
+                setTimeout(() => {
+                    setIsLoading(false);
+                }, 1500);
+
             }
         };
         getTeamDetails();
