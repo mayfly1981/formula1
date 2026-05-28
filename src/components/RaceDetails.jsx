@@ -12,8 +12,12 @@ import getPositionColor from "../helpers/positionColors";
 export default function RaceDetails(props) {
     const [raceQualifiers, setRaceQualifiers] = useState(null);
     const [raceResults, setRaceResults] = useState([]);
+    const [filteredQualifiers, setFilteredQualifiers] = useState([]);
+    const [filteredResults, setFilteredResults] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(false);
+    const [search, setSearch] = useState("");
+
     const params = useParams();
     const navigate = useNavigate();
 
@@ -49,7 +53,9 @@ export default function RaceDetails(props) {
                 setError(true);
             } else {
                 setRaceQualifiers(qualifiers);
+                setFilteredQualifiers(qualifiers.QualifyingResults);
                 setRaceResults(results);
+                setFilteredResults(results);
             }
         } catch (e) {
             setError(true);
@@ -71,6 +77,38 @@ export default function RaceDetails(props) {
         navigate(`/teamDetails/${constructorId}`);
     }
 
+    useEffect(() => {
+        const normalizedSearch = search
+            .toLowerCase()
+            .trim()
+            .replace(/\s+/g, " ");
+        const searchedResults = raceResults.filter((result) => {
+            const driverName =
+                result.Driver.familyName.toLowerCase();
+            const teamName =
+                result.Constructor.name.toLowerCase();
+            return (
+                driverName.includes(normalizedSearch) ||
+                teamName.includes(normalizedSearch)
+            );
+        });
+        const searchedQualifiers =
+            raceQualifiers?.QualifyingResults?.filter((qualifier) => {
+                const driverName =
+                    qualifier.Driver.familyName.toLowerCase();
+                const teamName =
+                    qualifier.Constructor.name.toLowerCase();
+                return (
+                    driverName.includes(normalizedSearch) ||
+                    teamName.includes(normalizedSearch)
+                );
+            }) || [];
+        setFilteredResults(searchedResults);
+        setFilteredQualifiers(searchedQualifiers);
+    }, [raceResults, raceQualifiers, search]);
+
+
+
     if (isLoading || !raceQualifiers) {
         return <Loader />
     };
@@ -87,6 +125,21 @@ export default function RaceDetails(props) {
     return (
         <div className="team-details-page">
             <Breadcrumb items={breadcrumbsRaceDetails} />
+
+            <input type="text"
+                placeholder="Search teams or drivers..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+            />
+
+            {filteredResults.length === 0 && (
+                <p>No results found</p>
+            )}
+
+            {search && (
+                <button onClick={() => setSearch("")}>Clear
+                </button>)}
+
             <div className="team-details-content">
                 <div className="team-card">
                     <div className="team-card-header">
@@ -141,8 +194,7 @@ export default function RaceDetails(props) {
                         </thead>
 
                         <tbody>
-                            {raceQualifiers?.QualifyingResults?.map((qualifier) => {
-
+                            {filteredQualifiers.map((qualifier) => {
                                 return (
                                     <tr key={qualifier.position}>
                                         <td>{qualifier.position}</td>
@@ -199,7 +251,7 @@ export default function RaceDetails(props) {
                             </thead>
 
                             <tbody>
-                                {raceResults.map((result) => {
+                                {filteredResults.map((result) => {
                                     return (
 
                                         <tr key={result.position}>
