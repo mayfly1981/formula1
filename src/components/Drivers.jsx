@@ -58,13 +58,11 @@ export default function Drivers(props) {
 
     if (error) {
         return <Error />
-    }
+    };
 
     const breadcrumbsDrivers = [
         { text: "Drivers", route: "" }
     ];
-
-    console.log("drivers ", drivers);
 
     return (
         <div className="container-drivers">
@@ -104,10 +102,10 @@ export default function Drivers(props) {
                                     <td>{driver.points}</td>
                                 </tr>
                             );
-                        })}
+                        })};
                     </tbody>
                 </table>
             </div>
         </div>
     );
-}
+};
