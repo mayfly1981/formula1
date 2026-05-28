@@ -115,8 +115,11 @@ export default function RaceDetails(props) {
             </div>
 
             <div className="team-results-section">
+
                 <h2 className="team-results-title">Qualifying Results {props.year}</h2>
+
                 <div className="results-table-wrapper">
+
                     <table className="results-table">
                         <colgroup>
                             <col className="col-round" />
