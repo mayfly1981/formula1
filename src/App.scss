@@ -1005,3 +1005,139 @@ table {
     color: white;
     font-weight: 800;
 }
+
+// TEAMS strana fanuchi
+.teams-page {
+    width: 100%;
+    padding: 28px 32px;
+}
+
+.teams-page h1 {
+    color: #b1101a;
+    font-size: 46px;
+    font-weight: 800;
+    margin: 38px 0 28px 0;
+    letter-spacing: 1px;
+}
+
+/* Search za sada, kasnije ga prebacujemo u breadcrumbs traku */
+.teams-page input {
+    width: 220px;
+    padding: 9px 14px;
+    margin-bottom: 26px;
+    border-radius: 10px;
+    border: 1px solid #2a323a;
+    background-color: #141b20;
+    color: #e6e6e6;
+    outline: none;
+    font-size: 14px;
+}
+
+.teams-page input::placeholder {
+    color: rgba(230, 230, 230, 0.55);
+}
+
+.teams-page input:focus {
+    border-color: #b1101a;
+}
+
+/* Poruka ako nema rezultata */
+.teams-page p {
+    color: #e6e6e6;
+    font-size: 20px;
+    margin: 20px 0;
+}
+
+/* Glavna tabela kao kartica */
+.table-teams {
+    width: 100%;
+    max-width: 1260px;
+    margin-top: 0;
+    background-color: #141b20;
+    border: 1px solid #2a323a;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Sama tabela */
+.table-teams table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #d9d9d9;
+    font-size: 20px;
+}
+
+/* Header tabele */
+.table-teams thead th {
+    padding: 16px 20px;
+    background-color: #172136;
+    color: #d9d9d9;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 800;
+}
+
+/* Redovi da budu kao na details strani */
+.table-teams tbody tr:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.table-teams tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.07);
+}
+
+.table-teams tbody tr:hover {
+    background-color: rgba(177, 16, 26, 0.18);
+}
+
+/* Ćelije */
+.table-teams td {
+    padding: 16px 20px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Prva kolona - position kao badge */
+.table-teams td:first-child {
+    font-weight: 800;
+}
+
+.table-teams td:first-child::before {
+    content: "";
+}
+
+/* Ime tima */
+.table-teams td:nth-child(3) {
+    text-align: left;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.table-teams td:nth-child(3):hover {
+    color: #e21b2d;
+}
+
+/* Details link kao dugme */
+.table-teams a {
+    padding: 8px 18px;
+    border-radius: 10px;
+    background-color: #080d12;
+    color: #e6e6e6;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.25s;
+}
+
+.table-teams a:hover {
+    background-color: #b1101a;
+    color: white;
+}
+
+/* Points kolona */
+.table-teams td:last-child {
+    font-weight: 700;
+}

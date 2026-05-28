@@ -7,23 +7,18 @@ import { getCountryCodeByNationality, getCountryCodeByShortName } from "../helpe
 import Breadcrumb from "./Breadcrumb";
 import getPositionColor from "../helpers/positionColors";
 
-
-
 export default function TeamDetails(props) {
     const [isLoading, setIsLoading] = useState(true);
     const [standing, setStanding] = useState(null);
     const [races, setRaces] = useState([]);
     const [filteredRaces, setFilteredRaces] = useState([]);
     const [search, setSearch] = useState("");
-
     const { id } = useParams();
     const teamId = id;
     const year = props.year || 2013;
-
     const team = races[0]?.Results?.[0]?.Constructor || null;
 
     useEffect(() => {
-
 
         const searchedRaces = races.filter((race) =>
             race.raceName
@@ -36,7 +31,6 @@ export default function TeamDetails(props) {
         );
         setFilteredRaces(searchedRaces);
     }, [races, search]);
-
 
     useEffect(() => {
         if (!teamId) return;
@@ -66,7 +60,6 @@ export default function TeamDetails(props) {
 
             } catch (error) {
 
-
                 setRaces([]);
                 setStanding(null);
 
@@ -75,22 +68,18 @@ export default function TeamDetails(props) {
                 setIsLoading(false);
             }
 
-
         };
 
         getTeamDetails();
 
     }, [teamId, year]);
 
-
     if (!teamId) {
         return <p>No team selected</p>;
     }
-
     if (isLoading) {
         return <Loader />;
     }
-
     if (!team) {
         return <p>No team data found</p>;
     }
@@ -99,7 +88,6 @@ export default function TeamDetails(props) {
         { text: "Teams", route: "/teams" },
         { text: `${team.name}`, route: "" }
     ];
-
 
     return (
 
@@ -111,17 +99,15 @@ export default function TeamDetails(props) {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
             />
-
             {filteredRaces.length === 0 && (
                 <p>Race not found</p>
-            )}
+            )};
 
             {search && (
                 <button onClick={() => setSearch("")}>Clear
                 </button>)}
 
             <div className="team-details-content">
-
                 <div className="team-card">
                     <div className="team-card-header">
                         <img
@@ -135,34 +121,28 @@ export default function TeamDetails(props) {
 
                         </div>
                     </div>
-
                     <div className="team-info">
-
                         <p className="team-country-pill">
                             <strong>Country:</strong>
                             <span className="team-country-name">
                                 {team.nationality}
                             </span>
-
                             <Flag
                                 country={getCountryCodeByNationality
                                     (props.flags, team.nationality)}
                                 size={20}
                             />
                         </p>
-
                         <div className="team-stats">
                             <p className="team-stat">
                                 <span className="team-stat-label">Position</span>
                                 <span className="team-stat-value">{standing?.position}</span>
                             </p>
-
                             <p className="team-stat">
                                 <span className="team-stat-label">Points</span>
                                 <span className="team-stat-value">{standing?.points}</span>
                             </p>
                         </div>
-
                         <a
                             href={team.url}
                             target="_blank"
@@ -173,7 +153,6 @@ export default function TeamDetails(props) {
                         </a>
                     </div>
                 </div>
-
                 <div className="team-results-section">
                     <h2 className="team-results-title">Formula 1 {year} Results</h2>
 
@@ -195,7 +174,6 @@ export default function TeamDetails(props) {
                                     <th>Points</th>
                                 </tr>
                             </thead>
-
                             <tbody>
                                 {filteredRaces.map((race) => {
                                     const driver1 = race.Results?.[0];
@@ -204,7 +182,6 @@ export default function TeamDetails(props) {
                                     return (
                                         <tr key={race.round}>
                                             <td>{race.round}</td>
-
                                             <td>
                                                 <div className="flag-text">
                                                     <Flag
@@ -217,22 +194,17 @@ export default function TeamDetails(props) {
                                                     <span>{race.raceName}</span>
                                                 </div>
                                             </td>
-
                                             <td className="position-cell">
                                                 <span className="position-badge" style={{ backgroundColor: getPositionColor(driver1?.position, 10) }}>
                                                     {driver1?.position}
                                                 </span>
                                             </td>
-
-
                                             <td className="position-cell">
                                                 <span className="position-badge"
                                                     style={{ backgroundColor: getPositionColor(driver2?.position, 10) }}>
                                                     {driver2?.position}
                                                 </span>
                                             </td>
-
-
                                             <td>
                                                 {Number(driver1?.points || 0) + Number(driver2?.points || 0)}
                                             </td>
@@ -244,7 +216,6 @@ export default function TeamDetails(props) {
                     </div>
                 </div>
             </div>
-
         </div >
     );
 }
