@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
-import Loader from "./Loader";
-import axios from "axios";
-import { useNavigate } from "react-router";
-import Flag from "react-flagkit";
-import { getCountryCodeByShortName } from "../helpers/getCountryCode";
 import { getCountryCodeByNationality } from "../helpers/getCountryCode";
+import { getCountryCodeByShortName } from "../helpers/getCountryCode";
+import { useNavigate } from "react-router";
 import Breadcrumb from "./Breadcrumb";
+import Loader from "./Loader";
+import Flag from "react-flagkit";
+import axios from "axios";
+import Error from "./Error";
 
 export default function Races(props) {
+
     const [races, setRaces] = useState([])
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
@@ -15,54 +17,21 @@ export default function Races(props) {
     const [filteredRaces, setFilteredRaces] = useState([]);
     const navigate = useNavigate();
 
-
     useEffect(() => {
         console.log("useEffect");
         getRaces();
     }, [props.year]);
-
 
     const getRaces = async () => {
         try {
             setError(false);
             const url = `https://api.jolpi.ca/ergast/f1/${props.year}/results/1.json`;
             const response = await axios.get(url);
-            const standings = response.data.MRData.RaceTable.Races || [];
-            if (standings.length === 0) {
+            const races = response.data.MRData.RaceTable.Races || [];
+            if (races.length === 0) {
                 setError(true);
             } else {
-                setRaces(standings);
-            }
-        } catch (e) {
-            setError(true);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    // const getRaces = async () => {
-    //     const url = `https://api.jolpi.ca/ergast/f1/${props.year}/results/1.json`;
-    //     const response = await axios.get(url);
-    //     console.log(response.data.MRData.RaceTable.Races);
-    //     setRaces(response.data.MRData.RaceTable.Races);
-    //     setLoading(false);
-    //     console.log("getRaces");
-    // };
-
-
-
-    const getDrivers = async () => {
-        try {
-            setError(false);
-            const url = `https://api.jolpi.ca/ergast/f1/${props.year}/driverStandings.json`;
-            const response = await axios.get(url);
-            const standings =
-                response.data.MRData.StandingsTable.StandingsLists[0]
-                    ?.DriverStandings || [];
-            if (standings.length === 0) {
-                setError(true);
-            } else {
-                setDrivers(standings);
+                setRaces(races);
             }
         } catch (e) {
             setError(true);
@@ -77,10 +46,7 @@ export default function Races(props) {
         setFilteredRaces(searchedRaces);
     }, [races, search]);
 
-
     const handleClick = (position) => {
-        //key moze biti i "round"
-        console.log("handleClick", position);
         navigate(`/raceDetails/${position}`);
     };
 
@@ -91,14 +57,13 @@ export default function Races(props) {
     if (loading) {
         return <Loader />
     };
+
     if (error) {
         return <Error />
     }
 
     const breadcrumbsRaces = [
-
         { text: "Races", route: "" }
-
     ];
 
     console.log("races", races);
@@ -107,22 +72,19 @@ export default function Races(props) {
         <div className="container-races">
             <Breadcrumb items={breadcrumbsRaces} />
             <h1>Races calendar</h1>
-
             <input type="text"
                 placeholder="Search races..."
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
-            />
+                onChange={(e) => setSearch(e.target.value)} />
 
-            {filteredRaces.length === 0 && (
-                <p>Race not found</p>
-            )
-            }
+            {filteredRaces.length === 0 && (<p>Race not found</p>)}
 
             <div className="table-races">
                 <table >
                     <thead>
-                        <tr><th colSpan={7}>Races calendar - {props.year}</th></tr>
+                        <tr>
+                            <th colSpan={7}>Races calendar - {props.year}</th>
+                        </tr>
                         <tr>
                             <th>Round</th>
                             <th colSpan={2}>Grand Prix</th>
@@ -131,7 +93,6 @@ export default function Races(props) {
                             <th colSpan={2}>Winner</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         {filteredRaces.map((race) => {
                             const driver = race.Results[0].Driver;
@@ -139,26 +100,25 @@ export default function Races(props) {
                                 <tr key={race.round}>
                                     <td> {race.round}</td>
                                     <td>
-                                        <Flag country={getCountryCodeByShortName(props.flags, race.Circuit.Location.country)} size={20} />
-
+                                        <Flag
+                                            country={getCountryCodeByShortName(props.flags, race.Circuit.Location.country)} size={20} />
                                     </td>
-                                    <td onClick={() => handleClick(race.round)}>{race.raceName}</td>
+                                    <td onClick={() => handleClick(race.round)}>{race.raceName}
+                                    </td>
                                     <td>{race.Circuit.circuitName}</td>
                                     <td>{race.date}</td>
                                     <td>
                                         <Flag country={getCountryCodeByNationality(props.flags, race.Results[0].Driver.nationality)} size={20} />
-
                                     </td>
                                     <td onClick={() => handleClickDriver(driver.driverId)}>
-                                        {driver.familyName}</td>
+                                        {driver.familyName}
+                                    </td>
                                 </tr>
                             );
                         })}
                     </tbody>
-
                 </table>
             </div>
         </div>
-
     );
 }
