@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import Loader from "./Loader";
-import { useNavigate, } from "react-router";
-import Flag from "react-flagkit";
 import { getCountryCodeByNationality } from "../helpers/getCountryCode";
+import { useNavigate, } from "react-router";
 import Breadcrumb from "./Breadcrumb";
-import HomeIcon from '@mui/icons-material/Home';
+import Loader from "./Loader";
+import axios from "axios";
+import Flag from "react-flagkit";
 import Error from "./Error";
+import HomeIcon from '@mui/icons-material/Home';
 
 export default function Drivers(props) {
 
@@ -19,22 +19,20 @@ export default function Drivers(props) {
 
     useEffect(() => {
         getDrivers();
-        console.log("useEffect");
     }, [props.year]);
-
 
     const getDrivers = async () => {
         try {
             setError(false);
             const url = `https://api.jolpi.ca/ergast/f1/${props.year}/driverStandings.json`;
             const response = await axios.get(url);
-            const standings =
+            const drivers =
                 response.data.MRData.StandingsTable.StandingsLists[0]
                     ?.DriverStandings || [];
-            if (standings.length === 0) {
+            if (drivers.length === 0) {
                 setError(true);
             } else {
-                setDrivers(standings);
+                setDrivers(drivers);
             }
         } catch (e) {
             setError(true);
@@ -43,14 +41,12 @@ export default function Drivers(props) {
         }
     };
 
-
     useEffect(() => {
         const searchedDrivers = drivers.filter((driver) =>
             `${driver.Driver.givenName}`.toLowerCase().includes(search.toLowerCase().trim().replace(/\s+/g, " ")) ||
             `${driver.Driver.familyName}`.toLowerCase().includes(search.toLowerCase().trim().replace(/\s+/g, " ")))
         setFilteredDrivers(searchedDrivers);
     }, [drivers, search]);
-
 
     const handleClick = (driverId) => {
         navigate(`/driverDetails/${driverId}`);
@@ -67,6 +63,7 @@ export default function Drivers(props) {
     if (error) {
         return <Error />
     }
+
     const breadcrumbsDrivers = [
         { text: "Drivers", route: "" }
     ];
@@ -75,50 +72,48 @@ export default function Drivers(props) {
 
     return (
         <div className="container-drivers">
-
             <div className="table-drivers">
-
                 <Breadcrumb items={breadcrumbsDrivers} />
                 <h1 className="title">Drivers Championship</h1>
-                <input type="text"
+                <input
+                    type="text"
                     placeholder="Search drivers..."
                     value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                />
+                    onChange={(e) => setSearch(e.target.value)} />
 
-                {filteredDrivers.length === 0 && (
-                    <p>Driver not found</p>
-                )
-                }
+                {filteredDrivers.length === 0 && (<p>Driver not found</p>)}
 
                 <table>
                     <thead>
                         <tr>
-                            <th colSpan={5}>Drivers Championship Standings - {props.year}</th>
+                            <th colSpan={5}>Drivers Championship Standings - {props.year}
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         {filteredDrivers.map((driver) => {
                             return (
-                                <tr
-                                    className="driver-details"
+                                <tr className="driver-details"
                                     key={driver.Driver.driverId}>
                                     <td>{driver.position}</td>
                                     <td >
-                                        <Flag country={getCountryCodeByNationality(props.flags, driver.Driver.nationality)} size={20} />
+                                        <Flag
+                                            country={getCountryCodeByNationality(props.flags, driver.Driver.nationality)}
+                                            size={20} />
                                     </td>
-                                    <td onClick={() => handleClick(driver.Driver.driverId)}>{driver.Driver.givenName} {driver.Driver.familyName}</td>
-
-                                    <td onClick={() => handleClickTeam(driver.Constructors[0].constructorId)}>{driver.Constructors[0].name}</td>
+                                    <td onClick={() => handleClick(driver.Driver.driverId)}>
+                                        {driver.Driver.givenName} {driver.Driver.familyName}
+                                    </td>
+                                    <td onClick={() => handleClickTeam(driver.Constructors[0].constructorId)}>
+                                        {driver.Constructors[0].name}
+                                    </td>
                                     <td>{driver.points}</td>
                                 </tr>
                             );
                         })}
                     </tbody>
                 </table>
-
-
             </div>
         </div>
-    )
+    );
 }
