@@ -52,9 +52,9 @@ export default function App() {
             </div>
 
             <div className="just-li">
-              <NavLink to="/drivers" style={activeStyle} ><img src="/img/Kaciga.png" alt="" width={180} /> <span>Drivers</span></NavLink>
-              <NavLink to="/teams" style={activeStyle} ><img src="/img/Teams.png" alt="" width={180} /> <span>Teams</span></NavLink>
-              <NavLink to="/races" style={activeStyle} ><img src="/img/Races1.png" alt="" width={180} /><span>Races</span></NavLink>
+              <NavLink to="/drivers" style={activeStyle} ><img src="/img/drivers-helmet.gif" alt="" width={180} /> <span>Drivers</span></NavLink>
+              <NavLink to="/teams" style={activeStyle} ><img src="/img/teams-1.gif" alt="" width={180} /> <span>Teams</span></NavLink>
+              <NavLink to="/races" style={activeStyle} ><img src="/img/flag-nascar.gif" alt="" width={180} /><span>Races</span></NavLink>
             </div>
 
           </nav>
