@@ -159,11 +159,6 @@ export default function DriverDetails(props) {
                                 {filteredRaces.map((driverRace) => {
                                     return (
                                         <tr
-                                            // onClick={() =>
-                                            //     handleClick(
-                                            //         driverRace.Results[0].Driver.driverId
-                                            //     )
-                                            // }
                                             key={driverRace.round}
                                         >
 
@@ -189,7 +184,7 @@ export default function DriverDetails(props) {
                                                 {driverRace.raceName}
                                             </td>
 
-                                            <td onClick={() => handleClickTeam(result.Constructor.constructorId)}>
+                                            <td onClick={() => handleClickTeam(driverRace.Results[0].Constructor.constructorId)}>
                                                 {driverRace.Results[0].Constructor.name}
                                             </td>
 
