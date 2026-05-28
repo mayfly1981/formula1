@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import Loader from "./Loader";
 import Flag from "react-flagkit";
 import { getCountryCodeByNationality, getCountryCodeByShortName } from "../helpers/getCountryCode";
@@ -14,6 +14,7 @@ export default function TeamDetails(props) {
     const [filteredRaces, setFilteredRaces] = useState([]);
     const [search, setSearch] = useState("");
     const { id } = useParams();
+    const navigate = useNavigate();
     const teamId = id;
     const year = props.year || 2013;
     const team = races[0]?.Results?.[0]?.Constructor || null;
@@ -88,6 +89,10 @@ export default function TeamDetails(props) {
         { text: "Teams", route: "/teams" },
         { text: `${team.name}`, route: "" }
     ];
+
+    const handleClickRaceDetails = (position) => {
+        navigate(`/raceDetails/${position}`);
+    };
 
     return (
 
@@ -180,7 +185,8 @@ export default function TeamDetails(props) {
                                     const driver2 = race.Results?.[1];
 
                                     return (
-                                        <tr key={race.round}>
+                                        <tr key={race.round}
+                                            onClick={() => handleClickRaceDetails(race.round)}>
                                             <td>{race.round}</td>
                                             <td>
                                                 <div className="flag-text">
