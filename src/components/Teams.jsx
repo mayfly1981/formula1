@@ -25,14 +25,13 @@ export default function Teams(props) {
             setError(false);
             const url = `https://api.jolpi.ca/ergast/f1/${props.year}/constructorStandings.json`;
             const response = await axios.get(url);
-            const standings =
-                response.data.MRData.StandingsTable.StandingsLists[0]
-                    ?.ConstructorStandings || [];
-            if (standings.length === 0) {
-                setError(true);
-            } else {
-                setTeams(standings);
-            }
+
+            const standingsList = response.data?.MRData?.StandingsTable?.StandingsLists;
+            const teams = (standingsList && standingsList.length > 0)
+                ? standingsList[0].ConstructorStandings
+                : [];
+
+            setTeams(teams)
         } catch (e) {
             setError(true);
         } finally {
