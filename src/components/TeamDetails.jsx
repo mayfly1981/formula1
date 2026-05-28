@@ -14,6 +14,8 @@ export default function TeamDetails(props) {
     const [isLoading, setIsLoading] = useState(true);
     const [standing, setStanding] = useState(null);
     const [races, setRaces] = useState([]);
+    const [filteredRaces, setFilteredRaces] = useState([]);
+    const [search, setSearch] = useState("");
 
     const { id } = useParams();
     const teamId = id;
@@ -21,6 +23,21 @@ export default function TeamDetails(props) {
     const year = props.year || 2013;
 
     const team = races[0]?.Results?.[0]?.Constructor || null;
+
+    useEffect(() => {
+
+        const searchedRaces = races.filter((race) =>
+            race.raceName
+                .toLowerCase()
+                .includes(
+                    search.toLowerCase()
+                        .trim()
+                        .replace(/\s+/g, " ")
+                )
+        );
+        setFilteredRaces(searchedRaces);
+    }, [races, search]);
+
 
     useEffect(() => {
         if (!teamId) return;
@@ -107,6 +124,23 @@ export default function TeamDetails(props) {
 
         <div className="team-details-page">
             <Breadcrumb items={breadcrumbsTeamDetails} />
+
+            <input type="text"
+                placeholder="Search races..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+            />
+
+            {filteredRaces.length === 0 && (
+                <p>Race not found</p>
+            )}
+
+            {search && (
+                <button onClick={() => setSearch("")}>Clear
+                </button>)}
+
+
+
             <div className="team-details-content">
 
                 <div className="team-card">
@@ -187,7 +221,7 @@ export default function TeamDetails(props) {
                             </thead>
 
                             <tbody>
-                                {races.map((race) => {
+                                {filteredRaces.map((race) => {
                                     const driver1 = race.Results?.[0];
                                     const driver2 = race.Results?.[1];
 
