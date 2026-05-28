@@ -1,7 +1,13 @@
 export default function Error() {
     return (
         <div className="error-container">
-            <h1>Nije ucestvovao u trci xD</h1>
+            <div className="error-gif-wrapper">
+                <img src="../public/img/error.gif" alt="error" className="error-gif" />
+                <div className="error-text-overlay">
+                    <h1 className="error-code">404</h1>
+                    <p className="error-message">Verstappen je tužan jer ova stranica ne postoji.</p>
+                </div>
+            </div>
         </div>
     );
 }
