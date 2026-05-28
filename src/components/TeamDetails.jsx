@@ -24,6 +24,7 @@ export default function TeamDetails(props) {
 
     useEffect(() => {
 
+
         const searchedRaces = races.filter((race) =>
             race.raceName
                 .toLowerCase()
@@ -65,16 +66,18 @@ export default function TeamDetails(props) {
 
             } catch (error) {
 
+
                 setRaces([]);
                 setStanding(null);
 
             } finally {
-                setTimeout(() => {
-                    setIsLoading(false);
-                }, 1500);
 
+                setIsLoading(false);
             }
+
+
         };
+
         getTeamDetails();
 
     }, [teamId, year]);

@@ -28,11 +28,7 @@ export default function Races(props) {
             const url = `https://api.jolpi.ca/ergast/f1/${props.year}/results/1.json`;
             const response = await axios.get(url);
             const races = response.data.MRData.RaceTable.Races || [];
-            if (races.length === 0) {
-                setError(true);
-            } else {
-                setRaces(races);
-            }
+            setRaces(races);
         } catch (e) {
             setError(true);
         } finally {
