@@ -1,11 +1,12 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import Loader from "./Loader";
-import Flag from "react-flagkit";
 import { getCountryCodeByNationality, getCountryCodeByShortName } from "../helpers/getCountryCode";
 import Breadcrumb from "./Breadcrumb";
+import Loader from "./Loader";
+import Flag from "react-flagkit";
+import axios from "axios";
 import getPositionColor from "../helpers/positionColors";
+import Error from "./Error";
 
 export default function TeamDetails(props) {
     const [isLoading, setIsLoading] = useState(true);
@@ -13,6 +14,8 @@ export default function TeamDetails(props) {
     const [races, setRaces] = useState([]);
     const [filteredRaces, setFilteredRaces] = useState([]);
     const [search, setSearch] = useState("");
+    const [error, setError] = useState(false);
+
     const { id } = useParams();
     const teamId = id;
     const year = props.year || 2013;
@@ -29,16 +32,17 @@ export default function TeamDetails(props) {
                         .replace(/\s+/g, " ")
                 )
         );
+
         setFilteredRaces(searchedRaces);
+
     }, [races, search]);
 
     useEffect(() => {
+
         if (!teamId) return;
 
         const getTeamDetails = async () => {
             try {
-                setIsLoading(true);
-
                 const url = `https://api.jolpi.ca/ergast/f1/${year}/constructors/${teamId}/results.json`;
 
                 const response = await axios.get(url);
@@ -52,19 +56,17 @@ export default function TeamDetails(props) {
                         ?.ConstructorStandings?.[0] || null;
                 setStanding(standingData);
 
-
                 const raceList =
                     response.data.MRData.RaceTable.Races || [];
 
                 setRaces(raceList);
-
             } catch (error) {
 
+                setError(true);
                 setRaces([]);
                 setStanding(null);
 
             } finally {
-
                 setIsLoading(false);
             }
 
@@ -82,6 +84,9 @@ export default function TeamDetails(props) {
     }
     if (!team) {
         return <p>No team data found</p>;
+    }
+    if (error) {
+        return <Error />
     }
 
     const breadcrumbsTeamDetails = [
