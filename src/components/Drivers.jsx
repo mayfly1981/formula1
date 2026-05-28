@@ -29,11 +29,7 @@ export default function Drivers(props) {
             const drivers =
                 response.data.MRData.StandingsTable.StandingsLists[0]
                     ?.DriverStandings || [];
-            if (drivers.length === 0) {
-                setError(true);
-            } else {
-                setDrivers(drivers);
-            }
+            setDrivers(drivers);
         } catch (e) {
             setError(true);
         } finally {
@@ -101,11 +97,9 @@ export default function Drivers(props) {
                                             country={getCountryCodeByNationality(props.flags, driver.Driver.nationality)}
                                             size={20} />
                                     </td>
-                                    <td onClick={() => handleClick(driver.Driver.driverId)}>
-                                        {driver.Driver.givenName} {driver.Driver.familyName}
+                                    <td onClick={() => handleClick(driver.Driver.driverId)}>{driver.Driver.givenName} {driver.Driver.familyName}
                                     </td>
-                                    <td onClick={() => handleClickTeam(driver.Constructors[0].constructorId)}>
-                                        {driver.Constructors[0].name}
+                                    <td onClick={() => handleClickTeam(driver.Constructors[0].constructorId)}>{driver.Constructors[0].name}
                                     </td>
                                     <td>{driver.points}</td>
                                 </tr>
