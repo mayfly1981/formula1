@@ -75,8 +75,11 @@ export default function Races(props) {
             />
             <h1>Races calendar</h1>
 
-
             {filteredRaces.length === 0 && (<p>Race not found</p>)}
+
+            {search && (
+                <button onClick={() => setSearch("")}>Clear
+                </button>)}
 
             <div className="table-races">
                 <table >
