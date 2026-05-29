@@ -55,7 +55,7 @@ export default function App() {
                 <span>Teams</span>
               </NavLink>
               <NavLink to="/races" className={activeClass} >
-                <img src="/img/flag-nascar.gif"
+                <img src="/img/race-flag-18.gif"
                   alt="" />
                 <span>Races</span>
               </NavLink>
