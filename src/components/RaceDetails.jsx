@@ -117,22 +117,25 @@ export default function RaceDetails(props) {
         <div className="team-details-page">
             <Breadcrumb
                 items={breadcrumbsRaceDetails}
+                search={search}
+                onSearch={setSearch}
+                placeholder="Search teams or drivers..."
                 year={props.year}
                 onYearChange={props.setYear}
             />
-            <input type="text"
-                placeholder="Search teams or drivers..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-            />
 
-            {filteredResults.length === 0 && (
-                <p>No results found</p>
-            )}
 
-            {search && (
-                <button onClick={() => setSearch("")}>Clear
-                </button>)}
+            {
+                filteredResults.length === 0 && (
+                    <p>No results found</p>
+                )
+            }
+
+            {
+                search && (
+                    <button onClick={() => setSearch("")}>Clear
+                    </button>)
+            }
 
             <div className="team-details-content">
                 <div className="team-card">
@@ -164,71 +167,14 @@ export default function RaceDetails(props) {
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div className="team-results-section">
 
-                <h2 className="team-results-title">Qualifying Results {props.year}</h2>
+                <div className="team-results-section">
 
-                <div className="results-table-wrapper">
+                    <h2 className="team-results-title">Qualifying Results {props.year}</h2>
 
-                    <table className="results-table">
-                        <colgroup>
-                            <col className="col-round" />
-                            <col className="col-grand-prix" />
-                            <col className="col-driver" />
-                            <col className="col-driver" />
-                            <col className="col-points" />
-                        </colgroup>
+                    <div className="results-table-wrapper">
 
-                        <thead>
-                            <tr>
-                                <th>Pos</th>
-                                <th colSpan={2}>Driver</th>
-                                <th>Team</th>
-                                <th>Best Time</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            {filteredQualifiers.map((qualifier) => {
-
-                                return (
-                                    <tr key={qualifier.position}>
-                                        <td>{qualifier.position}</td>
-                                        <td>
-                                            <div className="flag-text">
-
-                                                <Flag
-                                                    country={getCountryCodeByNationality(
-                                                        props.flags,
-                                                        qualifier.Driver.nationality)}
-                                                    size={20} />
-                                            </div>
-                                        </td>
-                                        <td
-                                            onClick={() => handleClickDriver(qualifier.Driver.driverId)}>
-                                            <span >
-                                                {qualifier.Driver.familyName}
-                                            </span>
-                                        </td>
-                                        <td
-                                            onClick={() => handleClickTeam(qualifier.Constructor.constructorId)}>
-                                            <span>
-                                                {qualifier.Constructor.name}
-                                            </span>
-                                        </td>
-                                        <td>{getBestTime(qualifier)}</td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
-                </div>
-
-                <div className="results-table-wrapper">
-                    <div className="race-results">
-                        <h3>Races Results</h3>
                         <table className="results-table">
                             <colgroup>
                                 <col className="col-round" />
@@ -243,55 +189,115 @@ export default function RaceDetails(props) {
                                     <th>Pos</th>
                                     <th colSpan={2}>Driver</th>
                                     <th>Team</th>
-                                    <th>Result</th>
-                                    <th>Points</th>
+                                    <th>Best Time</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                {filteredResults.map((result) => {
+                                {filteredQualifiers.map((qualifier) => {
+
                                     return (
-
-                                        <tr key={result.position}>
-
-                                            <td>{result.position}</td>
-
+                                        <tr key={qualifier.position}>
+                                            <td>{qualifier.position}</td>
                                             <td>
                                                 <div className="flag-text">
-                                                    <Flag country={getCountryCodeByNationality(
-                                                        props.flags,
-                                                        result.Driver.nationality)}
+
+                                                    <Flag
+                                                        country={getCountryCodeByNationality(
+                                                            props.flags,
+                                                            qualifier.Driver.nationality)}
                                                         size={20} />
                                                 </div>
                                             </td>
-
                                             <td
-                                                onClick={() => handleClickDriver(result.Driver.driverId)} >
-                                                <span>
-                                                    {result.Driver.familyName}
+                                                onClick={() => handleClickDriver(qualifier.Driver.driverId)}>
+                                                <span >
+                                                    {qualifier.Driver.familyName}
                                                 </span>
                                             </td>
-
-                                            <td onClick={() => handleClickTeam(result.Constructor.constructorId)}>
-                                                {result.Constructor.name}
+                                            <td
+                                                onClick={() => handleClickTeam(qualifier.Constructor.constructorId)}>
+                                                <span>
+                                                    {qualifier.Constructor.name}
+                                                </span>
                                             </td>
-
-                                            <td>{getRaceTime(result)}</td>
-
-                                            <td className="position-cell">
-                                                <span className="position-badge"
-                                                    style={{
-                                                        backgroundColor: getPositionColor(result.points, 25)
-                                                    }}>{result.points}</span>
-                                            </td>
+                                            <td>{getBestTime(qualifier)}</td>
                                         </tr>
                                     );
                                 })}
                             </tbody>
                         </table>
                     </div>
+
+                    <div className="results-table-wrapper">
+                        <div className="race-results">
+                            <h2 className="team-results-title">
+                                Race Results {props.year}
+                            </h2>
+                            <table className="results-table">
+                                <colgroup>
+                                    <col className="col-round" />
+                                    <col className="col-grand-prix" />
+                                    <col className="col-driver" />
+                                    <col className="col-driver" />
+                                    <col className="col-points" />
+                                </colgroup>
+
+                                <thead>
+                                    <tr>
+                                        <th>Pos</th>
+                                        <th colSpan={2}>Driver</th>
+                                        <th>Team</th>
+                                        <th>Result</th>
+                                        <th>Points</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {filteredResults.map((result) => {
+                                        return (
+
+                                            <tr key={result.position}>
+
+                                                <td>{result.position}</td>
+
+                                                <td>
+                                                    <div className="flag-text">
+                                                        <Flag country={getCountryCodeByNationality(
+                                                            props.flags,
+                                                            result.Driver.nationality)}
+                                                            size={20} />
+                                                    </div>
+                                                </td>
+
+                                                <td
+                                                    onClick={() => handleClickDriver(result.Driver.driverId)} >
+                                                    <span>
+                                                        {result.Driver.familyName}
+                                                    </span>
+                                                </td>
+
+                                                <td onClick={() => handleClickTeam(result.Constructor.constructorId)}>
+                                                    {result.Constructor.name}
+                                                </td>
+
+                                                <td>{getRaceTime(result)}</td>
+
+                                                <td className="position-cell">
+                                                    <span className="position-badge"
+                                                        style={{
+                                                            backgroundColor: getPositionColor(result.points, 25)
+                                                        }}>{result.points}</span>
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </div >
         </div >
     );
 }
