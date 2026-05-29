@@ -1334,3 +1334,17 @@ table {
         font-size: 18px;
     }
 }
+
+.img-driver {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.team-title-box {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 24px;
+}
