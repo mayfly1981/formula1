@@ -63,8 +63,9 @@ export default function Drivers(props) {
     ];
 
     return (
-        <div className="container-drivers">
-            <div className="table-drivers">
+        <div className="container-races">
+            <div >
+
                 <Breadcrumb
                     items={breadcrumbsDrivers}
                     search={search}
@@ -81,35 +82,36 @@ export default function Drivers(props) {
                 )}
 
 
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th colSpan={5}>Drivers Championship Standings - {props.year}
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filteredDrivers.map((driver) => {
-                            return (
-                                <tr className="driver-details"
-                                    key={driver.Driver.driverId}>
-                                    <td>{driver.position}</td>
-                                    <td >
-                                        <Flag
-                                            country={getCountryCodeByNationality(props.flags, driver.Driver.nationality)}
-                                            size={20} />
-                                    </td>
-                                    <td onClick={() => handleClick(driver.Driver.driverId)}>{driver.Driver.givenName} {driver.Driver.familyName}
-                                    </td>
-                                    <td onClick={() => handleClickTeam(driver.Constructors[0].constructorId)}>{driver.Constructors[0].name}
-                                    </td>
-                                    <td>{driver.points}</td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
+                <div className="table-races">
+                    <table >
+                        <thead>
+                            <tr>
+                                <th colSpan={5}>Drivers Championship Standings - {props.year}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filteredDrivers.map((driver) => {
+                                return (
+                                    <tr className="driver-details"
+                                        key={driver.Driver.driverId}>
+                                        <td>{driver.position}</td>
+                                        <td >
+                                            <Flag
+                                                country={getCountryCodeByNationality(props.flags, driver.Driver.nationality)}
+                                                size={20} />
+                                        </td>
+                                        <td onClick={() => handleClick(driver.Driver.driverId)}>{driver.Driver.givenName} {driver.Driver.familyName}
+                                        </td>
+                                        <td onClick={() => handleClickTeam(driver.Constructors[0].constructorId)}>{driver.Constructors[0].name}
+                                        </td>
+                                        <td>{driver.points}</td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     );
