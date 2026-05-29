@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { useParams, useNavigate } from "react-router";
 import Loader from "./Loader";
 import Flag from "react-flagkit";
@@ -8,6 +8,7 @@ import { getCountryCodeByShortName } from "../helpers/getCountryCode";
 import Breadcrumb from "./Breadcrumb";
 import HomeIcon from '@mui/icons-material/Home';
 import Home from "./Home";
+import Error from "./Error";
 
 export default function DriverDetails(props) {
     const [driverDetails, setDriverDetails] = useState(null);
@@ -15,6 +16,7 @@ export default function DriverDetails(props) {
     const [filteredRaces, setFilteredRaces] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [search, setSearch] = useState("");
+    const [error, setError] = useState(false);
 
     const params = useParams();
     const navigate = useNavigate();
@@ -40,21 +42,29 @@ export default function DriverDetails(props) {
     }, [driverRaces, search]);
 
     const getDriverDetails = async () => {
+        try {
+            const urlDriverDetails = `https://api.jolpi.ca/ergast/f1/${props.year}/drivers/${params.id}/driverStandings.json`;
+            const urlDriverRaces = `https://api.jolpi.ca/ergast/f1/${props.year}/drivers/${params.id}/results.json`;
 
-        const urlDriverDetails = `https://api.jolpi.ca/ergast/f1/${props.year}/drivers/${params.id}/driverStandings.json`;
-        const urlDriverRaces = `https://api.jolpi.ca/ergast/f1/${props.year}/drivers/${params.id}/results.json`;
+            const driverDetailsResponse = await axios.get(urlDriverDetails);
+            const driverDetailsRaces = await axios.get(urlDriverRaces);
 
-        const driverDetailsResponse = await axios.get(urlDriverDetails);
-        const driverDetailsRaces = await axios.get(urlDriverRaces);
-
-        setDriverDetails(driverDetailsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
-        setDriverRaces(driverDetailsRaces.data.MRData.RaceTable.Races);
-        setIsLoading(false);
+            setDriverDetails(driverDetailsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
+            setDriverRaces(driverDetailsRaces.data.MRData.RaceTable.Races);
+        } catch {
+            setError(true);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     if (isLoading) {
         return <Loader />;
     };
+
+    if (error) {
+        return <Error />
+    }
 
     const driver = driverDetails;
 
@@ -79,16 +89,16 @@ export default function DriverDetails(props) {
         <div>
 
             <div className="team-details-page">
-               <Breadcrumb
-    items={breadcrumbsDriverDetails}
-    search={search}
-    onSearch={setSearch}
-    placeholder="Search races..."
-    year={props.year}
-    onYearChange={props.setYear}
-/>
+                <Breadcrumb
+                    items={breadcrumbsDriverDetails}
+                    search={search}
+                    onSearch={setSearch}
+                    placeholder="Search races..."
+                    year={props.year}
+                    onYearChange={props.setYear}
+                />
 
-               
+
 
                 {filteredRaces.length === 0 && (
                     <p>Race not found</p>
