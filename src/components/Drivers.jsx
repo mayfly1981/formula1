@@ -6,7 +6,7 @@ import Loader from "./Loader";
 import axios from "axios";
 import Flag from "react-flagkit";
 import Error from "./Error";
-import HomeIcon from '@mui/icons-material/Home';
+
 
 export default function Drivers(props) {
 
@@ -66,13 +66,16 @@ export default function Drivers(props) {
     return (
         <div className="container-drivers">
             <div className="table-drivers">
-                <Breadcrumb items={breadcrumbsDrivers} />
+                <Breadcrumb
+    items={breadcrumbsDrivers}
+    search={search}
+    onSearch={setSearch}
+    placeholder="Search drivers..."
+    year={props.year}
+    onYearChange={props.setYear}
+/>
                 <h1 className="title">Drivers Championship</h1>
-                <input
-                    type="text"
-                    placeholder="Search drivers..."
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)} />
+               
 
                 {filteredDrivers.length === 0 && (
                     <p>No results found</p>
@@ -107,7 +110,7 @@ export default function Drivers(props) {
                                     <td>{driver.points}</td>
                                 </tr>
                             );
-                        })};
+                        })}
                     </tbody>
                 </table>
             </div>
