@@ -101,9 +101,7 @@ export default function DriverDetails(props) {
                     <p>No results found</p>
                 )}
 
-                {search && (
-                    <button onClick={() => setSearch("")}>Clear
-                    </button>)}
+
                 <div className="team-details-content">
                     <div className="team-card">
 
