@@ -23,7 +23,6 @@ export default function Drivers(props) {
 
     const getDrivers = async () => {
         try {
-            setError(false);
             const url = `https://api.jolpi.ca/ergast/f1/${props.year}/driverStandings.json`;
             const response = await axios.get(url);
             const drivers =
@@ -67,15 +66,15 @@ export default function Drivers(props) {
         <div className="container-drivers">
             <div className="table-drivers">
                 <Breadcrumb
-    items={breadcrumbsDrivers}
-    search={search}
-    onSearch={setSearch}
-    placeholder="Search drivers..."
-    year={props.year}
-    onYearChange={props.setYear}
-/>
+                    items={breadcrumbsDrivers}
+                    search={search}
+                    onSearch={setSearch}
+                    placeholder="Search drivers..."
+                    year={props.year}
+                    onYearChange={props.setYear}
+                />
                 <h1 className="title">Drivers Championship</h1>
-               
+
 
                 {filteredDrivers.length === 0 && (
                     <p>No results found</p>
