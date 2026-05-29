@@ -66,13 +66,16 @@ export default function Teams(props) {
 
     return (
         <div className="container-teams">
-            <Breadcrumb items={breadcrumbsTeams} />
+            <Breadcrumb
+    items={breadcrumbsTeams}
+    search={search}
+    onSearch={setSearch}
+    placeholder="Search teams..."
+    year={props.year}
+    onYearChange={props.setYear}
+/>
             <h1>Constructors Championship</h1>
-            <input
-                type="text"
-                placeholder="Search teams..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)} />
+      
 
             {filteredTeams.length === 0 && (<p>No results found</p>)}
 
