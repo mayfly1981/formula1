@@ -81,7 +81,11 @@ export default function RaceDetails(props) {
 
     return (
         <div className="team-details-page">
-            <Breadcrumb items={breadcrumbsRaceDetails} />
+            <Breadcrumb
+       items={breadcrumbsRaceDetails}
+       year={props.year}
+       onYearChange={props.setYear}
+   />
             <div className="team-details-content">
                 <div className="team-card">
                     <div className="team-card-header">
