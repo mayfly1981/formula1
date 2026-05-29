@@ -77,9 +77,6 @@ export default function Races(props) {
 
             {filteredRaces.length === 0 && (<p>No results found</p>)}
 
-            {search && (
-                <button onClick={() => setSearch("")}>Clear
-                </button>)}
 
             <div className="table-races">
                 <table >

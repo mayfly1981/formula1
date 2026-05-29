@@ -80,9 +80,7 @@ export default function Drivers(props) {
                     <p>No results found</p>
                 )}
 
-                {search && (
-                    <button onClick={() => setSearch("")}>Clear
-                    </button>)}
+
 
                 <table>
                     <thead>

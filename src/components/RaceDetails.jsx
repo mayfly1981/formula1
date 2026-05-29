@@ -131,11 +131,7 @@ export default function RaceDetails(props) {
                 )
             }
 
-            {
-                search && (
-                    <button onClick={() => setSearch("")}>Clear
-                    </button>)
-            }
+
 
             <div className="team-details-content">
                 <div className="team-card">
