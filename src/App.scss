@@ -1110,3 +1110,8 @@ table {
     overflow: hidden;
     overflow-x: auto;
 }
+
+.driver-details td,
+.results-table tbody td {
+    cursor: pointer;
+}
