@@ -1,12 +1,11 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { getCountryCodeByNationality, getCountryCodeByShortName } from "../helpers/getCountryCode";
-import Breadcrumb from "./Breadcrumb";
+import { useParams, useNavigate } from "react-router";
 import Loader from "./Loader";
 import Flag from "react-flagkit";
-import axios from "axios";
+import { getCountryCodeByNationality, getCountryCodeByShortName } from "../helpers/getCountryCode";
+import Breadcrumb from "./Breadcrumb";
 import getPositionColor from "../helpers/positionColors";
-import Error from "./Error";
 
 export default function TeamDetails(props) {
     const [isLoading, setIsLoading] = useState(true);
@@ -14,9 +13,8 @@ export default function TeamDetails(props) {
     const [races, setRaces] = useState([]);
     const [filteredRaces, setFilteredRaces] = useState([]);
     const [search, setSearch] = useState("");
-    const [error, setError] = useState(false);
-
     const { id } = useParams();
+    const navigate = useNavigate();
     const teamId = id;
     const year = props.year || 2013;
     const team = races[0]?.Results?.[0]?.Constructor || null;
@@ -32,17 +30,16 @@ export default function TeamDetails(props) {
                         .replace(/\s+/g, " ")
                 )
         );
-
         setFilteredRaces(searchedRaces);
-
     }, [races, search]);
 
     useEffect(() => {
-
         if (!teamId) return;
 
         const getTeamDetails = async () => {
             try {
+                setIsLoading(true);
+
                 const url = `https://api.jolpi.ca/ergast/f1/${year}/constructors/${teamId}/results.json`;
 
                 const response = await axios.get(url);
@@ -56,17 +53,19 @@ export default function TeamDetails(props) {
                         ?.ConstructorStandings?.[0] || null;
                 setStanding(standingData);
 
+
                 const raceList =
                     response.data.MRData.RaceTable.Races || [];
 
                 setRaces(raceList);
+
             } catch (error) {
 
-                setError(true);
                 setRaces([]);
                 setStanding(null);
 
             } finally {
+
                 setIsLoading(false);
             }
 
@@ -85,14 +84,15 @@ export default function TeamDetails(props) {
     if (!team) {
         return <p>No team data found</p>;
     }
-    if (error) {
-        return <Error />
-    }
 
     const breadcrumbsTeamDetails = [
         { text: "Teams", route: "/teams" },
         { text: `${team.name}`, route: "" }
     ];
+
+    const handleClickRaceDetails = (position) => {
+        navigate(`/raceDetails/${position}`);
+    };
 
     return (
 
@@ -188,7 +188,8 @@ export default function TeamDetails(props) {
                                     const driver2 = race.Results?.[1];
 
                                     return (
-                                        <tr key={race.round}>
+                                        <tr key={race.round}
+                                            onClick={() => handleClickRaceDetails(race.round)}>
                                             <td>{race.round}</td>
                                             <td>
                                                 <div className="flag-text">

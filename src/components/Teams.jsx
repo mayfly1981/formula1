@@ -77,11 +77,7 @@ export default function Teams(props) {
             <h1>Constructors Championship</h1>
       
 
-            {filteredTeams.length === 0 && (<p>No results found</p>)}
-
-            {search && (
-                <button onClick={() => setSearch("")}>Clear
-                </button>)}
+            {filteredTeams.length === 0 && (<p>Team not found</p>)}
 
             <div className="table-teams">
                 <table>
