@@ -281,7 +281,7 @@ table {
     color: $color-h1;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url("../public/img/2026_Explainer_FIA_Front_3_4_1920x1080.avif");
+    background-image: url("../img/2026_Explainer_FIA_Front_3_4_1920x1080.avif");
 
 }
 
@@ -1083,4 +1083,30 @@ table {
 .team-card-header>.team-logo {
     background-color: rgba(145, 22, 28, 0.28);
     filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.55));
+}
+
+// === KONZISTENTNOST LISTA (Drivers, Teams, Races) ===
+
+.container-drivers,
+.container-teams,
+.container-races {
+    padding: 24px;
+    margin: 0;
+    box-sizing: border-box;
+
+    h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+}
+
+.table-drivers,
+.table-teams,
+.table-races {
+    background-color: $color-bg-table;
+    border: 1px solid $line-border;
+    border-radius: 24px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+    overflow: hidden;
+    overflow-x: auto;
 }
