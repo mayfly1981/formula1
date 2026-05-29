@@ -1,4 +1,5 @@
 @use "./variable" as *;
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
 
 body {
     background-color: $color-body;
@@ -63,8 +64,1315 @@ body {
 
 // ==========> DRIVERS < ==========
 
-.main-container {
+
+
+body {
+    background-color: $color-body;
+    color: $color-text;
+    margin: 0;
+    font-size: $font-size-text;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+// =======> DRIVERS <========
+.navigations {
+    width: 240px;
+    background-color: $color-nav;
+    padding-top: 20px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        padding: 18px;
+        text-align: center;
+        transition: 0.3s;
+    }
+
+    .just-li {
+        a {
+            text-decoration: none;
+            color: $color-text;
+            font-size: $font-size-nav;
+            font-weight: 500;
+            display: block;
+            border-radius: 15px;
+            padding: 12px;
+            transition: 0.2s;
+            text-align: center;
+
+            &:hover {
+                background-color: $a-hover;
+                color: $color-text;
+            }
+        }
+    }
+
+    .logo {
+        height: 10px;
+
+        img {
+            width: 15px;
+            margin-bottom: 25px;
+            margin-left: 5px;
+        }
+    }
+}
+
+
+
+//        ========= > DRIVER - DETAILS  < ================
+
+.driver-details-page {
     display: flex;
+    gap: 28px;
+    flex: 2;
+    flex-direction: row;
+    width: auto;
+    min-width: 0;
+    min-height: 100vh;
+    padding: 14px 24px 24px 20px;
+    align-items: stretch;
+    box-sizing: border-box;
+
+}
+
+//    ===========>  LEVI DEO - PODACI SA VOZACA <===============
+.driver-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border: 1px solid $line-border;
+    padding: 28px;
+    padding-left: 12px;
+    width: 320px;
+    min-width: 320px;
+    min-height: calc(100vh - 48px);
+    border-radius: 24px;
+    background-color: $color-bg-table;
+    box-shadow: 0 12px 35px rgb(0, 0, 0, 0.45);
+}
+
+.driver-card-header {
+
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-bottom: 32px;
+
+    .img-drivers {
+        width: 200px;
+        height: 250px;
+        border-radius: 20px;
+        background-color: rgba(255, 255, 255, 0.04);
+    }
+
+    .driver-title-box {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+
+        .driver-title {
+            margin: 0;
+            color: $color-h1;
+            font-size: 26px;
+            line-height: 1.1;
+        }
+    }
+
+    p {
+        margin: 10px 0px;
+        font-size: $font-size-text;
+    }
+
+    // prepisati od jele za a crveno
+    a {
+        margin-top: 15px;
+        padding: 10px 20px;
+        background: $color-bg-table;
+        color: $color-text;
+        text-decoration: none;
+        transition: 0.2s;
+
+        &:hover {
+            background: $color-nav;
+        }
+    }
+
+    .driver-info {
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        width: 100%;
+
+        h3 {
+            font-size: $font-size-h;
+        }
+    }
+}
+
+
+//  ============> TABELA SA VOZACIMA <===========
+.right-details {
+    align-items: flex-start;
+    align-items: center;
+    width: 70%;
+    background: $color-bg-table;
+    border: 1px solid $line-border;
+    border-radius: 20px;
+    padding: 25px;
+
+    .card-table {
+        background: $color-bg-table;
+
+        .img-country {
+            width: 50px;
+            height: 100px;
+        }
+
+        table {
+            column-span: 6;
+        }
+
+        h3 {
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+    }
+}
+
+
+// ===========> DIZAJN ZA SVE TABELE < =========
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+
+    thead {
+        background: #131d33;
+
+        tr {
+            border-bottom: 1px solid #1b2640;
+        }
+
+        th {
+            padding: 14px 16px;
+            text-align: center;
+            font-weight: 700;
+            color: $color-text;
+            font-size: 20px;
+            white-space: nowrap;
+        }
+    }
+
+    tbody {
+        tr {
+            transition: background 0.15s;
+            cursor: pointer;
+
+            &:nth-child(even) {
+                background-color: rgba(255, 255, 255, 0.035);
+            }
+
+            &:nth-child(odd) {
+                background-color: transparent;
+            }
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.07);
+            }
+        }
+    }
+
+    td {
+        padding: 12px 16px;
+        font-size: 18px;
+        text-align: center;
+        color: $color-text;
+    }
+}
+
+// ===========> HOME PAGE < ==========
+.home-image {
+
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../img/home2.gif");
+
+}
+
+// ==========> RACES <============
+
+.container-races {
+    display: block;
+    background-color: $color-bg-table;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 30px;
+    font-size: $font-size-text;
+    border: 0.1px solid grey;
+    box-shadow: 1px 3px 3px 3px rgba(138, 126, 126, 0.55);
+
+    h1 {
+        color: $color-h1;
+        font-size: 50px;
+        margin-bottom: 30px;
+        text-align: left;
+    }
+
+    .table-races {
+        background-color: $color-bg-table;
+        border-radius: 10px;
+        padding: 25px;
+        font-size: 22px;
+
+
+    }
+}
+
+
+// ===============> TEAMS <============
+
+.container-teams {
+    display: block;
+    background-color: $color-bg-table;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 30px;
+    font-size: 22px;
+    border: 0.1px solid grey;
+    box-shadow: 1px 3px 3px 3px rgba(138, 126, 126, 0.55);
+
+    h1 {
+        color: $color-h1;
+        font-size: 50px;
+        margin-bottom: 30px;
+        text-align: left;
+    }
+
+    .table-teams {
+        background-color: $color-bg-table;
+        border-radius: 10px;
+        padding: 25px;
+        font-size: 22px;
+    }
+
+    a {
+        text-decoration: none;
+        color: $color-text;
+    }
+}
+
+// radis RACES DETAILS
+
+// =============> RACES DETAILS <===============
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    background-color: $color-bg-table;
+    color: $color-text;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 30px;
+    font-size: 22px;
+    border: 0.1px solid grey;
+    box-shadow: 1px 3px 3px 3px rgba(138, 126, 126, 0.55);
+    overflow: hidden;
+
+    h1 {
+        color: $color-h1;
+        font-size: 30px;
+        margin-bottom: 30px;
+        text-align: left;
+    }
+
+    .tables-container {
+        display: flex;
+
+    }
+
+    // .grand-prix { }
+
+    .qualifying-results {
+        background-color: $color-bg-table;
+        border-radius: 10px;
+        padding: 25px;
+        font-size: 22px;
+
+    }
+
+    .race-results {
+        background-color: $color-bg-table;
+        border-radius: 10px;
+        padding: 25px;
+        font-size: 22px;
+
+        .points-color {
+            color: black;
+            overflow: hidden;
+        }
+    }
+}
+
+
+// Odavde fanuchi
+// TEAM DETAILS TABELA fanuchi
+
+.results-table {
+    width: 100%;
+    // table-layout: fixed;
+    table-layout: auto;
+    border-collapse: collapse;
+}
+
+.results-table thead {
+    background-color: #131d33;
+}
+
+.results-table th {
+    padding: 14px 16px;
+    color: $color-text;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.results-table tbody td {
+    padding: 12px 16px;
+    color: $color-text;
+    font-size: 18px;
+}
+
+.results-table th:nth-child(2),
+.results-table td:nth-child(2) {
+    text-align: left;
+    padding-left: 32px;
+}
+
+.results-table tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.035);
+}
+
+.results-table tbody tr:nth-child(odd) {
+    background-color: transparent;
+}
+
+.results-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.07);
+}
+
+.col-round {
+    width: 8%;
+}
+
+// .col-grand-prix {
+//     width: 34%;
+// }
+
+// .col-driver {
+//     width: 18%;
+// }
+
+// .col-points {
+//     width: 10%;
+// }
+.col-grand-prix {
+    width: 40%;
+}
+
+.col-driver {
+    width: 20%;
+}
+
+.col-points {
+    width: 12%;
+}
+
+.grand-prix-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.position-cell {
+    text-align: center;
+}
+
+.position-badge {
+    display: inline-block;
+    // min-width: 80px;
+    min-width: 50px;
+    width: 60%;
+    // ovo iznad zamenila sa 60% da bi se bolje prilagodilo manjim ekranima
+    padding: 8px 0;
+    border-radius: 7px;
+    text-align: center;
+    color: #071016;
+    font-weight: 700;
+}
+
+// TEAM DETAILS STRANA fanuchi
+
+.team-details-page {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+    min-height: 100vh;
+    padding: 24px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.team-details-content {
+    display: flex;
+    align-items: stretch;
+    gap: 24px;
+    width: 100%;
+}
+
+// TEAM DETAILS KARTICA fanuchi
+
+.team-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    // width: 360px;
+    width: 28%;
+    // min-width: 360px;
+    min-width: 280px;
+
+    border: 1px solid $line-border;
+    border-radius: 24px;
+    background-color: $color-bg-table;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+
+    padding: 28px;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.team-card-header {
+    display: flex;
+    // align-items: center;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 28px;
+    flex-wrap: wrap; // ← dodaj ovo da se presloze na manjim ekranima
+}
+
+.team-logo {
+    // width: 150px;
+    // height: 150px; zamenila sa 4
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    aspect-ratio: 1;
+
+
+    object-fit: contain;
+    background-color: rgba(255, 255, 255, 0.04);
+    border-radius: 20px;
+    padding: 18px;
+    box-sizing: border-box;
+
+    // ovo dodaj za bolje
+    @media (max-width: 1024px) {
+        max-width: 100%; // logo zauzme ceo red
+    }
+}
+
+
+.team-title-box {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0; // dodaj ovo
+    overflow: hidden; // dodaj ovo
+}
+
+.team-title {
+    margin: 0;
+    color: $color-h1;
+    // font-size: 26px;
+    font-size: clamp(16px, 2vw, 26px);
+    // clamp znači: nikad manje od 16px, nikad više od 26px, idealno 2% širine ekrana
+    line-height: 1.1;
+}
+
+.team-name-with-flag {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    color: $color-text;
+    font-size: 18px;
+}
+
+.flag-text {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+.flag-text span {
+    white-space: nowrap;
+}
+
+.team-info {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.team-info-row {
+    display: flex;
+    gap: 10px;
+    margin: 0;
+    font-size: 20px;
+
+    strong {
+        color: $color-text;
+    }
+
+    span {
+        color: white;
+    }
+}
+
+.team-stats {
+    display: flex;
+    gap: 18px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+.team-stat {
+    flex: 1;
+    margin: 0;
+    padding: 20px;
+    border-radius: 18px;
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid $line-border;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-sizing: border-box;
+}
+
+.team-stat-label {
+    font-size: 16px;
+    color: $color-text;
+}
+
+.team-stat-value {
+    font-size: 34px;
+    font-weight: 700;
+    color: white;
+}
+
+.team-history-link,
+.team-country-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    width: 100%;
+    margin: 0;
+    padding: 12px 20px;
+    box-sizing: border-box;
+
+    border-radius: 999px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    border: 1px solid $line-border;
+    transition: 0.3s;
+}
+
+.team-country-pill {
+    background-color: rgba(255, 255, 255, 0.08);
+
+    strong {
+        color: white;
+    }
+}
+
+.team-country-name {
+    color: $color-text;
+}
+
+.team-history-link {
+
+    background-color: $color-h1;
+
+    &:hover {
+        background-color: $a-hover;
+        transform: translateY(-2px);
+    }
+}
+
+// TABELA S REZULTATIMA fanuchi
+
+.team-results-section {
+    flex: 1;
+    width: auto;
+    max-width: none;
+    min-width: 0;
+    margin: 0;
+    padding-top: 0;
+    background-color: $color-bg-table;
+    border: 1px solid $line-border;
+    border-radius: 24px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+    overflow: clip;
+    //  izmenila overflow u clip
+}
+
+.driver-results-section {
+    flex: 1;
+    width: auto;
+    max-width: none;
+    min-width: 0;
+    margin: 0;
+    padding-top: 0;
+    background-color: $color-bg-table;
+    border: 1px solid $line-border;
+    border-radius: 24px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+    overflow: clip;
+}
+
+.team-results-title {
+    color: $color-text;
+    font-size: 32px;
+    text-align: center;
+    margin: 0;
+    padding: 18px 20px;
+    background-color: $color-bg-table;
+    border-bottom: 1px solid $line-border;
+}
+
+.results-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+// BREADCRUMBS za sve fanuchi
+
+.breadcrumbs-wrapper {
+    width: 100%;
+    max-width: none;
+}
+
+.breadcrumbs {
+    width: 100%;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    list-style: none;
+    margin: 0;
+    padding: 12px 18px;
+
+    background-color: $color-bg-table;
+    border: 1px solid $line-border;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.breadcrumb-item,
+.breadcrumbs-item {
+    display: flex;
+    align-items: center;
+
+    a,
+    span {
+        width: auto;
+        //  izmenila sa 130px na auto
+        height: 44px;
+        padding: 0 16px;
+        box-sizing: border-box;
+
+        border-radius: 12px;
+        background-color: $color-nav;
+        color: $color-text;
+        text-decoration: none;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+
+        transition: all 0.3s ease;
+        font-size: 16px;
+        line-height: 1;
+        font-family: Arial, Helvetica, sans-serif;
+        white-space: nowrap;
+        text-align: center;
+    }
+
+    a:hover {
+        background-color: #111a22;
+        color: white;
+        transform: translateY(-2px);
+    }
+}
+
+.breadcrumbs .breadcrumb-item:last-child>span,
+.breadcrumbs .breadcrumbs-item:last-child>span {
+    background-color: $color-h1;
+    color: white;
+}
+
+
+// ERROR PAGE fanuchi
+.error-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.error-gif-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+.error-gif {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.error-text-overlay {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px 0;
+    border-radius: 12px;
+
+    .error-code {
+        font-size: 120px;
+        color: $color-h1;
+        margin: 0;
+        text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.9);
+        // rgba(0, 0, 0, 0.5) — crna providna pozadina, broj 0.5 možeš menjati od 0 (potpuno providno) do 1 (neprozirno)
+    }
+}
+
+.error-message {
+    font-size: 28px;
+    color: white;
+    text-align: center;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.9);
+    padding: 0 20px;
+    margin: 0;
+}
+
+//Loader fanuchi
+
+
+.f1-gif-wrap {
+    min-height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 2rem;
+    padding-bottom: 80px;
+    background: transparent;
+}
+
+.f1-gif {
+    width: 480px;
+    max-width: 90%;
+    height: auto;
+    border-radius: 12px;
+}
+
+.f1-gif-text {
+    font-family: 'Orbitron', monospace;
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: #8B0000;
+    text-transform: uppercase;
+    margin: 0;
+    animation: pulse 1.2s ease-in-out infinite;
+}
+
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+//GLAVNA NAVIGACIJA MENU fanuchi
+
+/* GLAVNA NAVIGACIJA IZ APP.jsx */
+
+.app-sidebar-nav {
+    width: 240px;
+    min-height: 100vh;
+    background-color: #0b111a;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 20px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.app-sidebar-nav-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+
+/* LOGO */
+
+.app-sidebar-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-sidebar-logo img {
+    max-width: 160px;
+    height: auto;
+    display: block;
+}
+
+
+/* LINKOVI: DRIVERS, TEAMS, RACES */
+
+.app-sidebar-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+
+/* JEDAN NAV LINK */
+
+.app-nav-link {
+    width: 145px;
+    min-height: 95px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+    padding: 8px;
+
+    text-decoration: none;
+    color: white;
+
+    opacity: 0.75;
+    border-radius: 14px;
+    border: 1px solid transparent;
+
+    background-color: rgba(255, 255, 255, 0.04);
+
+    transition: 0.25s ease;
+}
+
+.app-nav-link img {
+    width: 75px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+}
+
+.app-nav-link span {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+}
+
+
+/* HOVER */
+
+.app-nav-link:hover {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.35);
+    transform: translateY(-2px);
+}
+
+
+
+/* AKTIVAN LINK */
+
+.app-nav-link.active {
+    opacity: 1;
+    background-color: rgba(220, 0, 0, 0.28);
+    border: 1px solid rgba(255, 0, 0, 0.9);
+    box-shadow: 0 0 18px rgba(255, 0, 0, 0.45);
+    transform: scale(1.04);
+}
+
+.app-nav-link.active span {
+    color: white;
+    font-weight: 800;
+}
+
+
+// Breadcrumbs novi zaseban fanuchi
+.app-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.breadcrumbs-controls {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.year-select {
+    height: 40px;
+    padding: 0 12px;
+    border-radius: 11px;
+    background-color: $color-nav;
+    color: $color-text;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+
+.breadcrumb-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 11px;
+    background-color: $color-nav;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: $color-text;
+
+    input {
+        background: transparent;
+        border: none;
+        outline: none;
+        color: $color-text;
+        font-size: 15px;
+        width: 170px;
+    }
+
+    input::placeholder {
+        color: #6f6f72;
+    }
+}
+
+// crvena aktivna (poslednja) breadcrumb stavka
+.breadcrumbs .breadcrumb-item .breadcrumb-active {
+    background-color: $color-h1;
+    color: #fff;
+}
+
+// LOGO TIMA: tamno-crvena podloga + svetli halo (samo logo, ne i slika vozaca)
+.team-card-header>.team-logo {
+    background-color: rgba(145, 22, 28, 0.28);
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.55));
+}
+
+// === KONZISTENTNOST LISTA (Drivers, Teams, Races) ===
+
+.container-drivers,
+.container-teams,
+.container-races {
+    padding: 24px;
+    margin: 0;
+    box-sizing: border-box;
+
+    h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+}
+
+.table-drivers,
+.table-teams,
+.table-races {
+    background-color: $color-bg-table;
+    border: 1px solid $line-border;
+    border-radius: 24px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+    overflow: hidden;
+    overflow-x: auto;
+}
+
+.driver-details td,
+.results-table tbody td {
+    cursor: pointer;
+}
+
+// ============================================
+// RESPONSIVE
+// ============================================
+
+// --- Tablet i manji desktop (ispod 1024px) ---
+@media (max-width: 1024px) {
+
+    .app-sidebar-nav {
+        width: 90px;
+    }
+
+    .app-sidebar-logo img {
+        max-width: 70px;
+    }
+
+    .app-nav-link {
+        width: 70px;
+        min-height: 75px;
+        padding: 6px;
+    }
+
+    .app-nav-link img {
+        width: 50px;
+        height: 38px;
+    }
+
+    .app-nav-link span {
+        font-size: 11px;
+    }
+
+    .team-details-content {
+        flex-direction: column;
+    }
+
+    .team-card {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .team-results-section {
+        width: 100%;
+    }
+
+    .driver-details-page {
+        flex-direction: column;
+    }
+
+    .driver-card {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .breadcrumbs {
+        gap: 10px;
+        padding: 8px 12px;
+    }
+
+    .breadcrumb-item a,
+    .breadcrumbs-item a,
+    .breadcrumb-item span,
+    .breadcrumbs-item span {
+        font-size: 13px;
+        height: 36px;
+        padding: 0 10px;
+    }
+
+    .year-select,
+    .breadcrumb-search {
+        height: 36px;
+    }
+
+    .breadcrumb-search input {
+        width: 130px;
+    }
+
+    table thead th {
+        font-size: 16px;
+        padding: 10px 12px;
+    }
+
+    table td {
+        font-size: 16px;
+        padding: 10px 12px;
+    }
+
+    .team-title {
+        font-size: clamp(14px, 2vw, 20px);
+    }
+
+    .team-stat-value {
+        font-size: 26px;
+    }
+}
+
+// --- Mobilni telefon (ispod 640px) ---
+@media (max-width: 640px) {
+
+    .app-sidebar-nav {
+        width: 60px;
+    }
+
+    .app-sidebar-logo img {
+        max-width: 44px;
+    }
+
+    .app-nav-link {
+        width: 50px;
+        min-height: 58px;
+        padding: 4px;
+    }
+
+    .app-nav-link img {
+        width: 34px;
+        height: 28px;
+    }
+
+    .app-nav-link span {
+        display: none;
+    }
+
+    .breadcrumbs {
+        flex-wrap: wrap;
+        gap: 6px;
+        padding: 6px 10px;
+        border-radius: 12px;
+    }
+
+    .breadcrumbs-controls {
+        margin-left: 0;
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .breadcrumb-search input {
+        width: 100px;
+        font-size: 13px;
+    }
+
+    .team-details-content {
+        flex-direction: column;
+    }
+
+    .team-stats {
+        flex-direction: column;
+    }
+
+    .team-stat-value {
+        font-size: 22px;
+    }
+
+    .team-card-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .team-logo {
+        max-width: 100px;
+    }
+
+    .container-drivers,
+    .container-teams,
+    .container-races {
+        padding: 12px;
+    }
+
+    .results-table th,
+    table thead th {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .results-table tbody td,
+    table td {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .position-badge {
+        min-width: 34px;
+        font-size: 13px;
+        padding: 5px 0;
+    }
+
+    .breadcrumbs-wrapper {
+        width: 100%;
+    }
+
+    .f1-gif-wrap .f1-gif {
+        width: 90%;
+    }
+
+    .f1-gif-text {
+        font-size: 14px;
+        letter-spacing: 2px;
+    }
+
+    .error-code {
+        font-size: 70px !important;
+    }
+
+    .error-message {
+        font-size: 18px;
+    }
+}
+
+.img-driver {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.team-title-box {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 24px;
 }
 
 .container-drivers {
@@ -873,7 +2181,7 @@ table {
 }
 
 //Loader fanuchi
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
 
 .f1-gif-wrap {
     min-height: 100vh;
