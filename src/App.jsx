@@ -9,8 +9,6 @@ import RaceDetails from "./components/RaceDetails";
 import Loader from "./components/Loader";
 import axios from "axios";
 import Home from "./components/Home";
-import Flag from 'react-flagkit';
-import SelectYear from "./components/SelectYear";
 import Error from "./components/Error";
 
 export default function App() {
@@ -41,8 +39,8 @@ export default function App() {
 
             <div className="app-sidebar-logo">
               <Link to="/" className="app-sidebar-logo">
-<img src="/img/F1-logo.png" alt="Formula 1" />
-</Link>
+                <img src="/img/F1-logo.png" alt="Formula 1" />
+              </Link>
             </div>
             <div className="app-sidebar-links">
               <NavLink to="/drivers" className={activeClass}>
@@ -62,7 +60,7 @@ export default function App() {
             </div>
           </nav>
         </div>
-         <div className="app-content">
+        <div className="app-content">
           <Routes>
             <Route path="/" element={<Home year={year} />} />
             <Route path="/drivers" element={<Drivers flags={flags} year={year} setYear={setYear} />} />
