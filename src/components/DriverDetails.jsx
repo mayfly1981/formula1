@@ -79,13 +79,16 @@ export default function DriverDetails(props) {
         <div>
 
             <div className="team-details-page">
-                <Breadcrumb items={breadcrumbsDriverDetails} />
+               <Breadcrumb
+    items={breadcrumbsDriverDetails}
+    search={search}
+    onSearch={setSearch}
+    placeholder="Search races..."
+    year={props.year}
+    onYearChange={props.setYear}
+/>
 
-                <input type="text"
-                    placeholder="Search races..."
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                />
+               
 
                 {filteredRaces.length === 0 && (
                     <p>Race not found</p>
