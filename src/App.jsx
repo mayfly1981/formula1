@@ -38,9 +38,11 @@ export default function App() {
       <div className="main-container">
         <div className="app-sidebar-nav">
           <nav className="app-sidebar-nav-inner">
-            <SelectYear value={year} change={(e) => setYear(e.target.value)} />
+
             <div className="app-sidebar-logo">
-              <Link to="/"><img src="/img/F1-logo.png" alt="Home picture" /></Link>
+              <Link to="/" className="app-sidebar-logo">
+<img src="/img/F1-logo.png" alt="Formula 1" />
+</Link>
             </div>
             <div className="app-sidebar-links">
               <NavLink to="/drivers" className={activeClass}>
@@ -60,15 +62,15 @@ export default function App() {
             </div>
           </nav>
         </div>
-        <div>
+         <div className="app-content">
           <Routes>
             <Route path="/" element={<Home year={year} />} />
-            <Route path="/drivers" element={<Drivers flags={flags} year={year} />} />
-            <Route path="/teams" element={<Teams flags={flags} year={year} />} />
-            <Route path="/races" element={<Races flags={flags} year={year} />} />
-            <Route path="/driverDetails/:id" element={<DriverDetails flags={flags} year={year} />} />
-            <Route path="/teamDetails/:id" element={<TeamDetails flags={flags} year={year} />} />
-            <Route path="/raceDetails/:id" element={<RaceDetails flags={flags} year={year} />} />
+            <Route path="/drivers" element={<Drivers flags={flags} year={year} setYear={setYear} />} />
+            <Route path="/teams" element={<Teams flags={flags} year={year} setYear={setYear} />} />
+            <Route path="/races" element={<Races flags={flags} year={year} setYear={setYear} />} />
+            <Route path="/driverDetails/:id" element={<DriverDetails flags={flags} year={year} setYear={setYear} />} />
+            <Route path="/teamDetails/:id" element={<TeamDetails flags={flags} year={year} setYear={setYear} />} />
+            <Route path="/raceDetails/:id" element={<RaceDetails flags={flags} year={year} setYear={setYear} />} />
             <Route path="*" element={<Error />} />
           </Routes>
         </div>
