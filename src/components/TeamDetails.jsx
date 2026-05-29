@@ -105,7 +105,7 @@ export default function TeamDetails(props) {
 
 
             {filteredRaces.length === 0 && (
-                <p>Race not found</p>
+                <p>No results found</p>
             )}
 
             {search && (
