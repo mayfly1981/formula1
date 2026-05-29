@@ -13,6 +13,8 @@ export default function TeamDetails(props) {
     const [races, setRaces] = useState([]);
     const [filteredRaces, setFilteredRaces] = useState([]);
     const [search, setSearch] = useState("");
+    const [error, setError] = useState(false);
+
     const { id } = useParams();
     const navigate = useNavigate();
     const teamId = id;
@@ -38,8 +40,6 @@ export default function TeamDetails(props) {
 
         const getTeamDetails = async () => {
             try {
-                setIsLoading(true);
-
                 const url = `https://api.jolpi.ca/ergast/f1/${year}/constructors/${teamId}/results.json`;
 
                 const response = await axios.get(url);
@@ -47,12 +47,10 @@ export default function TeamDetails(props) {
                 const standingResponse = await axios.get(
                     `https://api.jolpi.ca/ergast/f1/${year}/constructors/${teamId}/constructorStandings.json`
                 );
-
                 const standingData =
                     standingResponse.data.MRData.StandingsTable.StandingsLists?.[0]
                         ?.ConstructorStandings?.[0] || null;
                 setStanding(standingData);
-
 
                 const raceList =
                     response.data.MRData.RaceTable.Races || [];
@@ -63,9 +61,8 @@ export default function TeamDetails(props) {
 
                 setRaces([]);
                 setStanding(null);
-
+                setError(true);
             } finally {
-
                 setIsLoading(false);
             }
 
@@ -98,15 +95,15 @@ export default function TeamDetails(props) {
 
         <div className="team-details-page">
             <Breadcrumb
-    items={breadcrumbsTeamDetails}
-    search={search}
-    onSearch={setSearch}
-    placeholder="Search races..."
-    year={props.year}
-    onYearChange={props.setYear}
-/>
+                items={breadcrumbsTeamDetails}
+                search={search}
+                onSearch={setSearch}
+                placeholder="Search races..."
+                year={props.year}
+                onYearChange={props.setYear}
+            />
 
-            
+
             {filteredRaces.length === 0 && (
                 <p>Race not found</p>
             )}
