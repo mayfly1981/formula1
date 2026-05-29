@@ -107,121 +107,121 @@ export default function DriverDetails(props) {
                 {search && (
                     <button onClick={() => setSearch("")}>Clear
                     </button>)}
+                <div className="team-details-content">
+                    <div className="team-card">
 
-                <div className="team-card">
+                        <div className="team-card-header">
 
-                    <div className="team-card-header">
+                            <div className="img-driver">
+                                <img className="team-logo"
+                                    src={`/img/${driver.Driver.driverId}.png`}
+                                    alt="Driver picture" />
 
-                        <div className="img-driver">
-                            <img className="team-logo"
-                                src={`/img/${driver.Driver.driverId}.png`}
-                                alt="Driver picture" />
+                                <div className="team-title-box">
+                                    <h3 className="team-title">
+                                        {driver.Driver.givenName}{" "}
+                                        {driver.Driver.familyName}
+                                    </h3>
+                                </div>
+                                <div className="team-info">
+                                    <p className="team-country-pill">
+                                        <Flag
+                                            className="flag"
+                                            country={getCountryCodeByNationality(
+                                                props.flags,
+                                                driver.Driver.nationality
+                                            )}
+                                            size={30} />
+                                        {driver.Driver.nationality}
+                                    </p>
+                                    <p className="team-country-pill">
+                                        <span>{driver.Constructors[0].name}</span>
+                                    </p>
 
-                            <div className="team-title-box">
-                                <h3 className="team-title">
-                                    {driver.Driver.givenName}{" "}
-                                    {driver.Driver.familyName}
-                                </h3>
-                            </div>
-                            <div className="team-info">
-                                <p className="team-country-pill">
-                                    <Flag
-                                        className="flag"
-                                        country={getCountryCodeByNationality(
-                                            props.flags,
-                                            driver.Driver.nationality
-                                        )}
-                                        size={30} />
-                                    {driver.Driver.nationality}
-                                </p>
-                                <p className="team-country-pill">
-                                    <span>{driver.Constructors[0].name}</span>
-                                </p>
+                                    <p className="team-country-pill">Birth: {driver.Driver.dateOfBirth}</p>
 
-                                <p className="team-country-pill">Birth: {driver.Driver.dateOfBirth}</p>
-
-                                <a href={driver.Driver.url}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="team-history-link">Biography
-                                </a>
+                                    <a href={driver.Driver.url}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="team-history-link">Biography
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div className="driver-results-section">
+                    <div className="driver-results-section">
 
-                    <h3 className="driver-results-title">Formula 1 - {props.year} Results</h3>
+                        <h3 className="driver-results-title">Formula 1 - {props.year} Results</h3>
 
-                    <div className="results-table-wrapper">
-                        <table className="results-table">
-                            <thead>
-                                <tr>
-                                    <th>Round</th>
-                                    <th></th>
-                                    <th>Grand Prix</th>
-                                    <th>Team</th>
-                                    <th>Grid</th>
-                                    <th>Race</th>
-                                </tr>
-                            </thead>
+                        <div className="results-table-wrapper">
+                            <table className="results-table">
+                                <thead>
+                                    <tr>
+                                        <th>Round</th>
+                                        <th></th>
+                                        <th>Grand Prix</th>
+                                        <th>Team</th>
+                                        <th>Grid</th>
+                                        <th>Race</th>
+                                    </tr>
+                                </thead>
 
-                            <tbody>
+                                <tbody>
 
-                                {filteredRaces.map((driverRace) => {
-                                    return (
-                                        <tr
-                                            key={driverRace.round}
-                                        >
+                                    {filteredRaces.map((driverRace) => {
+                                        return (
+                                            <tr
+                                                key={driverRace.round}
+                                            >
 
-                                            <td>{driverRace.round}</td>
+                                                <td>{driverRace.round}</td>
 
-                                            <td>
-                                                <div className="img-country">
-                                                    <Flag
-                                                        country={getCountryCodeByShortName(
-                                                            props.flags,
-                                                            driverRace.Circuit.Location.country
-                                                        )}
-                                                        size={20}
-                                                    />
-                                                </div>
-                                            </td>
+                                                <td>
+                                                    <div className="img-country">
+                                                        <Flag
+                                                            country={getCountryCodeByShortName(
+                                                                props.flags,
+                                                                driverRace.Circuit.Location.country
+                                                            )}
+                                                            size={20}
+                                                        />
+                                                    </div>
+                                                </td>
 
-                                            <td onClick={() =>
-                                                handleClickRaceDetails(
-                                                    driverRace.round
-                                                )
-                                            }>
-                                                {driverRace.raceName}
-                                            </td>
+                                                <td onClick={() =>
+                                                    handleClickRaceDetails(
+                                                        driverRace.round
+                                                    )
+                                                }>
+                                                    {driverRace.raceName}
+                                                </td>
 
-                                            <td onClick={() => handleClickTeam(driverRace.Results[0].Constructor.constructorId)}>
-                                                {driverRace.Results[0].Constructor.name}
-                                            </td>
+                                                <td onClick={() => handleClickTeam(driverRace.Results[0].Constructor.constructorId)}>
+                                                    {driverRace.Results[0].Constructor.name}
+                                                </td>
 
-                                            <td>
-                                                {driverRace.Results[0].grid}
-                                            </td>
+                                                <td>
+                                                    {driverRace.Results[0].grid}
+                                                </td>
 
-                                            <td>
-                                                {driverRace.Results[0].position}
-                                            </td>
+                                                <td>
+                                                    {driverRace.Results[0].position}
+                                                </td>
 
-                                        </tr>
-                                    );
-                                })}
+                                            </tr>
+                                        );
+                                    })}
 
-                            </tbody>
+                                </tbody>
 
-                        </table>
+                            </table>
 
+                        </div>
                     </div>
                 </div>
-
             </div>
-        </div>
+        </div >
     );
 }
 
