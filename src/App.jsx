@@ -71,6 +71,9 @@ export default function App() {
             <Route path="/raceDetails/:id" element={<RaceDetails flags={flags} year={year} setYear={setYear} />} />
             <Route path="*" element={<Error />} />
           </Routes>
+          <div>
+            <footer>Formula 1 © {year} </footer>
+          </div>
         </div>
       </div >
     </BrowserRouter >

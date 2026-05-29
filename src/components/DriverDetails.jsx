@@ -83,74 +83,75 @@ export default function DriverDetails(props) {
     }
 
     return (
-        <div>
-
-            <div className="team-details-page">
-                <Breadcrumb
-                    items={breadcrumbsDriverDetails}
-                    search={search}
-                    onSearch={setSearch}
-                    placeholder="Search races..."
-                    year={props.year}
-                    onYearChange={props.setYear}
-                />
 
 
+        <div className="team-details-page">
+            <Breadcrumb
+                items={breadcrumbsDriverDetails}
+                search={search}
+                onSearch={setSearch}
+                placeholder="Search races..."
+                year={props.year}
+                onYearChange={props.setYear}
+            />
 
-                {filteredRaces.length === 0 && (
-                    <p>No results found</p>
-                )}
+            {filteredRaces.length === 0 && (
+                <p>No results found</p>
+            )}
 
 
-                <div className="team-details-content">
-                    <div className="team-card">
-
-                        <div className="team-card-header">
-
-                            <div className="img-driver">
-                                <img className="team-logo"
-                                    src={`/img/${driver.Driver.driverId}.png`}
-                                    alt="Driver picture" />
-
-                                <div className="team-title-box">
-                                    <h3 className="team-title">
-                                        {driver.Driver.givenName}{" "}
-                                        {driver.Driver.familyName}
-                                    </h3>
-                                </div>
-                                <div className="team-info">
-                                    <p className="team-country-pill">
-                                        <Flag
-                                            className="flag"
-                                            country={getCountryCodeByNationality(
-                                                props.flags,
-                                                driver.Driver.nationality
-                                            )}
-                                            size={30} />
-                                        {driver.Driver.nationality}
-                                    </p>
-                                    <p className="team-country-pill">
-                                        <span>{driver.Constructors[0].name}</span>
-                                    </p>
-
-                                    <p className="team-country-pill">Birth: {driver.Driver.dateOfBirth}</p>
-
-                                    <a href={driver.Driver.url}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="team-history-link">Biography
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+            <div className="team-details-content">
+                <div className="team-card">
+                    <div className="img-driver">
+                        <img className="team-logo"
+                            src={`/img/${driver.Driver.driverId}.png`}
+                            alt="Driver picture" />
                     </div>
+                    <div className="team-title-box">
+                        <h3 className="team-title">
+                            {driver.Driver.givenName}{" "}
+                            {driver.Driver.familyName}
+                        </h3>
+                    </div>
+                    <div className="team-info">
+                        <p className="team-country-pill">
+                            <Flag
+                                className="flag"
+                                country={getCountryCodeByNationality(
+                                    props.flags,
+                                    driver.Driver.nationality
+                                )}
+                                size={30} />
+                            {driver.Driver.nationality}
+                        </p>
+                        <p className="team-country-pill">
+                            <span>{driver.Constructors[0].name}</span>
+                        </p>
 
-                    <div className="driver-results-section">
+                        <p className="team-country-pill">Birth: {driver.Driver.dateOfBirth}</p>
 
-                        <h3 className="driver-results-title">Formula 1 - {props.year} Results</h3>
+                        <a href={driver.Driver.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="team-history-link">Biography
+                        </a>
+                    </div>
+                </div>
 
-                        <div className="results-table-wrapper">
+                <div className="team-results-section">
+
+
+                    <h3 className="team-results-title">Formula 1 {props.year} Results</h3>
+                    <div className="results-table-wrapper">
+                        <div className="race-results">
                             <table className="results-table">
+                                <colgroup>
+                                    <col className="col-round" />
+                                    <col className="col-grand-prix" />
+                                    <col className="col-driver" />
+                                    <col className="col-driver" />
+                                    <col className="col-points" />
+                                </colgroup>
                                 <thead>
                                     <tr>
                                         <th>Round</th>
@@ -207,11 +208,8 @@ export default function DriverDetails(props) {
                                             </tr>
                                         );
                                     })}
-
                                 </tbody>
-
                             </table>
-
                         </div>
                     </div>
                 </div>
