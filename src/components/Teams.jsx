@@ -22,7 +22,6 @@ export default function Teams(props) {
 
     const getTeams = async () => {
         try {
-            setError(false);
             const url = `https://api.jolpi.ca/ergast/f1/${props.year}/constructorStandings.json`;
             const response = await axios.get(url);
 
@@ -67,15 +66,15 @@ export default function Teams(props) {
     return (
         <div className="container-teams">
             <Breadcrumb
-    items={breadcrumbsTeams}
-    search={search}
-    onSearch={setSearch}
-    placeholder="Search teams..."
-    year={props.year}
-    onYearChange={props.setYear}
-/>
+                items={breadcrumbsTeams}
+                search={search}
+                onSearch={setSearch}
+                placeholder="Search teams..."
+                year={props.year}
+                onYearChange={props.setYear}
+            />
             <h1>Constructors Championship</h1>
-      
+
 
             {filteredTeams.length === 0 && (<p>Team not found</p>)}
 
