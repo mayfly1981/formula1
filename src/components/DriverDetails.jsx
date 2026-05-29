@@ -1,16 +1,17 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { useParams, useNavigate } from "react-router";
 import Loader from "./Loader";
 import Flag from "react-flagkit";
 import { getCountryCodeByNationality } from "../helpers/getCountryCode";
 import { getCountryCodeByShortName } from "../helpers/getCountryCode";
 import Breadcrumb from "./Breadcrumb";
+import HomeIcon from '@mui/icons-material/Home';
+import Home from "./Home";
 import Error from "./Error";
 
 export default function DriverDetails(props) {
-
-    const [driver, setDriver] = useState(null);
+    const [driverDetails, setDriverDetails] = useState(null);
     const [driverRaces, setDriverRaces] = useState([]);
     const [filteredRaces, setFilteredRaces] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -48,7 +49,7 @@ export default function DriverDetails(props) {
             const driverDetailsResponse = await axios.get(urlDriverDetails);
             const driverDetailsRaces = await axios.get(urlDriverRaces);
 
-            setDriver(driverDetailsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
+            setDriverDetails(driverDetailsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
             setDriverRaces(driverDetailsRaces.data.MRData.RaceTable.Races);
         } catch {
             setError(true);
@@ -65,9 +66,8 @@ export default function DriverDetails(props) {
         return <Error />
     }
 
-    const clearSearch = () => {
-        setSearch("");
-    };
+    const driver = driverDetails;
+
 
     const breadcrumbsDriverDetails = [
         { text: "Drivers", route: "/drivers" },
@@ -98,7 +98,7 @@ export default function DriverDetails(props) {
 
 
                 {filteredRaces.length === 0 && (
-                    <p>Race not found</p>
+                    <p>No results found</p>
                 )}
 
                 {search && (
