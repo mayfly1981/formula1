@@ -74,7 +74,7 @@ export default function RaceDetails(props) {
             .toLowerCase()
             .trim()
             .replace(/\s+/g, " ");
-        const searchedResults = filteredResults.filter((result) => {
+        const searchedResults = raceResults.filter((result) => {
             const driverName =
                 result.Driver.familyName.toLowerCase();
             const teamName =
@@ -191,7 +191,7 @@ export default function RaceDetails(props) {
                         </thead>
 
                         <tbody>
-                            {raceQualifiers?.QualifyingResults?.map((qualifier) => {
+                            {filteredQualifiers.map((qualifier) => {
 
                                 return (
                                     <tr key={qualifier.position}>
@@ -249,7 +249,7 @@ export default function RaceDetails(props) {
                             </thead>
 
                             <tbody>
-                                {raceResults.map((result) => {
+                                {filteredResults.map((result) => {
                                     return (
 
                                         <tr key={result.position}>
